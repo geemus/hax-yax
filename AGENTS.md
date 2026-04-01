@@ -28,71 +28,13 @@ Skills live under `.agents/skills/` so that agents running within this repositor
 
 ## Skills Format
 
-Each skill is a **directory** named after the skill. The directory must contain a `SKILL.md` file with YAML frontmatter followed by Markdown instructions. See the [Agent Skills specification](https://agentskills.io/specification) for full details.
+Each skill is a **directory** named after the skill containing a `SKILL.md` file with YAML frontmatter and Markdown instructions.
 
-### Frontmatter
+For full format rules, naming constraints, progressive disclosure levels, and a worked example, use the **`skills`** skill or read `.agents/skills/skills/references/skill-format.md` directly.
 
-```yaml
----
-name: skill-name          # required: must match the directory name
-description: >            # required: what this skill does and when to use it
-  Extracts and summarizes content from PDF files. Use when the user
-  asks to read, parse, or extract text from a PDF document.
-license: Apache-2.0       # optional
-metadata:                 # optional: version tracking, authorship
-  author: your-handle
-  version: "1.0"
-allowed-tools:            # optional: restrict which tools the skill may use
-  - Bash
-  - Read
----
-```
+## Adding or Managing Skills
 
-**`name`** rules:
-- Lowercase letters, numbers, and hyphens only
-- 1–64 characters; no leading/trailing/consecutive hyphens
-- Must match the parent directory name exactly
-
-**`description`** rules:
-- Non-empty, maximum 1024 characters
-- Write in third person — this text is injected into the system prompt for discovery
-- Include both *what* the skill does and *when* to invoke it
-
-### Markdown body
-
-Write whatever helps agents perform the task effectively. Recommended sections:
-
-```markdown
-# Skill Name
-
-Brief overview of the skill's purpose.
-
-## Instructions
-
-Step-by-step guidance for the agent to follow.
-
-## Examples
-
-Concrete examples with inputs and expected outputs.
-```
-
-### Progressive disclosure
-
-Skills load in three stages — keep each lean:
-
-| Level | Content | When loaded | Target size |
-|-------|---------|-------------|-------------|
-| 1 | `name` + `description` frontmatter | Always (startup) | ~100 tokens |
-| 2 | `SKILL.md` body | When skill is triggered | < 5,000 tokens |
-| 3 | `scripts/`, `references/`, `assets/` | On demand, via bash | Unlimited |
-
-## Adding a New Skill
-
-1. Create a directory: `.agents/skills/<skill-name>/` (lowercase, hyphen-separated)
-2. Add `.agents/skills/<skill-name>/SKILL.md` with `name:` and `description:` frontmatter
-3. Write clear, concrete instructions in the Markdown body
-4. Add `scripts/`, `references/`, or `assets/` as needed for Level 3 content
-5. Commit: `add <skill-name> skill: <one-line summary>`
+Use the **`skills`** skill — it covers creating, updating, and deleting skills with the correct conventions and commit messages.
 
 ## Git Workflow
 
