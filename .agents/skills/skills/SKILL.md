@@ -1,9 +1,7 @@
 ---
 name: skills
 description: >
-  Creates, updates, and manages reusable agent skills in this repository.
-  Use when the user asks to add a new skill, modify an existing skill,
-  delete a skill, or review the skill structure and conventions.
+  Creates, updates, and manages reusable agent skills.
 license: Apache-2.0
 metadata:
   author: geemus
