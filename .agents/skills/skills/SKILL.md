@@ -21,20 +21,23 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 3. Create `SKILL.md` — required frontmatter fields: `name` (must match directory), `description` (what it does and when to use it)
 4. Write a clear Markdown body with instructions agents can follow directly
 5. Add `scripts/`, `references/`, or `assets/` subdirectories only when needed for Level 3 content
-6. Commit: `add <skill-name> skill: <one-line summary>`
+6. Review `AGENTS.md` — update if the new skill affects documented structure, conventions, or workflow
+7. Commit: `add <skill-name> skill: <one-line summary>`
 
 ### Updating a skill
 
 1. Read the existing `SKILL.md` before making changes
 2. Keep the `name` field in sync with the directory name — never rename one without the other
 3. Update `metadata.version` when the instructions change meaningfully
-4. Commit: `update <skill-name> skill: <one-line summary of change>`
+4. Review `AGENTS.md` — update if the changes affect anything documented there
+5. Commit: `update <skill-name> skill: <one-line summary of change>`
 
 ### Deleting a skill
 
 1. Confirm with the user before deleting
 2. Remove the entire `.agents/skills/<skill-name>/` directory
-3. Commit: `remove <skill-name> skill: <reason>`
+3. Review `AGENTS.md` — remove any references to the deleted skill
+4. Commit: `remove <skill-name> skill: <reason>`
 
 ### Reviewing / auditing skills
 
