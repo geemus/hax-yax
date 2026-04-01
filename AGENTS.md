@@ -13,7 +13,6 @@ This repository captures reusable skills for AI coding agents. Agent guidance fo
 ```
 skills/
 ├── AGENTS.md              # This file — agent guidance (agents.md standard)
-├── CLAUDE.md              # Symlink → AGENTS.md (Claude Code compatibility)
 ├── LICENSE
 └── .agents/
     └── skills/
