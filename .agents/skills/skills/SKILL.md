@@ -51,6 +51,6 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 |-------|---------|--------------|
 | 1 | `name` + `description` | Always |
 | 2 | `SKILL.md` body (this file) | When skill is triggered |
-| 3 | `references/` files | When you need format details or examples |
+| 3 | `scripts/`, `references/`, `assets/` | When you need format details, examples, or executables |
 
 Read `references/skill-format.md` for complete frontmatter rules, naming constraints, and a full worked example.
