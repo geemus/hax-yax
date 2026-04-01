@@ -15,12 +15,16 @@ skills/
 ├── AGENTS.md              # This file — agent guidance (agents.md standard)
 ├── CLAUDE.md              # Symlink → AGENTS.md (Claude Code compatibility)
 ├── LICENSE
-└── <skill-name>/          # Each skill is a directory
-    ├── SKILL.md           # Required: YAML frontmatter + instructions
-    ├── scripts/           # Optional: executable scripts (Python, Bash, JS)
-    ├── references/        # Optional: reference materials, API docs, schemas
-    └── assets/            # Optional: templates, examples, other resources
+└── .agents/
+    └── skills/
+        └── <skill-name>/          # Each skill is a directory
+            ├── SKILL.md           # Required: YAML frontmatter + instructions
+            ├── scripts/           # Optional: executable scripts (Python, Bash, JS)
+            ├── references/        # Optional: reference materials, API docs, schemas
+            └── assets/            # Optional: templates, examples, other resources
 ```
+
+Skills live under `.agents/skills/` so that agents running within this repository discover them automatically via standard agent runtime conventions.
 
 ## Skills Format
 
@@ -84,8 +88,8 @@ Skills load in three stages — keep each lean:
 
 ## Adding a New Skill
 
-1. Create a directory: `<skill-name>/` (lowercase, hyphen-separated)
-2. Add `<skill-name>/SKILL.md` with `name:` and `description:` frontmatter
+1. Create a directory: `.agents/skills/<skill-name>/` (lowercase, hyphen-separated)
+2. Add `.agents/skills/<skill-name>/SKILL.md` with `name:` and `description:` frontmatter
 3. Write clear, concrete instructions in the Markdown body
 4. Add `scripts/`, `references/`, or `assets/` as needed for Level 3 content
 5. Commit: `add <skill-name> skill: <one-line summary>`
