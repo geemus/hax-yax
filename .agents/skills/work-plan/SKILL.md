@@ -8,7 +8,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Work Plan
@@ -22,7 +22,7 @@ Turns a description of work into a structured plan written to a GitHub issue.
 Collect the following from the user (ask only for what is missing):
 
 - **Work description** — what needs to be done (required; may be provided inline as skill args)
-- **GitHub repository** — `owner/repo` where the issue will be created (required)
+- **GitHub repository** — infer `owner/repo` from the current git context by running `git remote get-url origin` and parsing the result; only ask the user if the remote cannot be determined
 - **Issue title** — short summary; generate one from the description if not provided
 - **Labels** — optional comma-separated list of labels to apply to the issue
 
@@ -67,14 +67,14 @@ Share the created issue URL with the user and briefly summarize the plan structu
 
 **Invocation (inline description):**
 ```
-/work-plan Add rate limiting to the public API — repo: acme/backend
+/work-plan Add rate limiting to the public API
 ```
 
 **Invocation (interactive):**
 ```
 /work-plan
 ```
-Claude will ask for the work description and repository.
+Claude will ask for the work description. The repository is inferred automatically from `git remote get-url origin`.
 
 **Generated issue body structure:**
 ```markdown
