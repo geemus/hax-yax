@@ -11,7 +11,6 @@ This repository captures reusable skills for AI coding agents. Agent guidance fo
 ## Structure
 
 ```
-skills/
 ├── AGENTS.md              # This file — agent guidance (agents.md standard)
 ├── LICENSE
 └── .agents/
