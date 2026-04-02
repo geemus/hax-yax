@@ -2,9 +2,11 @@
 name: plan
 description: >
   Generates a detailed, structured work plan from a description of work to be
-  done, then creates a GitHub issue containing the plan. Invoke when the user
-  wants to plan out a feature, bug fix, project, or any body of work and
-  capture it as a GitHub issue for tracking and collaboration.
+  done, then creates a GitHub issue containing the plan. Interactive: asks
+  clarifying questions when needed, presents the plan for review, and confirms
+  labels before creating the issue. Invoke when the user wants to plan out a
+  feature, bug fix, project, or any body of work and capture it as a GitHub
+  issue for tracking and collaboration.
 license: Apache-2.0
 metadata:
   author: geemus
@@ -17,7 +19,6 @@ allowed-tools:
   - Write
   - mcp__github__list_issues
   - mcp__github__list_pull_requests
-  - mcp__github__issue_write
   - mcp__github__create_issue
 ---
 
@@ -32,7 +33,7 @@ Turns a description of work into a structured, executable plan written to a GitH
 Collect the following (ask only for what is missing):
 
 - **Work description** — what needs to be done (required; may be provided inline as skill args). If the description is too vague to decompose into concrete tasks without guessing, ask 1–2 targeted clarifying questions before continuing.
-- **GitHub repository** — infer `owner/repo` by running `git remote get-url origin` and parsing the result. Parse both HTTPS (`https://github.com/owner/repo.git`) and SSH (`git@github.com:owner/repo.git`) remote formats — for SSH remotes, split on `:` then strip `.git`. Only ask if the remote cannot be determined.
+- **GitHub repository** — infer `owner/repo` by running `git remote get-url origin` and parsing the result. Parse both HTTPS (`https://github.com/owner/repo.git`) and SSH (`git@github.com:owner/repo.git`) remote formats — for SSH remotes, split on `:` then strip `.git`. If the command exits non-zero, produces empty output, or the result cannot be parsed into `owner/repo`, ask the user for the repository explicitly.
 - **Sub-issues** — if the work description clearly involves multiple distinct phases or bodies of work, ask now whether the user wants each phase tracked as a separate sub-issue linked to a parent.
 
 Check `gh` availability once here and carry the result forward — do not re-check in later steps:
@@ -56,7 +57,7 @@ Before planning, ground the plan in reality:
 
 ### 3. Consider approaches
 
-For non-trivial design decisions, briefly evaluate 2–3 alternative approaches. For each, note the key tradeoff. Select the best approach and document the rationale. This becomes the Approach section. For straightforward tasks where there is only one sensible implementation path, skip this step.
+For non-trivial design decisions, briefly evaluate 2–3 alternative approaches. For each, note the key tradeoff. Select the best approach and document the rationale. This becomes the Approach section. Skip this step only when the work involves fewer than 3 tasks and there is clearly no meaningful choice between approaches.
 
 ### 4. Generate the plan
 
@@ -117,7 +118,11 @@ Present the finished plan to the user, then suggest labels for confirmation:
 - *Type* (pick one): `feature`, `bug`, `refactor`, `docs`, `test`
 - *Priority* (pick one): `priority: high`, `priority: medium`, `priority: low`
 
-Wait for the user to confirm the labels (or propose different ones) before proceeding. Note: if the selected labels do not yet exist in the repository, `gh issue create` will fail — create them first with `gh label create` or use only labels that already exist.
+Wait for the user to confirm the labels (or propose different ones) before proceeding.
+
+Before creating the issue, verify the confirmed labels exist in the repository:
+- **`gh` available:** `gh label list --repo <owner/repo> --json name --jq '.[].name'` — compare against confirmed labels; create any missing ones with `gh label create <name> --repo <owner/repo>` before proceeding.
+- **`gh` unavailable:** skip the check and use only the labels the user confirmed; note in the report if any labels may not exist.
 
 ### 7. Create the GitHub issue
 
@@ -127,14 +132,15 @@ Use the path determined in step 1:
 
 - **`gh` available:** Write the plan body to a uniquely named temp file using the `Write` tool (avoids shell quoting issues and concurrent collisions), then create the issue and clean up the temp file:
   ```
-  gh issue create --repo <owner/repo> --title "<derived title>" --body-file /tmp/plan-body-<epoch>.md --label "<type-label>" --label "<priority-label>"
-  rm /tmp/plan-body-<epoch>.md
+  EPOCH=$(date +%s)
+  gh issue create --repo <owner/repo> --title "<derived title>" --body-file /tmp/plan-body-${EPOCH}.md --label "<type-label>" --label "<priority-label>"
+  rm /tmp/plan-body-${EPOCH}.md
   ```
-  Use a separate `--label` flag for each label confirmed in step 6. Replace `<epoch>` with the current Unix timestamp.
+  Use a separate `--label` flag for each label confirmed in step 6.
 
-- **`gh` unavailable:** Use `mcp__github__issue_write` with `method: "create"`, `owner`, `repo`, `title`, `body`, and `labels` (using only the labels confirmed in step 6).
+- **`gh` unavailable:** Use `mcp__github__create_issue` with `owner`, `repo`, `title`, `body`, and `labels` (using only the labels confirmed in step 6).
 
-**Sub-issues**: If sub-issue tracking was agreed in step 1, create a sub-issue for each phase now and link them to the parent issue.
+**Sub-issues**: If sub-issue tracking was agreed in step 1, create a child issue for each phase using the same method above. Link each child to the parent by adding a line to the parent issue body: `- Sub-issue: #<number> — <phase name>`. If `mcp__github__sub_issue_write` is available, use it to create the formal parent–child relationship.
 
 ### 8. Report back
 
