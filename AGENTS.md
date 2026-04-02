@@ -31,6 +31,13 @@ Each skill is a **directory** named after the skill containing a `SKILL.md` file
 
 For full format rules, naming constraints, progressive disclosure levels, and a worked example, use the **`skills`** skill or read `.agents/skills/skills/references/skill-format.md` directly.
 
+## Available Skills
+
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| `skills` | `/skills` | Create, update, and manage skills in this repository |
+| `plan` | `/plan` | Generate a structured work plan and write it to a GitHub issue |
+
 ## Adding or Managing Skills
 
 Use the **`skills`** skill — it covers creating, updating, and deleting skills with the correct conventions and commit messages.
