@@ -8,12 +8,13 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "2.3"
+  version: "2.4"
 allowed-tools:
   - Bash
   - Glob
   - Grep
   - Read
+  - Write
   - mcp__github__list_issues
   - mcp__github__list_pull_requests
   - mcp__github__issue_write
@@ -29,25 +30,30 @@ Turns a description of work into a structured, executable plan written to a GitH
 
 Collect the following (ask only for what is missing):
 
-- **Work description** — what needs to be done (required; may be provided inline as skill args)
-- **GitHub repository** — infer `owner/repo` by running `git remote get-url origin` and parsing the result; only ask if the remote cannot be determined
-- **Issue title** — generate one from the description if not provided
-- **Labels** — if not provided, suggest defaults based on the label strategy in step 6; confirm with the user before applying
+- **Work description** — what needs to be done (required; may be provided inline as skill args). If the description is too vague to decompose into concrete tasks without guessing, ask 1–2 targeted clarifying questions before continuing.
+- **GitHub repository** — infer `owner/repo` by running `git remote get-url origin` and parsing the result; only ask if the remote cannot be determined.
+
+Check `gh` availability once here and carry the result forward — do not re-check in later steps:
+```
+gh auth status 2>/dev/null && echo "gh: available" || echo "gh: unavailable"
+```
+
+Labels will be suggested after the plan is generated in step 4. Do not ask for them now.
 
 ### 2. Survey the context
 
 Before planning, ground the plan in reality:
 
-- Scan the codebase for existing patterns, conventions, and related code relevant to the work
-- Check for open issues or PRs related to the same area:
-  - Preferred: `gh issue list --repo <owner/repo> --state open --search "<keyword from work description>"` / `gh pr list --repo <owner/repo> --state open --search "<keyword>"`
-  - Fallback: `mcp__github__list_issues` / `mcp__github__list_pull_requests`
-- Note any constraints (tech stack, dependencies, CI requirements, etc.)
-- Record what already exists and what must be built from scratch — this becomes the Background section
+- **Codebase scan**: Use `Glob` to map the directory structure around the relevant area. Use `Grep` to search for key terms from the work description. Read `AGENTS.md`, `CLAUDE.md`, and `README.md` if present for conventions and constraints.
+- **Open issues / PRs**: Check for related work using whichever path was determined in step 1:
+  - `gh` available: `gh issue list --repo <owner/repo> --state open --search "<keyword from work description>"` and `gh pr list --repo <owner/repo> --state open --search "<keyword>"`
+  - `gh` unavailable: `mcp__github__list_issues` / `mcp__github__list_pull_requests`
+- **Constraints**: Note tech stack, dependencies, CI requirements, and anything that restricts the approach.
+- Record what already exists and what must be built from scratch — this feeds the Background section.
 
 ### 3. Consider approaches
 
-Before committing to a plan, briefly evaluate 2–3 alternative approaches. For each, note the key tradeoff. Select the best approach and document the rationale. This becomes the Approach section in the issue.
+Briefly evaluate 2–3 alternative approaches. For each, note the key tradeoff. Select the best approach and document the rationale. This becomes the Approach section.
 
 ### 4. Generate the plan
 
@@ -63,7 +69,7 @@ What exists today, what the context survey found, why this work is needed, and a
 The chosen approach and why it was selected over alternatives. One short paragraph; include the key tradeoff.
 
 #### Assumptions
-Explicit statements the plan depends on being true (e.g. "The existing auth middleware can be reused", "No breaking API changes are needed"). Flag anything that, if wrong, would require replanning.
+Explicit statements the plan depends on being true (e.g. "The existing auth middleware can be reused", "No breaking API changes are needed"). Flag anything that, if wrong, would require replanning. Omit this section if there are none.
 
 #### Tasks
 Ordered, actionable tasks as GitHub Markdown checkboxes. For non-trivial work, group into phases. Each task should have a single, clear deliverable.
@@ -91,9 +97,13 @@ A bulleted list of pass/fail conditions. Each criterion must be verifiable. Pair
 #### Open Questions
 Unknowns that need resolution before or during the work. Distinct from Assumptions: these are things the plan genuinely cannot answer yet. Omit this section if there are none.
 
+After drafting the plan, suggest labels for the user to confirm before proceeding to step 5:
+- *Type* (pick one): `feature`, `bug`, `refactor`, `docs`, `test`
+- *Priority* (pick one): `priority: high`, `priority: medium`, `priority: low`
+
 ### 5. Self-review before posting
 
-Before creating the issue, evaluate the draft plan:
+Evaluate the draft plan against these checks. Fix any issues found before continuing.
 
 - Does every task have a clear, actionable description? (If not, rewrite vague tasks.)
 - Are dependencies complete and correct?
@@ -102,30 +112,17 @@ Before creating the issue, evaluate the draft plan:
 - Is the plan appropriately scoped — neither too coarse nor too granular?
 - Is the Approach section present and does it name the chosen approach, the reason it was selected, and its key tradeoff?
 
-Fix any issues found, then proceed.
-
 ### 6. Create the GitHub issue
 
-First, check whether `gh` is available and authenticated:
-```
-gh auth status
-```
-If this succeeds, use `gh`. If it fails or `gh` is not found, use the MCP fallback.
+Use the path determined in step 1:
 
-- **Preferred — `gh` CLI:** write the plan body to a temp file to avoid shell quoting issues, then create the issue:
+- **`gh` available:** Write the plan body to a uniquely named temp file using the `Write` tool (avoids shell quoting issues and concurrent collisions), then create the issue:
   ```
-  cat > /tmp/plan-body.md << 'EOF'
-  <full plan Markdown>
-  EOF
-  gh issue create --repo <owner/repo> --title "<title>" --body-file /tmp/plan-body.md --label "feature" --label "priority: high"
+  gh issue create --repo <owner/repo> --title "<title>" --body-file /tmp/plan-body-<epoch>.md --label "feature" --label "priority: high"
   ```
-  Use a separate `--label` flag for each label.
+  Use a separate `--label` flag for each label. Replace `<epoch>` with the current Unix timestamp.
 
-- **Fallback — MCP:** use `mcp__github__issue_write` with `owner`, `repo`, `title`, `body`, and `labels`
-
-**Label strategy** — apply one label from each applicable category:
-- *Type*: `feature`, `bug`, `refactor`, `docs`, `test`
-- *Priority*: `priority: high`, `priority: medium`, `priority: low`
+- **`gh` unavailable:** Use `mcp__github__issue_write` with `method: "create"`, `owner`, `repo`, `title`, `body`, and `labels`.
 
 **Sub-issues**: If the plan has more than ~7 tasks or multiple distinct phases, suggest to the user that each phase (or major task group) be tracked as a separate sub-issue linked to this parent. Offer to create them.
 
