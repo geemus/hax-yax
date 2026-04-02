@@ -3,8 +3,7 @@ name: plan
 description: >
   Generates a detailed, structured work plan from a description of work to be
   done, then creates a GitHub issue containing the plan. Interactive: asks
-  clarifying questions when needed, presents the plan for review, and confirms
-  labels before creating the issue. Invoke when the user wants to plan out a
+  clarifying questions when needed and presents the plan for review. Invoke when the user wants to plan out a
   feature, bug fix, project, or any body of work and capture it as a GitHub
   issue for tracking and collaboration.
 license: Apache-2.0
@@ -40,8 +39,6 @@ Check `gh` availability once here and carry the result forward — do not re-che
 ```
 gh auth status 2>/dev/null && echo "gh: available" || echo "gh: unavailable"
 ```
-
-Labels will be suggested after the plan is generated in step 4. Do not ask for them now.
 
 ### 2. Survey the context
 
@@ -112,17 +109,9 @@ Evaluate the draft plan against these checks. Fix any issues found silently befo
 - Is the plan appropriately scoped — neither too coarse nor too granular?
 - Is the Approach section present and does it name the chosen approach, the reason it was selected, and its key tradeoff?
 
-### 6. Present the plan and confirm labels
+### 6. Present the plan
 
-Present the finished plan to the user, then suggest labels for confirmation:
-- *Type* (pick one): `feature`, `bug`, `refactor`, `docs`, `test`
-- *Priority* (pick one): `priority: high`, `priority: medium`, `priority: low`
-
-Wait for the user to confirm the labels (or propose different ones) before proceeding.
-
-Before creating the issue, verify the confirmed labels exist in the repository:
-- **`gh` available:** `gh label list --repo <owner/repo> --json name --jq '.[].name'` — compare against confirmed labels; create any missing ones with `gh label create <name> --repo <owner/repo>` before proceeding.
-- **`gh` unavailable:** skip the check and use only the labels the user confirmed; note in the report if any labels may not exist.
+Present the finished plan to the user and ask for confirmation before creating the issue.
 
 ### 7. Create the GitHub issue
 
@@ -133,12 +122,11 @@ Use the path determined in step 1:
 - **`gh` available:** Write the plan body to a uniquely named temp file using the `Write` tool (avoids shell quoting issues and concurrent collisions), then create the issue and clean up the temp file:
   ```
   EPOCH=$(date +%s)
-  gh issue create --repo <owner/repo> --title "<derived title>" --body-file /tmp/plan-body-${EPOCH}.md --label "<type-label>" --label "<priority-label>"
+  gh issue create --repo <owner/repo> --title "<derived title>" --body-file /tmp/plan-body-${EPOCH}.md
   rm /tmp/plan-body-${EPOCH}.md
   ```
-  Use a separate `--label` flag for each label confirmed in step 6.
 
-- **`gh` unavailable:** Use `mcp__github__create_issue` with `owner`, `repo`, `title`, `body`, and `labels` (using only the labels confirmed in step 6).
+- **`gh` unavailable:** Use `mcp__github__create_issue` with `owner`, `repo`, `title`, and `body`.
 
 **Sub-issues**: If sub-issue tracking was agreed in step 1, create a child issue for each phase using the same method above. Link each child to the parent by adding a line to the parent issue body: `- Sub-issue: #<number> — <phase name>`. If `mcp__github__sub_issue_write` is available, use it to create the formal parent–child relationship.
 
