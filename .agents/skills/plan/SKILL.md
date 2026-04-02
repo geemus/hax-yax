@@ -8,7 +8,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "2.2"
+  version: "2.3"
 allowed-tools:
   - Bash
   - Glob
@@ -40,7 +40,7 @@ Before planning, ground the plan in reality:
 
 - Scan the codebase for existing patterns, conventions, and related code relevant to the work
 - Check for open issues or PRs related to the same area:
-  - Preferred: `gh issue list --state open` / `gh pr list --state open`
+  - Preferred: `gh issue list --repo <owner/repo> --state open --search "<keyword from work description>"` / `gh pr list --repo <owner/repo> --state open --search "<keyword>"`
   - Fallback: `mcp__github__list_issues` / `mcp__github__list_pull_requests`
 - Note any constraints (tech stack, dependencies, CI requirements, etc.)
 - Record what already exists and what must be built from scratch — this becomes the Background section
@@ -100,17 +100,27 @@ Before creating the issue, evaluate the draft plan:
 - Does the acceptance criteria cover the full objective?
 - Are any assumptions likely to be wrong?
 - Is the plan appropriately scoped — neither too coarse nor too granular?
+- Is the Approach section present and does it name the chosen approach, the reason it was selected, and its key tradeoff?
 
 Fix any issues found, then proceed.
 
 ### 6. Create the GitHub issue
 
-Create the issue using whichever is available:
+First, check whether `gh` is available and authenticated:
+```
+gh auth status
+```
+If this succeeds, use `gh`. If it fails or `gh` is not found, use the MCP fallback.
 
-- **Preferred — `gh` CLI:**
+- **Preferred — `gh` CLI:** write the plan body to a temp file to avoid shell quoting issues, then create the issue:
   ```
-  gh issue create --title "<title>" --body "<plan>" --label "<labels>"
+  cat > /tmp/plan-body.md << 'EOF'
+  <full plan Markdown>
+  EOF
+  gh issue create --repo <owner/repo> --title "<title>" --body-file /tmp/plan-body.md --label "feature" --label "priority: high"
   ```
+  Use a separate `--label` flag for each label.
+
 - **Fallback — MCP:** use `mcp__github__issue_write` with `owner`, `repo`, `title`, `body`, and `labels`
 
 **Label strategy** — apply one label from each applicable category:
