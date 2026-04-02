@@ -8,7 +8,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "2.1"
+  version: "2.2"
 allowed-tools:
   - Bash
   - Glob
@@ -39,7 +39,9 @@ Collect the following (ask only for what is missing):
 Before planning, ground the plan in reality:
 
 - Scan the codebase for existing patterns, conventions, and related code relevant to the work
-- Check for open issues or PRs related to the same area (`mcp__github__list_issues`, `mcp__github__list_pull_requests`)
+- Check for open issues or PRs related to the same area:
+  - Preferred: `gh issue list --state open` / `gh pr list --state open`
+  - Fallback: `mcp__github__list_issues` / `mcp__github__list_pull_requests`
 - Note any constraints (tech stack, dependencies, CI requirements, etc.)
 - Record what already exists and what must be built from scratch — this becomes the Background section
 
@@ -103,11 +105,13 @@ Fix any issues found, then proceed.
 
 ### 6. Create the GitHub issue
 
-Use `mcp__github__issue_write` with:
-- `owner` and `repo` from step 1
-- `title` from step 1
-- `body` as the full Markdown plan from step 4
-- `labels` from step 1
+Create the issue using whichever is available:
+
+- **Preferred — `gh` CLI:**
+  ```
+  gh issue create --title "<title>" --body "<plan>" --label "<labels>"
+  ```
+- **Fallback — MCP:** use `mcp__github__issue_write` with `owner`, `repo`, `title`, `body`, and `labels`
 
 **Label strategy** — apply one label from each applicable category:
 - *Type*: `feature`, `bug`, `refactor`, `docs`, `test`
