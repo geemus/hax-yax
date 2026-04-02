@@ -112,9 +112,9 @@ Use the path determined in step 1:
 
 - **`gh` available:** Write the plan body to a uniquely named temp file using the `Write` tool (avoids shell quoting issues and concurrent collisions), then create the issue and clean up the temp file:
   ```
-  EPOCH=$(date +%s)
-  gh issue create --repo <owner/repo> --title "<derived title>" --body-file /tmp/plan-body-${EPOCH}.md
-  rm /tmp/plan-body-${EPOCH}.md
+  TMPFILE=$(mktemp /tmp/plan-body-XXXXXX.md)
+  gh issue create --repo <owner/repo> --title "<derived title>" --body-file $TMPFILE
+  rm $TMPFILE
   ```
 
 - **`gh` unavailable:** Use available GitHub MCP tools to create the issue with `owner`, `repo`, `title`, and `body`.
