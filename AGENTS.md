@@ -28,7 +28,7 @@ Skills live under `.agents/skills/` so that agents running within this repositor
 
 Each skill is a **directory** named after the skill containing a `SKILL.md` file with YAML frontmatter and Markdown instructions.
 
-For full format rules, naming constraints, progressive disclosure levels, and a worked example, use the **`skills`** skill or read `.agents/skills/skills/references/skill-format.md` directly.
+For full format rules, naming constraints, progressive disclosure levels, and a worked example, read `.agents/skills/skills/references/skill-format.md`. To create, update, or delete skills using guided steps, use the **`skills`** skill (`/skills`).
 
 ## Available Skills
 
@@ -39,7 +39,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 
 ## Adding or Managing Skills
 
-Use the **`skills`** skill — it covers creating, updating, and deleting skills with the correct conventions and commit messages.
+To create, update, or delete skills with guided steps and correct conventions, use the **`skills`** skill (`/skills`). To learn the skill format first, read `.agents/skills/skills/references/skill-format.md`.
 
 ## Git Workflow
 
