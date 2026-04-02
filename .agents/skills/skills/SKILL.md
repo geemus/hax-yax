@@ -50,6 +50,23 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 - If the audit is read-only and no issues are found, no commit is needed
 - If audit findings require corrections, apply fixes and commit: `fix(<skill-name>): <description of issue corrected>`
 
+## Examples
+
+**Creating a new skill called `deploy`:**
+> "Create a skill that deploys the app to staging using the deploy.sh script."
+
+Expected: agent creates `.agents/skills/deploy/SKILL.md` with appropriate frontmatter and instructions, commits with `feat(deploy): add deploy skill — ...`
+
+**Updating an existing skill's description:**
+> "Update the skills skill description to mention it also handles auditing."
+
+Expected: agent reads existing `SKILL.md`, updates the `description` frontmatter, bumps `metadata.version`, commits with `docs(skills): update description to mention auditing`
+
+**Deleting an obsolete skill:**
+> "Remove the old `pdf` skill, we don't use it anymore."
+
+Expected: agent confirms with user, removes `.agents/skills/pdf/` directory, updates `AGENTS.md` if needed, commits with `chore(pdf): remove pdf skill — no longer used`
+
 ## Progressive Disclosure
 
 | Level | Content | When to load |
