@@ -10,15 +10,6 @@ license: Apache-2.0
 metadata:
   author: geemus
   version: "1.0"
-allowed-tools:
-  - Bash
-  - Glob
-  - Grep
-  - Read
-  - Write
-  - mcp__github__list_issues
-  - mcp__github__list_pull_requests
-  - mcp__github__create_issue
 ---
 
 # Plan

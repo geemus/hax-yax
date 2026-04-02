@@ -46,7 +46,7 @@ allowed-tools:            # optional: restrict tool access within the skill
 
 ### `allowed-tools` rules
 
-List tool names to restrict which tools the agent may call while executing the skill. Omit to allow all tools.
+Omit unless the user explicitly requests tool restrictions. Restricting tools limits the agent's ability to handle unexpected situations; only add this field when there is a specific reason to do so.
 
 **Built-in tools** use their plain name: `Bash`, `Read`, `Edit`, `Write`, `Glob`, `Grep`, etc.
 
@@ -115,9 +115,6 @@ license: Apache-2.0
 metadata:
   author: geemus
   version: "1.0"
-allowed-tools:
-  - Bash
-  - Read
 ---
 
 # PDF
