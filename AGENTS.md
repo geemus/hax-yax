@@ -45,7 +45,14 @@ To create, update, or delete skills with guided steps and correct conventions, u
 
 - Default branch: `main`
 - Feature branches: `<author>/<short-description>` or `claude/<task-slug>`
-- Commit messages: imperative mood, lowercase, no trailing period
+- Commit messages: [Conventional Commits](https://www.conventionalcommits.org) format — `<type>[optional scope]: <description>` — where description is lowercase imperative mood with no trailing period
+  - Valid types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
+  - Scope (optional): the skill name or component affected, e.g. `feat(plan):`, `fix(skills):`
+  - Examples:
+    - `docs: adopt conventional commits standard`
+    - `feat(skills): add loop skill`
+    - `fix(plan): correct frontmatter validation logic`
+    - `chore: update AGENTS.md structure`
 - Do not force-push to `main`
 
 ## Code Style & Conventions
