@@ -44,6 +44,8 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 - List all skills: `ls .agents/skills/`
 - Validate a skill: check that `SKILL.md` exists, frontmatter has `name` and `description`, `name` matches the directory
 - For full format rules, see `references/skill-format.md`
+- If the audit is read-only and no issues are found, no commit is needed
+- If audit findings require corrections, apply fixes and commit: `fix <skill-name> skill: <description of issue corrected>`
 
 ## Progressive Disclosure
 
