@@ -35,7 +35,7 @@ gh auth status 2>/dev/null && echo "gh: available" || echo "gh: unavailable"
 
 Before planning, ground the plan in reality:
 
-- **Codebase scan**: Use `Glob` to map the directory structure around the relevant area. Use `Grep` to search for key terms from the work description. Read `AGENTS.md`, `CLAUDE.md`, and `README.md` if present for conventions and constraints. If none of these files exist, note the absence and continue.
+- **Codebase scan**: Use `Glob` to map the directory structure around the relevant area. Use `Grep` to search for key terms from the work description. Check for context files (all optional): `CLAUDE.md`, `README.md`, `AGENTS.md`. Read any that exist for conventions and constraints; if absent, proceed without them.
 - **Open issues / PRs**: Check for related work using whichever path was determined in step 1. Choose a specific keyword from the work description (a noun or action that would appear in issue titles) and use it consistently:
   - `gh` available: `gh issue list --repo <owner/repo> --state open --search "<keyword>"` and `gh pr list --repo <owner/repo> --state open --search "<keyword>"`
   - `gh` unavailable: use available GitHub MCP tools to list issues and pull requests
