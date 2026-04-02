@@ -21,7 +21,7 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 1. Choose a name: lowercase letters, numbers, and hyphens only; 1–64 chars; must be unique under `.agents/skills/`
 2. Create the directory: `.agents/skills/<skill-name>/`
 3. Create `SKILL.md` — required frontmatter fields: `name` (must match directory), `description` (what it does and when to use it)
-4. Do NOT include `allowed-tools` — omit it entirely so the agent has access to all tools
+4. Omit `allowed-tools` unless the user explicitly requests tool restrictions
 5. Write a clear Markdown body with instructions agents can follow directly
 6. Add `scripts/`, `references/`, or `assets/` subdirectories only when needed for Level 3 content
 7. Review `AGENTS.md` — update if the new skill affects documented structure, conventions, or workflow

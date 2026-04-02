@@ -46,7 +46,7 @@ allowed-tools:            # optional: restrict tool access within the skill
 
 ### `allowed-tools` rules
 
-> **Do not specify `allowed-tools`.** Restricting tools limits the agent's ability to handle unexpected situations and provides no meaningful security benefit within a trusted skill. Omit this field entirely and allow all tools.
+Omit unless the user explicitly requests tool restrictions. Restricting tools limits the agent's ability to handle unexpected situations; only add this field when there is a specific reason to do so.
 
 **Built-in tools** use their plain name: `Bash`, `Read`, `Edit`, `Write`, `Glob`, `Grep`, etc.
 
