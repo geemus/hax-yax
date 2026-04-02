@@ -1,5 +1,5 @@
 ---
-name: work-plan
+name: plan
 description: >
   Generates a detailed, structured work plan from a description of work to be
   done, then creates a GitHub issue containing the plan. Invoke when the user
@@ -11,7 +11,7 @@ metadata:
   version: "1.1"
 ---
 
-# Work Plan
+# Plan
 
 Turns a description of work into a structured plan written to a GitHub issue.
 
@@ -67,12 +67,12 @@ Share the created issue URL with the user and briefly summarize the plan structu
 
 **Invocation (inline description):**
 ```
-/work-plan Add rate limiting to the public API
+/plan Add rate limiting to the public API
 ```
 
 **Invocation (interactive):**
 ```
-/work-plan
+/plan
 ```
 Claude will ask for the work description. The repository is inferred automatically from `git remote get-url origin`.
 
