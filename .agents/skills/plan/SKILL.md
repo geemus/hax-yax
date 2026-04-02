@@ -8,60 +8,114 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.1"
+  version: "2.0"
 ---
 
 # Plan
 
-Turns a description of work into a structured plan written to a GitHub issue.
+Turns a description of work into a structured, executable plan written to a GitHub issue.
 
 ## Instructions
 
 ### 1. Gather inputs
 
-Collect the following from the user (ask only for what is missing):
+Collect the following (ask only for what is missing):
 
 - **Work description** — what needs to be done (required; may be provided inline as skill args)
-- **GitHub repository** — infer `owner/repo` from the current git context by running `git remote get-url origin` and parsing the result; only ask the user if the remote cannot be determined
-- **Issue title** — short summary; generate one from the description if not provided
-- **Labels** — optional comma-separated list of labels to apply to the issue
+- **GitHub repository** — infer `owner/repo` by running `git remote get-url origin` and parsing the result; only ask if the remote cannot be determined
+- **Issue title** — generate one from the description if not provided
+- **Labels** — if not provided, suggest defaults based on the label strategy in step 3; confirm with the user before applying
 
-### 2. Generate the plan
+### 2. Survey the context
 
-Think through the work carefully and produce a plan with these sections:
+Before planning, ground the plan in reality:
+
+- Scan the codebase for existing patterns, conventions, and related code relevant to the work
+- Check for open issues or PRs related to the same area (`mcp__github__list_issues`, `mcp__github__list_pull_requests`)
+- Note any constraints (tech stack, dependencies, CI requirements, etc.)
+- Record what already exists and what must be built from scratch — this becomes the Background section
+
+### 3. Consider approaches
+
+Before committing to a plan, briefly evaluate 2–3 alternative approaches. For each, note the key tradeoff. Select the best approach and document the rationale. This becomes the Approach section in the issue.
+
+### 4. Generate the plan
+
+Produce a plan with these sections:
 
 #### Objective
 One or two sentences stating the goal and why it matters.
 
 #### Background
-Relevant context: what exists today, why the work is needed, any constraints.
+What exists today, what the context survey found, why this work is needed, and any constraints.
+
+#### Approach
+The chosen approach and why it was selected over alternatives. One short paragraph; include the key tradeoff.
+
+#### Assumptions
+Explicit statements the plan depends on being true (e.g. "The existing auth middleware can be reused", "No breaking API changes are needed"). Flag anything that, if wrong, would require replanning.
 
 #### Tasks
-A numbered, ordered list of concrete tasks. For non-trivial work, group tasks into phases (e.g. *Phase 1 — Research*, *Phase 2 — Implementation*, *Phase 3 — Validation*). Each task should be actionable and independently completable. Use sub-tasks (indented checkboxes) for steps within a task.
+Ordered, actionable tasks as GitHub Markdown checkboxes. For non-trivial work, group into phases. Each task should be independently completable.
 
-Format tasks as GitHub Markdown task lists:
+Annotate dependencies explicitly:
+
 ```
-- [ ] Task description
+- [ ] Task A — no dependencies
+- [ ] Task B — no dependencies
+- [ ] Task C _(depends on: Task A)_
   - [ ] Sub-task
+- [ ] Task D _(depends on: Task B, Task C)_
 ```
+
+Mark tasks that can run in parallel with a note: _(parallel with: Task X)_.
 
 #### Acceptance Criteria
-A bulleted list of conditions that must be true for the work to be considered complete. Write each criterion so it can be evaluated as pass/fail.
+A bulleted list of pass/fail conditions. Each criterion must be verifiable. Pair criteria with the exact command or method to verify them where possible:
+
+```
+- All existing tests pass: `npm test`
+- Rate limit headers present on API responses: `curl -I /api/... | grep X-RateLimit`
+```
+
+#### Verification Steps
+A short ordered checklist of commands or actions to run at the end to confirm the work is complete. This is the "definition of done" in executable form.
+
+#### Assumptions
+*See above — include in the plan body.*
 
 #### Open Questions
-Any unknowns, risks, or decisions that need resolution before or during the work. Leave this section empty (or omit it) if there are none.
+Unknowns that need resolution before or during the work. Distinct from Assumptions: these are things the plan genuinely cannot answer yet. Omit this section if there are none.
 
-### 3. Create the GitHub issue
+### 5. Self-review before posting
 
-Use the GitHub MCP tool `mcp__github__create_issue` with:
-- `owner` and `repo` from the repository input
+Before creating the issue, evaluate the draft plan:
+
+- Does every task have a clear, actionable description? (If not, rewrite vague tasks.)
+- Are dependencies complete and correct?
+- Does the acceptance criteria cover the full objective?
+- Are any assumptions likely to be wrong?
+- Is the plan appropriately scoped — neither too coarse nor too granular?
+
+Fix any issues found, then proceed.
+
+### 6. Create the GitHub issue
+
+Use `mcp__github__create_issue` with:
+- `owner` and `repo` from step 1
 - `title` from step 1
-- `body` as the full Markdown plan from step 2
-- `labels` if provided
+- `body` as the full Markdown plan from step 4
+- `labels` from step 1
 
-### 4. Report back
+**Label strategy** — apply one label from each applicable category:
+- *Type*: `feature`, `bug`, `refactor`, `docs`, `test`
+- *Priority*: `priority: high`, `priority: medium`, `priority: low`
 
-Share the created issue URL with the user and briefly summarize the plan structure (number of tasks, phases if any).
+**Sub-issues**: If the plan has more than ~7 tasks or multiple distinct phases, suggest to the user that each phase (or major task group) be tracked as a separate sub-issue linked to this parent. Offer to create them.
+
+### 7. Report back
+
+Share the issue URL, state the number of tasks and phases, and call out any open questions or high-risk assumptions that should be resolved early.
 
 ## Examples
 
@@ -74,7 +128,7 @@ Share the created issue URL with the user and briefly summarize the plan structu
 ```
 /plan
 ```
-Claude will ask for the work description. The repository is inferred automatically from `git remote get-url origin`.
+Claude will ask for the work description. Repository is inferred from `git remote get-url origin`.
 
 **Generated issue body structure:**
 ```markdown
@@ -84,16 +138,32 @@ Claude will ask for the work description. The repository is inferred automatical
 ## Background
 ...
 
+## Approach
+...
+
+## Assumptions
+- ...
+
 ## Tasks
 
 ### Phase 1 — Research
-- [ ] ...
+- [ ] Task A
+- [ ] Task B _(parallel with: Task A)_
 
 ### Phase 2 — Implementation
-- [ ] ...
+- [ ] Task C _(depends on: Task A)_
+  - [ ] Sub-task
+
+### Phase 3 — Validation
+- [ ] Task D _(depends on: Task C)_
 
 ## Acceptance Criteria
+- All tests pass: `npm test`
 - ...
+
+## Verification Steps
+1. `npm test`
+2. ...
 
 ## Open Questions
 - ...
