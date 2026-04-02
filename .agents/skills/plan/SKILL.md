@@ -8,7 +8,15 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "2.0"
+  version: "2.1"
+allowed-tools:
+  - Bash
+  - Glob
+  - Grep
+  - Read
+  - mcp__github__list_issues
+  - mcp__github__list_pull_requests
+  - mcp__github__issue_write
 ---
 
 # Plan
@@ -24,7 +32,7 @@ Collect the following (ask only for what is missing):
 - **Work description** — what needs to be done (required; may be provided inline as skill args)
 - **GitHub repository** — infer `owner/repo` by running `git remote get-url origin` and parsing the result; only ask if the remote cannot be determined
 - **Issue title** — generate one from the description if not provided
-- **Labels** — if not provided, suggest defaults based on the label strategy in step 3; confirm with the user before applying
+- **Labels** — if not provided, suggest defaults based on the label strategy in step 6; confirm with the user before applying
 
 ### 2. Survey the context
 
@@ -56,7 +64,7 @@ The chosen approach and why it was selected over alternatives. One short paragra
 Explicit statements the plan depends on being true (e.g. "The existing auth middleware can be reused", "No breaking API changes are needed"). Flag anything that, if wrong, would require replanning.
 
 #### Tasks
-Ordered, actionable tasks as GitHub Markdown checkboxes. For non-trivial work, group into phases. Each task should be independently completable.
+Ordered, actionable tasks as GitHub Markdown checkboxes. For non-trivial work, group into phases. Each task should have a single, clear deliverable.
 
 Annotate dependencies explicitly:
 
@@ -71,18 +79,12 @@ Annotate dependencies explicitly:
 Mark tasks that can run in parallel with a note: _(parallel with: Task X)_.
 
 #### Acceptance Criteria
-A bulleted list of pass/fail conditions. Each criterion must be verifiable. Pair criteria with the exact command or method to verify them where possible:
+A bulleted list of pass/fail conditions. Each criterion must be verifiable. Pair each with the exact command or action used to verify it:
 
 ```
 - All existing tests pass: `npm test`
 - Rate limit headers present on API responses: `curl -I /api/... | grep X-RateLimit`
 ```
-
-#### Verification Steps
-A short ordered checklist of commands or actions to run at the end to confirm the work is complete. This is the "definition of done" in executable form.
-
-#### Assumptions
-*See above — include in the plan body.*
 
 #### Open Questions
 Unknowns that need resolution before or during the work. Distinct from Assumptions: these are things the plan genuinely cannot answer yet. Omit this section if there are none.
@@ -101,7 +103,7 @@ Fix any issues found, then proceed.
 
 ### 6. Create the GitHub issue
 
-Use `mcp__github__create_issue` with:
+Use `mcp__github__issue_write` with:
 - `owner` and `repo` from step 1
 - `title` from step 1
 - `body` as the full Markdown plan from step 4
@@ -139,7 +141,7 @@ Claude will ask for the work description. Repository is inferred from `git remot
 ...
 
 ## Approach
-...
+We will use approach X because it minimizes Y; the key tradeoff is Z.
 
 ## Assumptions
 - ...
@@ -160,10 +162,6 @@ Claude will ask for the work description. Repository is inferred from `git remot
 ## Acceptance Criteria
 - All tests pass: `npm test`
 - ...
-
-## Verification Steps
-1. `npm test`
-2. ...
 
 ## Open Questions
 - ...
