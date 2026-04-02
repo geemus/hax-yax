@@ -38,7 +38,7 @@ Before planning, ground the plan in reality:
 - **Codebase scan**: Use `Glob` to map the directory structure around the relevant area. Use `Grep` to search for key terms from the work description. Read `AGENTS.md`, `CLAUDE.md`, and `README.md` if present for conventions and constraints. If none of these files exist, note the absence and continue.
 - **Open issues / PRs**: Check for related work using whichever path was determined in step 1. Choose a specific keyword from the work description (a noun or action that would appear in issue titles) and use it consistently:
   - `gh` available: `gh issue list --repo <owner/repo> --state open --search "<keyword>"` and `gh pr list --repo <owner/repo> --state open --search "<keyword>"`
-  - `gh` unavailable: `mcp__github__list_issues` / `mcp__github__list_pull_requests`
+  - `gh` unavailable: use available GitHub MCP tools to list issues and pull requests
   - If no issues or PRs exist yet, note the absence and continue.
 - **Constraints**: Note tech stack, dependencies, CI requirements, and anything that restricts the approach.
 - Record what already exists and what must be built from scratch — this feeds the Background section.
@@ -117,9 +117,9 @@ Use the path determined in step 1:
   rm /tmp/plan-body-${EPOCH}.md
   ```
 
-- **`gh` unavailable:** Use `mcp__github__create_issue` with `owner`, `repo`, `title`, and `body`.
+- **`gh` unavailable:** Use available GitHub MCP tools to create the issue with `owner`, `repo`, `title`, and `body`.
 
-**Sub-issues**: If sub-issue tracking was agreed in step 1, create a child issue for each phase using the same method above. Link each child to the parent by adding a line to the parent issue body: `- Sub-issue: #<number> — <phase name>`. If `mcp__github__sub_issue_write` is available, use it to create the formal parent–child relationship.
+**Sub-issues**: If sub-issue tracking was agreed in step 1, create a child issue for each phase using the same method above. Link each child to the parent by adding a line to the parent issue body: `- Sub-issue: #<number> — <phase name>`.
 
 ### 8. Report back
 
