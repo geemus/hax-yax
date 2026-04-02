@@ -44,6 +44,23 @@ allowed-tools:            # optional: restrict tool access within the skill
 - Written in third person (agents read this for discovery)
 - Must describe both *what* the skill does and *when* to invoke it
 
+### `allowed-tools` rules
+
+List tool names to restrict which tools the agent may call while executing the skill. Omit to allow all tools.
+
+**Built-in tools** use their plain name: `Bash`, `Read`, `Edit`, `Write`, `Glob`, `Grep`, etc.
+
+**MCP tools** follow the convention `mcp__<server>__<tool>` (double-underscore separators):
+
+```yaml
+allowed-tools:
+  - Bash
+  - mcp__github__create_issue
+  - mcp__github__search_repositories
+```
+
+MCP tool names are runtime-dependent — they reflect whatever MCP servers are configured in the agent's environment. Document the names you require and note that the skill will fail if those MCP servers are not available.
+
 ## Markdown Body
 
 Recommended structure:
