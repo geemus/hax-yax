@@ -45,6 +45,7 @@ To create, update, or delete skills with guided steps and correct conventions, u
 
 - Default branch: `main`
 - Feature branches: `<author>/<short-description>` or `claude/<task-slug>`
+- **PR workflow**: When a PR is the goal, always create a feature branch first — never commit directly to `main` and open a PR from there. Branch, commit, push the branch, then `gh pr create`.
 - Commit messages: [Conventional Commits](https://www.conventionalcommits.org) format — `<type>[optional scope]: <description>` — where description is lowercase imperative mood with no trailing period
   - Valid types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
   - Scope (optional): the skill name or component affected, e.g. `feat(plan):`, `fix(skills):`
