@@ -34,7 +34,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| `skills` | `/skills` | Create, update, and manage skills in this repository |
+| `skills` | `/skills` | Create, update, manage, and audit skills in this repository |
 | `plan` | `/plan` | Generate a structured work plan and write it to a GitHub issue |
 | `conventional-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
 

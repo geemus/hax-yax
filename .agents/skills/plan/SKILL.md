@@ -143,6 +143,14 @@ Fetches issue #35, generates an updated plan, edits the issue in place, and post
 ```
 Same as above; repo is extracted from the URL.
 
+## Progressive Disclosure
+
+| Level | Content | When to load | Target size |
+|-------|---------|--------------|-------------|
+| 1 | `name` + `description` | Always (startup) | ~100 tokens |
+| 2 | `SKILL.md` body (this file) | When skill is triggered | < 5,000 tokens |
+| 3 | None currently defined | — | — |
+
 **Generated issue body structure:**
 ```markdown
 ## Objective
