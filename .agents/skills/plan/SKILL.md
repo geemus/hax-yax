@@ -31,11 +31,11 @@ Collect the following (ask only for what is missing):
 
 ### 2. Survey the context
 
-Before planning, ground the plan in reality:
+Before planning, ground the plan in reality. For a clearly simple task (a single isolated change with no cross-cutting concerns), a lightweight survey—checking only the immediately relevant directory and any context files—is sufficient; skip the open issues/PRs search. For multi-phase or cross-cutting work, run the full survey below.
 
 - **Existing issue content** *(update mode only)*: Fetch the current title and body of the target issue to use as planning context and to compute a change summary later.
 - **Codebase scan**: Use `Glob` to map the directory structure around the relevant area. Use `Grep` to search for key terms from the work description. Check for context files (all optional): `CLAUDE.md`, `README.md`, `AGENTS.md`. Read any that exist for conventions and constraints; if absent, proceed without them.
-- **Open issues / PRs**: Search for open issues and pull requests in the repo matching `<keyword>`, where the keyword is a specific noun or action from the work description that would appear in issue titles. If no issues or PRs exist yet, note the absence and continue.
+- **Open issues / PRs** *(skip for simple tasks)*: Search for open issues and pull requests in the repo matching `<keyword>`, where the keyword is a specific noun or action from the work description that would appear in issue titles. If no issues or PRs exist yet, note the absence and continue.
 - **Constraints**: Note tech stack, dependencies, CI requirements, and anything that restricts the approach.
 - Record what already exists and what must be built from scratch — this feeds the Background section.
 
