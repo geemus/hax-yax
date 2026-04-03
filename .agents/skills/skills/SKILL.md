@@ -72,12 +72,4 @@ Expected: agent reads existing `SKILL.md`, updates the `description` frontmatter
 
 Expected: agent confirms with user, removes `.agents/skills/pdf/` directory, updates `AGENTS.md` if needed, commits with `chore(pdf): remove pdf skill — no longer used`
 
-## Progressive Disclosure
-
-| Level | Content | When to load | Target size |
-|-------|---------|--------------|-------------|
-| 1 | `name` + `description` | Always (startup) | ~100 tokens |
-| 2 | `SKILL.md` body (this file) | When skill is triggered | < 5,000 tokens |
-| 3 | `scripts/`, `references/`, `assets/` | On demand, when you need format details, examples, or executables | Unlimited |
-
 Read `references/skill-format.md` for complete frontmatter rules, naming constraints, and a full worked example.

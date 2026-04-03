@@ -69,10 +69,3 @@ question: why is this sorted descending? just want to make sure it's intentional
 nitpick: s/recieve/receive/
 ```
 
-## Progressive Disclosure
-
-| Level | Content | When to load | Target size |
-|-------|---------|--------------|-------------|
-| 1 | `name` + `description` | Always (startup) | ~100 tokens |
-| 2 | `SKILL.md` body (this file) | When posting review comments | < 5,000 tokens |
-| 3 | `references/conventional-comments-spec.md` | When you need the full label/decoration list | Unlimited |
