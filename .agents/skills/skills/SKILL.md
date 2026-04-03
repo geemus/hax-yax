@@ -20,7 +20,7 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 
 1. Choose a name: lowercase letters, numbers, and hyphens only; 1–64 chars; must be unique under `.agents/skills/`
 2. Create the directory: `.agents/skills/<skill-name>/`
-3. Create `SKILL.md` — required frontmatter fields: `name` (must match directory), `description` (what it does and when to use it)
+3. Create `SKILL.md` — required frontmatter fields: `name` (must match directory), `description` (what it does and when to use it); for full frontmatter rules and a worked example, read `references/skill-format.md`
 4. Omit `allowed-tools` unless the user explicitly requests tool restrictions
 5. Write a clear Markdown body with instructions agents can follow directly
 6. Add `scripts/`, `references/`, or `assets/` subdirectories only when needed for Level 3 content
@@ -72,4 +72,3 @@ Expected: agent reads existing `SKILL.md`, updates the `description` frontmatter
 
 Expected: agent confirms with user, removes `.agents/skills/pdf/` directory, updates `AGENTS.md` if needed, commits with `chore(pdf): remove pdf skill — no longer used`
 
-Read `references/skill-format.md` for complete frontmatter rules, naming constraints, and a full worked example.
