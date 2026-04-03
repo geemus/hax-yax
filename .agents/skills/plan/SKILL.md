@@ -29,23 +29,13 @@ Collect the following (ask only for what is missing):
 - **GitHub repository** — infer `owner/repo` by running `git remote get-url origin` and parsing the result. Parse both HTTPS (`https://github.com/owner/repo.git`) and SSH (`git@github.com:owner/repo.git`) remote formats — for SSH remotes, split on `:` then strip `.git`. If the command exits non-zero, produces empty output, or the result cannot be parsed into `owner/repo`, ask the user for the repository explicitly. Run all git commands without `-C`; the working directory is already the repo root. *(In update mode with a full URL, prefer the repo extracted from the URL.)*
 - **Sub-issues** — if the work description clearly involves multiple distinct phases or bodies of work, ask now whether the user wants each phase tracked as a separate sub-issue linked to a parent.
 
-Check `gh` availability once here and carry the result forward — do not re-check in later steps:
-```
-gh auth status 2>/dev/null && echo "gh: available" || echo "gh: unavailable"
-```
-
 ### 2. Survey the context
 
 Before planning, ground the plan in reality:
 
 - **Existing issue content** *(update mode only)*: Fetch the current title and body of the target issue to use as planning context and to compute a change summary later.
-  - `gh` available: `gh issue view <number> --repo <owner/repo> --json title,body`
-  - `gh` unavailable: use available GitHub MCP tools to read the issue.
 - **Codebase scan**: Use `Glob` to map the directory structure around the relevant area. Use `Grep` to search for key terms from the work description. Check for context files (all optional): `CLAUDE.md`, `README.md`, `AGENTS.md`. Read any that exist for conventions and constraints; if absent, proceed without them.
-- **Open issues / PRs**: Check for related work using whichever path was determined in step 1. Choose a specific keyword from the work description (a noun or action that would appear in issue titles) and use it consistently:
-  - `gh` available: `gh issue list --repo <owner/repo> --state open --search "<keyword>"` and `gh pr list --repo <owner/repo> --state open --search "<keyword>"`
-  - `gh` unavailable: use available GitHub MCP tools to list issues and pull requests
-  - If no issues or PRs exist yet, note the absence and continue.
+- **Open issues / PRs**: Search for open issues and pull requests in the repo matching `<keyword>`, where the keyword is a specific noun or action from the work description that would appear in issue titles. If no issues or PRs exist yet, note the absence and continue.
 - **Constraints**: Note tech stack, dependencies, CI requirements, and anything that restricts the approach.
 - Record what already exists and what must be built from scratch — this feeds the Background section.
 
@@ -116,34 +106,11 @@ State whether you are in **create mode** (a new issue will be created) or **upda
 
 Derive the issue title from the Objective: use a concise phrase (under 72 characters) that captures the core action and subject (e.g. "Add rate limiting to the public API").
 
-Use the path determined in step 1:
-
-**Create mode:**
-
-- **`gh` available:** Write the plan body to a uniquely named temp file using the `Write` tool (avoids shell quoting issues and concurrent collisions), then create the issue and clean up the temp file:
-  ```
-  TMPFILE=$(mktemp /tmp/plan-body-XXXXXX.md)
-  gh issue create --repo <owner/repo> --title "<derived title>" --body-file $TMPFILE
-  rm $TMPFILE
-  ```
-
-- **`gh` unavailable:** Use available GitHub MCP tools to create the issue with `owner`, `repo`, `title`, and `body`.
+**Create mode:** Create a new GitHub issue with the derived title and plan body. To avoid shell quoting issues, write the body to a uniquely named temp file first (e.g. `mktemp`) and pass it via a file argument or read it in, then clean up the temp file.
 
 **Update mode:**
-
-- **`gh` available:**
-  1. Write the new plan body to a temp file, then update the issue title and body:
-     ```
-     TMPFILE=$(mktemp /tmp/plan-body-XXXXXX.md)
-     gh issue edit <number> --repo <owner/repo> --title "<derived title>" --body-file $TMPFILE
-     rm $TMPFILE
-     ```
-  2. Compose a change-summary comment that lists each section as **added**, **revised**, **preserved**, or **removed**, with a "Key change" sentence per section. Post it:
-     ```
-     gh issue comment <number> --repo <owner/repo> --body "<change summary>"
-     ```
-
-- **`gh` unavailable:** Use available GitHub MCP tools to edit the issue (`owner`, `repo`, `issue_number`, `title`, `body`) and then add a comment with the change summary.
+1. Update the issue title and body with the new plan. Write the body to a temp file first to avoid shell quoting issues.
+2. Compose a change-summary comment that lists each section as **added**, **revised**, **preserved**, or **removed**, with a "Key change" sentence per section. Post it as a comment on the issue.
 
 **Sub-issues**: If sub-issue tracking was agreed in step 1, create a child issue for each phase using the same method above. Link each child to the parent by adding a line to the parent issue body: `- Sub-issue: #<number> — <phase name>`.
 
