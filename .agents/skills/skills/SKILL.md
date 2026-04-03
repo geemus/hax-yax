@@ -44,11 +44,16 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 
 ### Reviewing / auditing skills
 
-- List all skills: `ls .agents/skills/`
-- Validate a skill: check that `SKILL.md` exists, frontmatter has `name` and `description`, `name` matches the directory
-- For full format rules, see `references/skill-format.md`
-- If the audit is read-only and no issues are found, no commit is needed
-- If audit findings require corrections, apply fixes and commit: `fix(<skill-name>): <description of issue corrected>`
+1. Discover all skills: use `Glob` with pattern `.agents/skills/*/SKILL.md`
+2. For each skill found, validate:
+   - `SKILL.md` exists (confirmed by the glob result)
+   - Frontmatter contains `name` and non-empty `description`
+   - `name` value matches the parent directory name exactly
+   - `description` describes both what the skill does and when to invoke it
+3. For complete format rules and validation criteria, read `references/skill-format.md`
+4. Auto-fix minor issues (typos, table formatting, missing optional metadata fields); ask the user before removing or renaming skills
+5. If the audit is read-only and no issues are found, no commit is needed
+6. If audit findings require corrections, apply fixes and commit: `fix(<skill-name>): <description of issue corrected>`
 
 ## Examples
 
@@ -69,10 +74,10 @@ Expected: agent confirms with user, removes `.agents/skills/pdf/` directory, upd
 
 ## Progressive Disclosure
 
-| Level | Content | When to load |
-|-------|---------|--------------|
-| 1 | `name` + `description` | Always |
-| 2 | `SKILL.md` body (this file) | When skill is triggered |
-| 3 | `scripts/`, `references/`, `assets/` | When you need format details, examples, or executables |
+| Level | Content | When to load | Target size |
+|-------|---------|--------------|-------------|
+| 1 | `name` + `description` | Always (startup) | ~100 tokens |
+| 2 | `SKILL.md` body (this file) | When skill is triggered | < 5,000 tokens |
+| 3 | `scripts/`, `references/`, `assets/` | On demand, when you need format details, examples, or executables | Unlimited |
 
 Read `references/skill-format.md` for complete frontmatter rules, naming constraints, and a full worked example.
