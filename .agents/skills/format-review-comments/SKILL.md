@@ -1,5 +1,5 @@
 ---
-name: conventional-comments
+name: format-review-comments
 description: >
   Formats code review and PR feedback using the Conventional Comments standard
   (label [decorations]: subject). Apply proactively whenever posting review
@@ -7,7 +7,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Conventional Comments

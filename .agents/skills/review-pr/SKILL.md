@@ -2,7 +2,7 @@
 name: review-pr
 description: >
   Guides systematic pull request review across logic, security, performance,
-  test coverage, and documentation. Uses the conventional-comments skill to
+  test coverage, and documentation. Uses the format-review-comments skill to
   format all feedback. Invoke when the user asks to review a pull request,
   audit a diff, or give structured feedback on proposed code changes.
 license: Apache-2.0
@@ -13,7 +13,7 @@ metadata:
 
 # Review PR
 
-Conducts a structured, multi-dimensional review of a pull request and formats every comment using the `conventional-comments` skill.
+Conducts a structured, multi-dimensional review of a pull request and formats every comment using the `format-review-comments` skill.
 
 ## Instructions
 
@@ -67,9 +67,9 @@ Work through every dimension in order. For each, read the relevant changed files
 - Is the PR description accurate and complete?
 - Do `README`, `CHANGELOG`, or other docs need updating?
 
-### 4. Format all feedback with conventional-comments
+### 4. Format all feedback with format-review-comments
 
-Apply the `conventional-comments` skill to every comment you write. Choose the label that matches the severity and intent:
+Apply the `format-review-comments` skill to every comment you write. Choose the label that matches the severity and intent:
 
 | Situation | Recommended label |
 |-----------|------------------|
@@ -81,7 +81,7 @@ Apply the `conventional-comments` skill to every comment you write. Choose the l
 | Small unambiguous fix | `todo` |
 | Informational only | `note` |
 
-For the full label and decoration reference, read `../conventional-comments/references/conventional-comments-spec.md`.
+For the full label and decoration reference, read `../format-review-comments/references/conventional-comments-spec.md`.
 
 ### 5. Write a review summary
 
