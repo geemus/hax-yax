@@ -38,6 +38,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `plan` | `/plan` | Generate a structured work plan and write it to a GitHub issue |
 | `conventional-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
 | `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
+| `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
 
 ## Adding or Managing Skills
 
