@@ -37,6 +37,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `skills` | `/skills` | Create, update, manage, and audit skills in this repository |
 | `plan` | `/plan` | Generate a structured work plan and write it to a GitHub issue |
 | `conventional-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
+| `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
 
 ## Adding or Managing Skills
 
