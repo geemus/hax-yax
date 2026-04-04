@@ -38,11 +38,27 @@ allowed-tools:            # optional: restrict tool access within the skill
 - No leading, trailing, or consecutive hyphens
 - Must match the parent directory name exactly
 
+#### Semantic quality rules
+
+- **Action + object formula**: prefer `search-orders`, `analyze-sentiment`, `generate-report` over vague single words
+- **Gerund form acceptable**: `processing-pdfs`, `extracting-metadata` are valid when they read naturally
+- **Specificity over brevity**: single-word names are almost always too vague — `pdf` says nothing about what happens to the PDF
+- **Name for outcome, not implementation**: use `analyze-sentiment` not `run-bert-v2`; callers should not need to know the underlying tool or model
+- **Avoid reserved words**: do not use `anthropic`, `claude`, or other trademark terms as the skill name or prefix
+- **Namespace prefixes for large repos**: when a repository has 10 or more skills, prefix related skills with a shared namespace (e.g. `orders-search`, `orders-refund`) to make discovery easier and prevent name collisions
+
 ### `description` rules
 
 - Non-empty; maximum 1024 characters
 - Written in third person (agents read this for discovery)
 - Must describe both *what* the skill does and *when* to invoke it
+
+#### Description best practices
+
+- **"Does X. Use when Y." template**: open with what the skill does, then explicitly state the triggering condition. Example: *"Extracts text from PDF files. Use when the user asks to read, parse, or summarize a PDF document."*
+- **Third person, active voice, start with the action verb**: write *"Generates …"* not *"This skill will generate …"* or *"Can be used to generate …"*
+- **Include trigger keywords and synonyms**: if users might phrase the request multiple ways, mention the synonyms so agent discovery works reliably (e.g. *"… also triggered by requests to OCR or convert PDFs"*)
+- **Explicitly distinguish overlapping skills**: if two skills handle similar inputs, call out the difference in each description so the agent picks the right one
 
 ### `allowed-tools` rules
 
@@ -94,10 +110,10 @@ Keep `SKILL.md` lean. Move large examples, schemas, and reference docs into `ref
 
 ## Worked Example
 
-Directory: `.agents/skills/pdf/`
+Directory: `.agents/skills/extract-pdf-text/`
 
 ```
-pdf/
+extract-pdf-text/
 ├── SKILL.md
 └── references/
     └── pdfminer-api.md
@@ -107,17 +123,17 @@ pdf/
 
 ```markdown
 ---
-name: pdf
+name: extract-pdf-text
 description: >
-  Extracts and summarizes content from PDF files. Use when the user
-  asks to read, parse, or extract text from a PDF document.
+  Extracts and summarizes text content from PDF files. Use when the user
+  asks to read, parse, extract, or summarize text from a PDF document.
 license: Apache-2.0
 metadata:
   author: geemus
   version: "1.0"
 ---
 
-# PDF
+# Extract PDF Text
 
 Extracts text and metadata from PDF files using pdfminer.
 
@@ -137,3 +153,15 @@ For full API details, read `references/pdfminer-api.md`.
 - Never commit secrets, tokens, or credentials inside a skill
 - Skills that call external services must document required environment variables in `SKILL.md`
 - Skills performing destructive operations must include an explicit confirmation step
+
+### Anti-patterns
+
+Avoid these common mistakes when naming and describing skills:
+
+| Anti-pattern | Example | Problem | Better alternative |
+|---|---|---|---|
+| Generic names | `helper`, `utils`, `tools` | Conveys no useful information for discovery | Name what the skill specifically does: `format-date`, `validate-email` |
+| Noun-only names | `data`, `files`, `report` | Does not indicate what action is taken | Add the verb: `fetch-data`, `archive-files`, `generate-report` |
+| Implementation-detail names | `run-bert-v2`, `call-gpt4` | Breaks callers when the implementation changes | Name the outcome: `analyze-sentiment`, `summarize-text` |
+| Mixed casing | `SearchOrders`, `search_orders` | Violates the lowercase-kebab-case format rule | `search-orders` |
+| Vague description openers | *"This skill can be used to…"*, *"A helper that…"* | Wastes the first tokens agents read; passive and weak | Start with the action verb: *"Searches orders by…"* |
