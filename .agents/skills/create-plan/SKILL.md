@@ -98,6 +98,17 @@ Evaluate the draft plan against these checks. Fix any issues found silently befo
 - Is the plan appropriately scoped — neither too coarse nor too granular?
 - Is the Approach section present and does it name the chosen approach, the reason it was selected, and its key tradeoff?
 
+### 5.5 Simplify the plan
+
+After self-review, challenge the scope. Ask: is there a simpler way to achieve the same objective? Make changes silently before presenting.
+
+- Remove any task that is not required by the acceptance criteria. If it is "nice to have", add it to Open Questions as a possible extension instead.
+- Collapse phases that have no meaningful dependency boundary between them.
+- If a simpler approach would satisfy all acceptance criteria with fewer tasks, switch to it and update the Approach section accordingly.
+- Flag tasks that could be explicitly deferred post-launch; move them to a "Future work" note at the bottom rather than deleting them.
+
+Do not remove tasks that reflexion identified as missing or necessary.
+
 ### 6. Present the plan
 
 State whether you are in **create mode** (a new issue will be created) or **update mode** (issue #N will be updated in place). Present the finished plan to the user and ask for confirmation before proceeding.
