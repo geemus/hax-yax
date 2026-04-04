@@ -28,21 +28,21 @@ Skills live under `.agents/skills/` so that agents running within this repositor
 
 Each skill is a **directory** named after the skill containing a `SKILL.md` file with YAML frontmatter and Markdown instructions.
 
-For full format rules, naming constraints, progressive disclosure levels, and a worked example, read `.agents/skills/skills/references/skill-format.md`. To create, update, or delete skills using guided steps, use the **`skills`** skill (`/skills`).
+For full format rules, naming constraints, progressive disclosure levels, and a worked example, read `.agents/skills/manage-skills/references/skill-format.md`. To create, update, or delete skills using guided steps, use the **`manage-skills`** skill (`/manage-skills`).
 
 ## Available Skills
 
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| `skills` | `/skills` | Create, update, manage, and audit skills in this repository |
-| `plan` | `/plan` | Generate a structured work plan and write it to a GitHub issue |
-| `conventional-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
+| `manage-skills` | `/manage-skills` | Create, update, manage, and audit skills in this repository |
+| `create-plan` | `/create-plan` | Generate a structured work plan and write it to a GitHub issue |
+| `format-review-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
 | `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
 | `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
 
 ## Adding or Managing Skills
 
-To create, update, or delete skills with guided steps and correct conventions, use the **`skills`** skill (`/skills`). To learn the skill format first, read `.agents/skills/skills/references/skill-format.md`.
+To create, update, or delete skills with guided steps and correct conventions, use the **`manage-skills`** skill (`/manage-skills`). To learn the skill format first, read `.agents/skills/manage-skills/references/skill-format.md`.
 
 ## Git Workflow
 
@@ -54,8 +54,8 @@ To create, update, or delete skills with guided steps and correct conventions, u
   - Scope (optional): the skill name or component affected, e.g. `feat(plan):`, `fix(skills):`
   - Examples:
     - `docs: adopt conventional commits standard`
-    - `feat(skills): add loop skill`
-    - `fix(plan): correct frontmatter validation logic`
+    - `feat(manage-skills): add loop skill`
+    - `fix(create-plan): correct frontmatter validation logic`
     - `chore: update AGENTS.md structure`
 - Do not force-push to `main`
 

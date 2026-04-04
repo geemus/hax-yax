@@ -1,5 +1,5 @@
 ---
-name: plan
+name: create-plan
 description: >
   Generates a detailed, structured work plan from a description of work to be
   done, then creates or updates a GitHub issue containing the plan. Interactive:
@@ -11,7 +11,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Plan

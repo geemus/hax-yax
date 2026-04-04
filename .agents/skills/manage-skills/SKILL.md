@@ -1,5 +1,5 @@
 ---
-name: skills
+name: manage-skills
 description: >
   Creates, updates, and manages reusable agent skills stored under
   .agents/skills/. Invoke when the user wants to add, modify, rename,
@@ -7,10 +7,10 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.1"
+  version: "1.2"
 ---
 
-# Skills
+# Manage Skills
 
 Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 
