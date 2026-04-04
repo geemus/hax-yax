@@ -7,7 +7,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Skills
@@ -18,9 +18,13 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 
 ### Creating a skill
 
-1. Choose a name: lowercase letters, numbers, and hyphens only; 1–64 chars; must be unique under `.agents/skills/`
+1. Choose a name — it must pass all of the following checks:
+   - **Format**: lowercase letters, digits, and hyphens only; 1–64 chars; no leading, trailing, or consecutive hyphens; must be unique under `.agents/skills/`
+   - **Quality**: use an action+object formula (`search-orders`, `extract-pdf-text`); avoid single-word or noun-only names; name the outcome, not the implementation; avoid reserved words (`anthropic`, `claude`)
+   - **Namespace**: if the repository already has 10 or more skills, add a shared prefix for related skills (e.g. `orders-search`, `orders-refund`)
+   - For the full naming specification and worked example, read `references/skill-format.md`
 2. Create the directory: `.agents/skills/<skill-name>/`
-3. Create `SKILL.md` — required frontmatter fields: `name` (must match directory), `description` (what it does and when to use it); for full specification and worked example, read `references/skill-format.md`
+3. Create `SKILL.md` — required frontmatter fields: `name` (must match directory), `description` (what it does and when to use it); use the **"Does X. Use when Y."** template — start with the action verb in third person, then state the triggering condition; for full specification and worked example, read `references/skill-format.md`
 4. Omit `allowed-tools` unless the user explicitly requests tool restrictions
 5. Write a clear Markdown body with instructions agents can follow directly
 6. Add `scripts/`, `references/`, or `assets/` subdirectories only when needed for Level 3 content
@@ -50,6 +54,12 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
    - Frontmatter contains `name` and non-empty `description`
    - `name` value matches the parent directory name exactly
    - `description` describes both what the skill does and when to invoke it
+   - **Quality checks**:
+     - `name` is not generic or noun-only (e.g. `helper`, `utils`, `data`, `files`)
+     - `name` uses action+object or gerund form, not an implementation detail (e.g. not `run-bert-v2`)
+     - `description` opens with an active-voice verb in third person, not *"This skill…"* or *"A helper…"*
+     - `description` explicitly states a triggering condition (*"Use when…"*)
+     - If the repository has 10+ skills, check that related skills share a namespace prefix
 3. For complete format rules and validation criteria, read `references/skill-format.md`
 4. Auto-fix minor issues (typos, table formatting, missing optional metadata fields); ask the user before removing or renaming skills
 5. If the audit is read-only and no issues are found, no commit is needed
