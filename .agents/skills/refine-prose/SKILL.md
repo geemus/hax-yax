@@ -4,12 +4,14 @@ description: >
   Polishes drafted prose for clarity, conciseness, and consistent voice before
   it is recorded or posted. Apply after drafting any plan, review summary, or
   written output to catch filler phrases, passive constructions, and
-  inconsistent terminology. Invoke directly with /refine-prose or reference
-  from other skills as a composable refinement step.
+  inconsistent terminology. Use when the user asks to polish, clean up, improve,
+  edit, or tighten writing — also triggered by "refine this draft", "make this
+  clearer", or "improve my writing". Reference from other skills as a composable
+  refinement step.
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Refine Prose

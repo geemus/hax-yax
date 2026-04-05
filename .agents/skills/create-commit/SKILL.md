@@ -2,13 +2,14 @@
 name: create-commit
 description: >
   Stages changes safely, generates a conventional-commit message from the diff,
-  and blocks secrets or debug artifacts from being committed. Use when the user
-  wants to commit work — also triggered by requests to stage files, write a
-  commit message, or run git commit.
+  and blocks secrets or debug artifacts from being committed.
+  TRIGGER when: user asks to commit, save changes, stage files, write a commit
+  message, or run git commit.
+  DO NOT TRIGGER when: user asks to push, open a PR, or create a branch.
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Create Commit

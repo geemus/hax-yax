@@ -2,12 +2,14 @@
 name: manage-skills
 description: >
   Creates, updates, and manages reusable agent skills stored under
-  .agents/skills/. Invoke when the user wants to add, modify, rename,
-  delete, or audit skills in this repository.
+  .agents/skills/. Use when the user wants to add, modify, rename, delete, or
+  audit skills in this repository — also triggered by "create a new skill",
+  "set up a skill", "list my skills", "what skills do I have", or "remove a
+  skill".
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.3"
+  version: "1.4"
 ---
 
 # Manage Skills

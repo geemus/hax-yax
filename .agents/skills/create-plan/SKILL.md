@@ -2,21 +2,21 @@
 name: create-plan
 description: >
   Generates a detailed, structured work plan from a description of work to be
-  done, then creates or updates a GitHub issue containing the plan. Interactive:
-  asks clarifying questions when needed and presents the plan for review. Invoke
-  when the user wants to plan out a feature, bug fix, project, or any body of
-  work and capture it as a GitHub issue for tracking and collaboration. Also
-  supports update mode: when invoked with an existing issue number or URL,
-  updates that issue in place and posts a change-summary comment.
+  done, then creates or updates a GitHub issue containing the plan. Use when the
+  user wants to plan out a feature, bug fix, project, or any body of work —
+  also triggered by "make a plan", "scope out this work", "break down this
+  task", "help me plan", or "create a GitHub issue for this". Supports update
+  mode: when given an existing issue number or URL, updates that issue in place
+  and posts a change-summary comment.
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Plan
 
-Turns a description of work into a structured, executable plan written to a GitHub issue. Supports both create mode (new issue) and update mode (edit an existing issue in place).
+Turns a description of work into a structured, executable plan written to a GitHub issue. Interactive: asks clarifying questions when needed and presents the plan for review before writing. Supports both create mode (new issue) and update mode (edit an existing issue in place).
 
 ## Instructions
 

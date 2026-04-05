@@ -3,12 +3,14 @@ name: review-pr
 description: >
   Guides systematic pull request review across logic, security, performance,
   test coverage, and documentation. Uses the format-review-comments skill to
-  format all feedback. Invoke when the user asks to review a pull request,
-  audit a diff, or give structured feedback on proposed code changes.
+  format all feedback. Use when the user asks to review a pull request, audit a
+  diff, or give structured feedback on proposed code changes — also triggered by
+  "look at this PR", "check PR #N", "can you review this", or "give feedback on
+  this diff".
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Review PR
