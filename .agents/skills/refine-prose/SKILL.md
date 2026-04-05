@@ -2,21 +2,21 @@
 name: refine-prose
 description: >
   Polishes drafted prose for clarity, conciseness, and consistent voice before
-  it is recorded or posted. Apply after drafting any plan, review summary, or
+  it is posted or presented. Apply after drafting any plan, review summary, or
   written output to catch filler phrases, passive constructions, and
   inconsistent terminology. Use when the user asks to polish, clean up, improve,
   edit, or tighten writing — also triggered by "refine this draft", "make this
-  clearer", or "improve my writing". Reference from other skills as a composable
-  refinement step.
+  clearer", or "improve my writing". Also composable: other skills invoke it as
+  a late-stage refinement step.
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Refine Prose
 
-Polishes a draft for clarity, conciseness, and consistent voice. Apply this skill after producing any written output — a plan, review summary, comment, or document — before presenting it to the user or posting it externally.
+Polishes a draft for clarity, conciseness, and consistent voice. Apply after producing any written output — a plan, review summary, comment, or document — before presenting or posting it.
 
 ## When to apply
 
@@ -25,7 +25,7 @@ Polishes a draft for clarity, conciseness, and consistent voice. Apply this skil
 - Before presenting any multi-sentence output to a user
 - Whenever explicitly invoked via `/refine-prose` on arbitrary text
 
-You do not need to be explicitly asked when wired in as a composable step. Run it silently and present only the refined result.
+When another skill calls it as a composable step, run silently and present only the refined result.
 
 ## Instructions
 

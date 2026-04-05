@@ -3,18 +3,18 @@ name: format-review-comments
 description: >
   Formats code review and PR feedback using the Conventional Comments standard
   (label [decorations]: subject). Apply proactively whenever posting review
-  comments, inline feedback, or any critique of code or pull requests. Also
-  invoke directly when the user asks to format feedback, use conventional
-  comments style, or label a review comment as blocking, suggestion, or nitpick.
+  comments or any critique of code or pull requests. Invoke directly when the
+  user asks to format feedback, use conventional comments style, or label a
+  review comment as blocking, suggestion, or nitpick.
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Conventional Comments
 
-Formats review and feedback comments using the [Conventional Comments](https://conventionalcomments.org/) standard so that intent is unambiguous — readers know immediately whether a comment is blocking, optional, or informational.
+Formats review comments using the [Conventional Comments](https://conventionalcomments.org/) standard, making intent unambiguous — readers know immediately whether a comment is blocking, optional, or informational.
 
 ## When to apply
 
@@ -23,7 +23,7 @@ Apply this format **proactively** whenever you:
 - Provide feedback on code, architecture, or a document
 - Suggest a change or improvement in a review context
 
-You do not need to be explicitly asked. If you are reviewing anything, use this format.
+Use this format whenever you are reviewing anything — no explicit request needed.
 
 ## Format
 

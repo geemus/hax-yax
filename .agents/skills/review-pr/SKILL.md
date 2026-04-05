@@ -1,7 +1,7 @@
 ---
 name: review-pr
 description: >
-  Guides systematic pull request review across logic, security, performance,
+  Conducts systematic pull request reviews across logic, security, performance,
   test coverage, and documentation. Uses the format-review-comments skill to
   format all feedback. Use when the user asks to review a pull request, audit a
   diff, or give structured feedback on proposed code changes — also triggered by
@@ -10,7 +10,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Review PR
@@ -30,7 +30,7 @@ Fetch the PR diff and description before proceeding.
 
 ### 2. Read the PR description
 
-Understand the stated intent: what problem does the PR solve, what approach was taken, and what is explicitly out of scope? Use this as the lens for all review dimensions below.
+Understand the stated intent: what problem does the PR solve, what approach the author took, and what is explicitly out of scope. Use this as the lens for all review dimensions below.
 
 ### 3. Review each dimension
 
@@ -89,10 +89,10 @@ For the full label and decoration reference, read `../format-review-comments/ref
 
 After the per-comment feedback, write a brief summary (3–7 sentences) covering:
 
-- Overall assessment: is the PR ready to merge, needs minor changes, or needs significant rework?
-- The most important finding (if any blocking issues exist, name them)
-- Any patterns worth calling out across the diff
-- Any dimensions that were skipped and why
+- Overall assessment — ready to merge, needs minor changes, or needs significant rework
+- The most important finding (name any blocking issues)
+- Any patterns visible across the diff
+- Any skipped dimensions and why
 
 Format the summary as a `note` conventional comment.
 
