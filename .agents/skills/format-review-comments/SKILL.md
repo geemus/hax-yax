@@ -3,11 +3,13 @@ name: format-review-comments
 description: >
   Formats code review and PR feedback using the Conventional Comments standard
   (label [decorations]: subject). Apply proactively whenever posting review
-  comments, inline feedback, or any critique of code or pull requests.
+  comments, inline feedback, or any critique of code or pull requests. Also
+  invoke directly when the user asks to format feedback, use conventional
+  comments style, or label a review comment as blocking, suggestion, or nitpick.
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Conventional Comments
