@@ -28,8 +28,9 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 4. Omit `allowed-tools` unless the user explicitly requests tool restrictions
 5. Write a clear Markdown body with instructions agents can follow directly
 6. Add `scripts/`, `references/`, or `assets/` subdirectories only when needed for Level 3 content
-7. Review `AGENTS.md` — update if the new skill affects documented structure, conventions, or workflow
-8. Commit: `feat(<skill-name>): add <skill-name> skill — <one-line summary>`
+7. Apply the `refine-prose` skill to the `description` frontmatter field and the `SKILL.md` body — run it silently before saving
+8. Review `AGENTS.md` — update if the new skill affects documented structure, conventions, or workflow
+9. Commit: `feat(<skill-name>): add <skill-name> skill — <one-line summary>`
 
 ### Updating a skill
 
@@ -62,8 +63,9 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
      - If the repository has 10+ skills, check that related skills share a namespace prefix
 3. For complete format rules and validation criteria, read `references/skill-format.md`
 4. Auto-fix minor issues (typos, table formatting, missing optional metadata fields); ask the user before removing or renaming skills
-5. If the audit is read-only and no issues are found, no commit is needed
-6. If audit findings require corrections, apply fixes and commit: `fix(<skill-name>): <description of issue corrected>`
+5. Apply the `refine-prose` skill to any `description` or body text that is rewritten or newly authored during the audit — run it silently before saving
+6. If the audit is read-only and no issues are found, no commit is needed
+7. If audit findings require corrections, apply fixes and commit: `fix(<skill-name>): <description of issue corrected>`
 
 ## Examples
 
