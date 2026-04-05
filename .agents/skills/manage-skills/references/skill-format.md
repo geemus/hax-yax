@@ -60,6 +60,34 @@ allowed-tools:            # optional: restrict tool access within the skill
 - **Include trigger keywords and synonyms**: if users might phrase the request multiple ways, mention the synonyms so agent discovery works reliably (e.g. *"… also triggered by requests to OCR or convert PDFs"*)
 - **Explicitly distinguish overlapping skills**: if two skills handle similar inputs, call out the difference in each description so the agent picks the right one
 
+#### Natural Language Triggers
+
+The `description` field is the primary discovery mechanism — agents match it against user phrasing at session startup. Trigger phrases are the natural-language expressions users actually say that should activate the skill.
+
+**Two patterns for documenting triggers:**
+
+1. **`Use when...` (inline)** — embed the triggering condition directly in the description. Best for simple, unambiguous skills:
+   > *"Generates a structured work plan. Use when the user asks to create a plan, define tasks, or scope out work."*
+
+2. **`TRIGGER when` / `DO NOT TRIGGER when` (explicit block)** — add structured lines after the description for skills that overlap with others or need clear disambiguation:
+   > *"Stages changes and creates a conventional commit message.*
+   > *TRIGGER when: user asks to commit, stage files, write a commit message, or save changes.*
+   > *DO NOT TRIGGER when: user asks to push, open a PR, or create a branch."*
+
+**Concrete examples:**
+
+| User says | Skill triggered | Key phrases in description |
+|-----------|----------------|---------------------------|
+| "create a commit", "save my changes", "commit this" | `create-commit` | *commit, stage files, write a commit message* |
+| "review this PR", "can you audit this diff" | `review-pr` | *pull request review, audit a diff* |
+| "make a plan", "create plan skill", "scope out this work" | `create-plan` | *work plan, scope out, define tasks* |
+| "clean up this draft", "polish my writing" | `refine-prose` | *polish prose, clarity, written output* |
+
+**Tips:**
+- Include synonyms users might say: *"commit"* and *"save changes"* should both trigger `create-commit`
+- For overlapping skills, `DO NOT TRIGGER when` prevents the wrong skill from firing
+- Natural phrasing (*"can you review this PR"*) should match as reliably as a direct slash command (*"/review-pr"*)
+
 ### `allowed-tools` rules
 
 Omit unless the user explicitly requests tool restrictions. Restricting tools limits the agent's ability to handle unexpected situations; only add this field when there is a specific reason to do so.
