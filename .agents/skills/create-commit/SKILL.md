@@ -9,12 +9,12 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Create Commit
 
-Guides agents through safe, well-formed git commits: automatic staging (skipping secrets and artifacts), conventional-commit message generation from the staged diff, and a final confirmation before committing.
+Guides agents through safe, well-formed git commits. Stages files automatically (skipping secrets and artifacts), generates a conventional-commit message from the diff, and confirms before committing.
 
 ## Instructions
 
