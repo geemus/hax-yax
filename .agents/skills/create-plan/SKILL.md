@@ -109,6 +109,10 @@ After self-review, challenge the scope. Ask: is there a simpler way to achieve t
 
 Do not remove tasks that reflexion identified as missing or necessary.
 
+### 5.8 Refine prose
+
+Apply the `refine-prose` skill to the full plan draft. Run it silently and carry the refined text forward — do not present the pre-refinement draft.
+
 ### 6. Present the plan
 
 State whether you are in **create mode** (a new issue will be created) or **update mode** (issue #N will be updated in place). Present the finished plan to the user and ask for confirmation before proceeding.

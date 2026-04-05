@@ -94,6 +94,10 @@ After the per-comment feedback, write a brief summary (3–7 sentences) covering
 
 Format the summary as a `note` conventional comment.
 
+### 6. Refine prose
+
+Apply the `refine-prose` skill to the review summary and all comments before posting. Run it silently — do not announce the refinement step.
+
 ## Examples
 
 **Invocation with PR number:**
