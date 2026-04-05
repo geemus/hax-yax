@@ -39,6 +39,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `format-review-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
 | `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
 | `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
+| `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
 
 ## Adding or Managing Skills
 
