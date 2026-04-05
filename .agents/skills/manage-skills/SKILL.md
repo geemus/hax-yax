@@ -7,7 +7,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Manage Skills
@@ -25,20 +25,22 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
    - For the full naming specification and worked example, read `references/skill-format.md`
 2. Create the directory: `.agents/skills/<skill-name>/`
 3. Create `SKILL.md` — required frontmatter fields: `name` (must match directory), `description` (what it does and when to use it); use the **"Does X. Use when Y."** template — start with the action verb in third person, then state the triggering condition; for full specification and worked example, read `references/skill-format.md`
-4. Omit `allowed-tools` unless the user explicitly requests tool restrictions
-5. Write a clear Markdown body with instructions agents can follow directly
-6. Add `scripts/`, `references/`, or `assets/` subdirectories only when needed for Level 3 content
-7. Apply the `refine-prose` skill to the `description` frontmatter field and the `SKILL.md` body — run it silently before saving
-8. Review `AGENTS.md` — update if the new skill affects documented structure, conventions, or workflow
-9. Commit: `feat(<skill-name>): add <skill-name> skill — <one-line summary>`
+4. Document natural-language trigger phrases in the `description` — include the phrases users are likely to say (e.g. *"create a commit"*, *"review this PR"*, *"make a plan"*). Use the inline `Use when...` form for simple skills; add explicit `TRIGGER when:` / `DO NOT TRIGGER when:` lines when the skill overlaps with others and disambiguation is needed. See the Natural Language Triggers section in `references/skill-format.md` for both patterns and concrete examples.
+5. Omit `allowed-tools` unless the user explicitly requests tool restrictions
+6. Write a clear Markdown body with instructions agents can follow directly
+7. Add `scripts/`, `references/`, or `assets/` subdirectories only when needed for Level 3 content
+8. Apply the `refine-prose` skill to the `description` frontmatter field and the `SKILL.md` body — run it silently before saving
+9. Review `AGENTS.md` — update if the new skill affects documented structure, conventions, or workflow
+10. Commit: `feat(<skill-name>): add <skill-name> skill — <one-line summary>`
 
 ### Updating a skill
 
 1. Read the existing `SKILL.md` before making changes
 2. Keep the `name` field in sync with the directory name — never rename one without the other
 3. Update `metadata.version` when the instructions change meaningfully
-4. Review `AGENTS.md` — update if the changes affect anything documented there
-5. Commit: `feat(<skill-name>):` or `fix(<skill-name>):` or `docs(<skill-name>):` depending on the nature of the change, followed by a lowercase imperative description
+4. If touching the `description`, review the natural-language trigger phrases — ensure the `Use when...` condition and any `TRIGGER when:` / `DO NOT TRIGGER when:` lines reflect the updated skill scope. See the Natural Language Triggers section in `references/skill-format.md` for guidance.
+5. Review `AGENTS.md` — update if the changes affect anything documented there
+6. Commit: `feat(<skill-name>):` or `fix(<skill-name>):` or `docs(<skill-name>):` depending on the nature of the change, followed by a lowercase imperative description
 
 ### Deleting a skill
 
