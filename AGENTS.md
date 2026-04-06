@@ -12,7 +12,13 @@ This repository captures reusable skills for AI coding agents. Agent guidance fo
 
 ```
 ├── AGENTS.md              # This file — agent guidance (agents.md standard)
+├── CHANGELOG.md           # Version history
 ├── LICENSE
+├── README.md              # Installation and usage reference
+├── .claude/
+│   └── skills -> ../.agents/skills   # Symlink for standalone Claude Code use
+├── .claude-plugin/
+│   └── plugin.json        # Claude Code plugin manifest
 └── .agents/
     └── skills/
         └── <skill-name>/          # Each skill is a directory
@@ -23,6 +29,24 @@ This repository captures reusable skills for AI coding agents. Agent guidance fo
 ```
 
 Skills live under `.agents/skills/` so that agents running within this repository discover them automatically via standard agent runtime conventions.
+
+## Plugin Installation
+
+This repository ships a Claude Code plugin manifest at `.claude-plugin/plugin.json`. The manifest points to `.agents/skills/` and registers skills under the `skills` namespace (e.g. `/skills:create-plan`).
+
+**Install via plugin directory:**
+
+```sh
+claude --plugin-dir /path/to/skills
+```
+
+**Install from the repository URL** (once Claude Code supports remote plugin installation):
+
+```sh
+claude plugin install https://github.com/geemus/skills
+```
+
+**Standalone use** (without plugin namespace): the `.claude/skills` symlink provides backward-compatible skill discovery for agents running within this repository.
 
 ## Skills Format
 
