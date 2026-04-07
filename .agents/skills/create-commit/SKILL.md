@@ -114,10 +114,3 @@ existing issue in place rather than always creating a new one.
 fix: correct typo and broken link in AGENTS.md
 ```
 
-## Progressive Disclosure
-
-| Level | Content | When to load | Target size |
-|-------|---------|--------------|-------------|
-| 1 | `name` + `description` | Always (startup) | ~100 tokens |
-| 2 | `SKILL.md` body (this file) | When skill is triggered | < 5,000 tokens |
-| 3 | `references/secret-patterns.md` | Step 2: secret detection | ~500 tokens |

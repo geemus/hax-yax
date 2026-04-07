@@ -136,6 +136,8 @@ Prefer explicit over implicit.
 
 Keep `SKILL.md` lean. Move large examples, schemas, and reference docs into `references/` or `assets/` and instruct agents to read them on demand.
 
+**Do not** add a progressive disclosure table to individual `SKILL.md` files. The table above describes how the system works; copying it into each skill is redundant and should be removed when found.
+
 ## Worked Example
 
 Directory: `.agents/skills/extract-pdf-text/`
