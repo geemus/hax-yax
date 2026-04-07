@@ -64,6 +64,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
 | `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
 | `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
+| `manage-sprites` | `/manage-sprites` | Provision, operate, checkpoint, and destroy sprites.dev instances via the `sprite` CLI |
 
 ## Adding or Managing Skills
 
