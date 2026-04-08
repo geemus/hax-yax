@@ -80,7 +80,7 @@ The `description` field is the primary discovery mechanism — agents match it a
 |-----------|----------------|---------------------------|
 | "create a commit", "save my changes", "commit this" | `create-commit` | *commit, stage files, write a commit message* |
 | "review this PR", "can you audit this diff" | `review-pr` | *pull request review, audit a diff* |
-| "make a plan", "create plan skill", "scope out this work" | `create-plan` | *work plan, scope out, define tasks* |
+| "make a plan", "create plan skill", "scope out this work" | `manage-plans` | *work plan, scope out, define tasks* |
 | "clean up this draft", "polish my writing" | `refine-prose` | *polish prose, clarity, written output* |
 
 **Tips:**

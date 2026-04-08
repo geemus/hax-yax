@@ -7,7 +7,7 @@ Reusable agent skills for Claude Code and other AI coding agents. Follows the [a
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
 | `manage-skills` | `/skills:manage-skills` | Create, update, manage, and audit skills in this repository |
-| `create-plan` | `/skills:create-plan` | Generate a structured work plan and write it to a GitHub issue |
+| `manage-plans` | `/skills:manage-plans` | Create and update structured work plans as GitHub issues |
 | `format-review-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
 | `review-pr` | `/skills:review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
 | `create-commit` | `/skills:commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
@@ -30,7 +30,7 @@ Or install directly from the repository URL once Claude Code supports remote plu
 claude plugin install https://github.com/geemus/skills
 ```
 
-Skills are registered under the `skills` namespace (e.g. `/skills:create-plan`). Run `/help` inside Claude Code to see all available commands.
+Skills are registered under the `skills` namespace (e.g. `/skills:manage-plans`). Run `/help` inside Claude Code to see all available commands.
 
 ### Standalone Claude Code use
 
