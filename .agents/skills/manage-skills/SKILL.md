@@ -5,10 +5,12 @@ description: >
   Use when the user wants to add, modify, rename, delete, or audit skills in
   this repository — also triggered by "create a new skill", "set up a skill",
   "list my skills", "what skills do I have", or "remove a skill".
+  DO NOT TRIGGER when: the user asks to review, evaluate, or critique a skill
+  for quality (use review-skill instead).
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.5"
+  version: "1.6"
 ---
 
 # Manage Skills
@@ -29,7 +31,7 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 4. Document natural-language trigger phrases in the `description` — include the phrases users are likely to say (e.g. *"create a commit"*, *"review this PR"*, *"make a plan"*). Use the inline `Use when...` form for simple skills; add explicit `TRIGGER when:` / `DO NOT TRIGGER when:` lines when the skill overlaps with others and disambiguation is needed. See the Natural Language Triggers section in `references/skill-format.md` for both patterns and concrete examples.
 5. Omit `allowed-tools` unless the user explicitly requests tool restrictions
 6. Write a clear Markdown body with instructions agents can follow directly
-7. Add `scripts/`, `references/`, or `assets/` subdirectories only when needed for Level 3 content
+7. Add `scripts/`, `references/`, or `assets/` subdirectories only for content too large to inline in `SKILL.md` (large examples, schemas, scripts, reference docs). See `references/skill-format.md` for the full progressive disclosure model.
 8. Apply the `refine-prose` skill to the `description` frontmatter field and the `SKILL.md` body — run it silently before saving
 9. Review `AGENTS.md` — update if the new skill affects documented structure, conventions, or workflow
 10. Commit: `feat(<skill-name>): add <skill-name> skill — <one-line summary>`
@@ -40,8 +42,9 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 2. Keep the `name` field in sync with the directory name — never rename one without the other
 3. Update `metadata.version` when the instructions change meaningfully
 4. If touching the `description`, review the natural-language trigger phrases — ensure the `Use when...` condition and any `TRIGGER when:` / `DO NOT TRIGGER when:` lines reflect the updated skill scope. See the Natural Language Triggers section in `references/skill-format.md` for guidance.
-5. Review `AGENTS.md` — update if the changes affect anything documented there
-6. Commit: `feat(<skill-name>):` or `fix(<skill-name>):` or `docs(<skill-name>):` depending on the nature of the change, followed by a lowercase imperative description
+5. Apply the `refine-prose` skill to any `description` or body text that is rewritten or newly authored — run it silently before saving.
+6. Review `AGENTS.md` — update if the changes affect anything documented there
+7. Commit: `feat(<skill-name>):` or `fix(<skill-name>):` or `docs(<skill-name>):` depending on the nature of the change, followed by a lowercase imperative description
 
 ### Deleting a skill
 
@@ -58,13 +61,8 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
    - Frontmatter contains `name` and non-empty `description`
    - `name` value matches the parent directory name exactly
    - `description` describes both what the skill does and when to invoke it
-   - **Quality checks**:
-     - `name` is not generic or noun-only (e.g. `helper`, `utils`, `data`, `files`)
-     - `name` uses action+object or gerund form, not an implementation detail (e.g. not `run-bert-v2`)
-     - `description` opens with an active-voice verb in third person, not *"This skill…"* or *"A helper…"*
-     - `description` explicitly states a triggering condition (*"Use when…"*)
-     - If the repository has 10+ skills, check that related skills share a namespace prefix
 3. For complete format rules and validation criteria, read `references/skill-format.md`
+4. For quality evaluation of individual skills (instruction clarity, trigger discoverability, composability), use the `review-skill` skill
 4. Auto-fix minor issues (typos, table formatting, missing optional metadata fields); ask the user before removing or renaming skills
 5. Apply the `refine-prose` skill to any `description` or body text that is rewritten or newly authored during the audit — run it silently before saving
 6. If the audit is read-only and no issues are found, no commit is needed
@@ -86,4 +84,9 @@ Expected: agent reads existing `SKILL.md`, updates the `description` frontmatter
 > "Remove the old `pdf` skill, we don't use it anymore."
 
 Expected: agent confirms with user, removes `.agents/skills/pdf/` directory, updates `AGENTS.md` if needed, commits with `chore(pdf): remove pdf skill — no longer used`
+
+**Auditing all skills:**
+> "List all my skills and check if any have issues."
+
+Expected: agent globs `.agents/skills/*/SKILL.md`, validates each skill's frontmatter and name/directory alignment, reports findings, auto-fixes minor issues (e.g. typos, table formatting), commits any corrections with `fix(<skill-name>): <description of issue corrected>`
 
