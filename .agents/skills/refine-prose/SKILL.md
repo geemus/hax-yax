@@ -7,11 +7,14 @@ description: >
   inconsistent terminology. Use when the user asks to polish, clean up, improve,
   edit, or tighten writing — also triggered by "refine this draft", "make this
   clearer", or "improve my writing". Also composable: other skills invoke it as
-  a late-stage refinement step.
+  a late-stage refinement step. TRIGGER when: user asks to polish, edit, or
+  improve prose. DO NOT TRIGGER when: user asks to format or lint code (use
+  language-specific tools instead), or when this skill is already running as a
+  composable step within another skill.
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Refine Prose
@@ -22,14 +25,12 @@ Polishes a draft for clarity, conciseness, and consistent voice. Apply after pro
 
 - After drafting a plan, proposal, or structured document
 - After writing a PR review summary or set of review comments
-- Before presenting any multi-sentence output to a user
+- Before presenting any intentionally drafted output — a plan, review, proposal, or multi-sentence response — to a user
 - Whenever explicitly invoked via `/refine-prose` on arbitrary text
-
-When another skill calls it as a composable step, run silently and present only the refined result.
 
 ## Instructions
 
-Work through each check in order. Apply fixes silently — do not narrate the edits.
+Work through each check in order. Apply fixes silently — do not narrate the edits. Apply prose rules only to prose — skip code blocks, inline code, tables with technical data, and structured output such as YAML frontmatter. When no changes are needed, return the original text unchanged.
 
 ### 1. Cut filler phrases
 
@@ -70,7 +71,7 @@ All items in a bulleted or numbered list must use the same grammatical form.
 
 ### 5. Standardize terminology
 
-Within a single document, use one term for each concept consistently. If a term was introduced earlier, reuse it exactly — do not alternate between synonyms (e.g. do not mix "pull request" and "PR" in formal plans; pick one and use it throughout).
+Within a single document, use one term for each concept consistently. Use whichever term already appears more often; apply the defaults below only when no term has been established yet.
 
 Default preferences:
 - "pull request" in formal prose; "PR" is acceptable in informal or space-constrained contexts
@@ -90,3 +91,25 @@ This skill is designed to be referenced by other skills as a late-stage refineme
 Callers reference it with a line such as:
 
 > Apply the `refine-prose` skill to the draft before presenting.
+
+## Examples
+
+**Direct invocation on user-supplied text:**
+```
+/refine-prose
+The reason that this is basically very important is due to the fact that the tests were being run by CI on a nightly basis, and it is worth noting that failures were being ignored.
+```
+
+Refined output:
+```
+This matters because CI runs the tests nightly and ignores failures.
+```
+_(Applied: cut filler phrases "basically", "due to the fact that", "it is worth noting that"; rewrote passive "were being run by CI" and "were being ignored" as active.)_
+
+**Composable invocation (from another skill):**
+```
+Apply the `refine-prose` skill to the review summary before presenting it. Run it silently — do not announce the refinement step.
+```
+
+**When no changes are needed:**
+Input is already clear and concise — return the original text unchanged with no commentary.
