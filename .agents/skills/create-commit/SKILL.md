@@ -4,12 +4,12 @@ description: >
   Stages changes safely, generates a conventional-commit message from the diff,
   and blocks secrets or debug artifacts from being committed.
   TRIGGER when: user asks to commit, save changes, stage files, write a commit
-  message, or run git commit.
+  message, run git commit, check in my changes, or commit my work.
   DO NOT TRIGGER when: user asks to push, open a PR, or create a branch.
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Create Commit
@@ -18,6 +18,8 @@ Guides agents through safe, well-formed git commits. Stages files automatically 
 
 ## Instructions
 
+**Side effects:** stages files (`git add`), creates a git commit object. Does not push or open a PR.
+
 ### 1. Survey changes
 
 ```
@@ -25,14 +27,18 @@ git status
 git diff
 ```
 
+If `git status` shows no changes (clean working tree), stop and tell the user: "Nothing to commit — the working tree is clean."
+
 Identify:
 - Modified, added, and deleted tracked files
-- Untracked files the user likely intends to include
+- Untracked files that are clearly part of the work (source files, config, docs in the project tree)
 - Files to **exclude**: binaries, build artifacts, generated files (e.g. `dist/`, `*.pyc`, `node_modules/`, `*.min.js`), lock files unless they changed intentionally
+
+If the untracked file set is ambiguous (many files, files that look auto-generated, or files outside the project's normal structure), list them and ask the user which to include before proceeding.
 
 ### 2. Detect secrets
 
-Before staging anything, scan all candidate files for secret patterns. Read `references/secret-patterns.md` for the full pattern list.
+Before staging anything, scan all modified, added, and untracked files identified in step 1 for secret patterns. Read `references/secret-patterns.md` for the full pattern list.
 
 If any match is found:
 - **Stop** — do not stage the affected file
@@ -97,6 +103,11 @@ EOF
 
 ## Examples
 
+**Invocation:**
+```
+/commit
+```
+
 **Feature addition:**
 > User has edited `.agents/skills/plan/SKILL.md` to add update mode.
 
@@ -112,5 +123,21 @@ existing issue in place rather than always creating a new one.
 
 ```
 fix: correct typo and broken link in AGENTS.md
+```
+
+**Secret detected — partial commit:**
+> User runs `/commit`; one file contains a hardcoded database password.
+
+```
+Staged: src/api/client.py, README.md
+Skipped:
+  - config/local.env  [BLOCKED: explicit secret assignment on line 4]
+    Fix: remove DB_PASSWORD value; reference $DB_PASSWORD instead,
+    or add config/local.env to .gitignore
+
+Proposed commit message:
+  feat(api): add client module
+
+Approve this message, or provide edits:
 ```
 
