@@ -3,7 +3,7 @@ name: review-skill
 description: >
   Evaluates whether a skill is effective — covering instruction clarity, trigger
   discoverability, example completeness, composability, and scope coherence.
-  Reads the full skill directory including Level 3 files before reviewing.
+  Reads the full skill directory including supporting files (scripts, references, assets) before reviewing.
   Formats every finding with format-review-comments and suggests inline fixes
   for unambiguous issues. Use when the user asks to review, audit, or evaluate
   a skill.
@@ -30,7 +30,7 @@ Accept the skill as:
 - A skill name (e.g. `create-plan`) — resolve to `.agents/skills/<name>/`
 - A path (e.g. `.agents/skills/create-plan/`) — use directly
 
-Confirm the skill directory exists before proceeding.
+Confirm the skill directory exists before proceeding. If it does not exist, stop and tell the user: "Skill directory `<path>` not found. Provide a valid skill name or path."
 
 ### 2. Read the skill in full
 
@@ -43,7 +43,7 @@ Do not begin reviewing until all files have been read. A finding that misses inf
 
 ### 3. Review each dimension
 
-Work through every dimension in order. For each, apply the evaluation questions and note findings. Skip a dimension only when it is genuinely not applicable (e.g. no examples are expected for a single-step utility skill — skip example completeness). For each finding, note whether an inline fix is clear and unambiguous.
+Work through every dimension in order. For each, apply the evaluation questions and note findings. Only example completeness is skippable — skip it when the skill is a single-step utility with self-evident output. All other four dimensions are mandatory. For each finding, note whether an inline fix is clear and unambiguous.
 
 #### Instruction clarity
 
@@ -113,7 +113,7 @@ Format the summary as a `note` conventional comment.
 
 ### 7. Refine prose
 
-Apply the `refine-prose` skill to the review summary and all comments. Run it silently — do not announce the refinement step.
+Apply the `refine-prose` skill to all output before presenting it. Do not announce this step to the user.
 
 ## Examples
 
@@ -125,6 +125,11 @@ Apply the `refine-prose` skill to the review summary and all comments. Run it si
 **Invocation by path:**
 ```
 /review-skill .agents/skills/create-plan/
+```
+
+**Sample output — skill not found:**
+```
+Skill directory `.agents/skills/nonexistent/` not found. Provide a valid skill name or path.
 ```
 
 **Sample output — instruction clarity finding:**
