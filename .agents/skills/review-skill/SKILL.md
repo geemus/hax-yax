@@ -91,10 +91,11 @@ Apply the `format-review-comments` skill to every comment. Choose the label that
 | Blocks reliable agent use | `issue [blocking]` |
 | Strong improvement | `suggestion` |
 | Minor style or wording | `nitpick` |
-| Something done well | `praise` |
 | Needs clarification | `question` |
 | Small unambiguous fix | `todo` |
 | Informational only | `note` |
+
+Do not write `praise` comments. Omit positive findings entirely — they add tokens without actionable content.
 
 ### 5. Suggest inline fixes for unambiguous findings
 
@@ -147,11 +148,6 @@ suggestion: the description does not include `DO NOT TRIGGER when` lines to disa
 Add after the existing description:
 > TRIGGER when: user asks to review, audit, or evaluate a skill.
 > DO NOT TRIGGER when: user asks to create, update, or delete a skill (use manage-skills instead).
-```
-
-**Sample output — positive finding:**
-```
-praise: all five steps are numbered imperatives — an agent can follow them in order with no ambiguity about sequencing or intent
 ```
 
 **Sample output — inline fix for a nitpick:**
