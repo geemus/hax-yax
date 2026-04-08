@@ -111,7 +111,7 @@ Do not remove tasks that self-review identified as missing or necessary.
 
 ### 7. Refine prose
 
-Invoke the `refine-prose` skill (via the Skill tool or `/refine-prose`) on the full plan draft. Run it silently and carry the refined text forward — do not present the pre-refinement draft.
+Invoke the `refine-prose` skill (`/refine-prose`) on the full plan draft. Run it silently and carry the refined text forward — do not present the pre-refinement draft.
 
 ### 8. Present the plan
 
