@@ -25,7 +25,7 @@ Polishes a draft for clarity, conciseness, and consistent voice. Apply after pro
 
 - After drafting a plan, proposal, or structured document
 - After writing a PR review summary or set of review comments
-- Before presenting any intentionally drafted output — a plan, review, proposal, or multi-paragraph response — to a user
+- Before presenting any intentionally drafted output — a plan, review, proposal, or multi-sentence response — to a user
 - Whenever explicitly invoked via `/refine-prose` on arbitrary text
 
 ## Instructions
