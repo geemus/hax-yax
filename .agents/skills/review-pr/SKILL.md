@@ -7,10 +7,14 @@ description: >
   diff, or give structured feedback on proposed code changes — also triggered by
   "look at this PR", "check PR #N", "can you review this", or "give feedback on
   this diff".
+  TRIGGER when: user asks to review a pull request, audit a diff, or give
+  feedback on proposed code changes.
+  DO NOT TRIGGER when: user asks to review, evaluate, or audit a skill file
+  (use review-skill instead).
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Review PR
@@ -26,6 +30,8 @@ Accept the PR as:
 - A bare PR number (e.g. `42`) — infer the repo from `git remote get-url origin`
 - A local diff or branch name — use `git diff <base>..<head>` to obtain the diff
 
+If no PR is specified, ask the user: "Which PR would you like me to review? Provide a URL, PR number, or branch name."
+
 Fetch the PR diff and description before proceeding.
 
 ### 2. Read the PR description
@@ -34,7 +40,7 @@ Understand the stated intent: what problem does the PR solve, what approach the 
 
 ### 3. Review each dimension
 
-Work through every dimension in order. For each, read the relevant changed files and note findings. You do not need to comment on every dimension — skip a dimension only when it is genuinely not applicable to the changes (e.g. no security surface touched → skip security).
+Work through every dimension in order. For each, read the relevant changed files and note findings. You do not need to comment on every dimension — skip a dimension only when the diff contains no changed lines that could affect it. Examples: skip Security when the only changes are to Markdown or CSS files; skip Performance when the only changes are to configuration or documentation; skip Test coverage when the PR is a documentation-only change.
 
 #### Logic and correctness
 
@@ -70,6 +76,8 @@ Work through every dimension in order. For each, read the relevant changed files
 - Do `README`, `CHANGELOG`, or other docs need updating?
 
 ### 4. Format all feedback with format-review-comments
+
+**Output:** All review comments are written to the conversation only. To post them to the PR, pass the output to the appropriate GitHub tool or ask the user if they would like comments posted.
 
 Apply the `format-review-comments` skill to every comment you write. Choose the label that matches the severity and intent:
 
@@ -112,6 +120,12 @@ Apply the `refine-prose` skill to the review summary and all comments before pos
 /review-pr https://github.com/owner/repo/pull/42
 ```
 
+**Invocation with branch name:**
+```
+/review-pr feature/my-branch
+```
+The agent will run `git diff main..feature/my-branch` to obtain the diff.
+
 **Sample output (logic finding):**
 ```
 issue [blocking]: `processItems` dereferences `items[0]` before checking that the slice is non-empty — this will panic on an empty input
@@ -125,6 +139,19 @@ if len(items) == 0 {
 **Sample output (positive finding):**
 ```
 praise: clean separation between the HTTP layer and business logic — the new handler delegates immediately to the service and has no domain knowledge of its own
+```
+
+**Sample output (suggestion with inline fix):**
+```
+suggestion: the new retry loop has no backoff — under sustained failures it will hammer the downstream service at full speed
+
+Add exponential backoff:
+delay := time.Second
+for attempt := 0; attempt < maxRetries; attempt++ {
+    if err := call(); err == nil { break }
+    time.Sleep(delay)
+    delay *= 2
+}
 ```
 
 **Sample output (summary):**
