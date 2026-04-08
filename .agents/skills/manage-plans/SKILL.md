@@ -1,19 +1,20 @@
 ---
-name: create-plan
+name: manage-plans
 description: >
-  Generates a detailed, structured work plan from a work description, then
-  creates or updates a GitHub issue containing the plan. Use when the user wants
-  to plan a feature, bug fix, project, or any body of work — also triggered by
-  "make a plan", "scope out this work", "break down this task", "help me plan",
-  or "create a GitHub issue for this". In update mode (triggered by an issue
-  number or URL), edits the issue in place and posts a change-summary comment.
+  Creates and updates detailed, structured work plans as GitHub issues. Use
+  when the user wants to plan a feature, bug fix, project, or any body of
+  work — also triggered by "make a plan", "scope out this work", "break down
+  this task", "help me plan", or "create a GitHub issue for this". In update
+  mode (triggered by an issue number or URL), edits the issue in place and
+  posts a change-summary comment.
+  DO NOT TRIGGER when: user asks to create, update, or delete a skill (use manage-skills instead).
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.4"
+  version: "2.0"
 ---
 
-# Plan
+# Manage Plans
 
 Turns a work description into a structured, executable plan and writes it to a GitHub issue. Asks clarifying questions when needed and presents the plan for review before writing. Supports create mode (new issue) and update mode (edits an existing issue in place).
 
@@ -30,7 +31,7 @@ Collect the following (ask only for what is missing):
 
 ### 2. Survey the context
 
-Before planning, ground the plan in reality. For a clearly simple task (a single isolated change with no cross-cutting concerns), a lightweight survey—checking only the immediately relevant directory and any context files—is sufficient; skip the open issues/PRs search. For multi-phase or cross-cutting work, run the full survey below.
+Before planning, ground the plan in reality. For a clearly simple task (a single isolated change with no cross-cutting concerns), a lightweight survey — checking only the immediately relevant directory and any context files — is sufficient; skip the open issues/PRs search. For multi-phase or cross-cutting work, run the full survey below.
 
 - **Existing issue content** *(update mode only)*: Fetch the current title and body of the target issue to use as planning context and to compute a change summary later.
 - **Codebase scan**: Use `Glob` to map the directory structure around the relevant area. Use `Grep` to search for key terms from the work description. Check for context files (all optional): `CLAUDE.md`, `README.md`, `AGENTS.md`. Read any that exist for conventions and constraints; if absent, proceed without them.
@@ -97,7 +98,7 @@ Evaluate the draft plan against these checks. Fix any issues found silently befo
 - Is the plan appropriately scoped — neither too coarse nor too granular?
 - Is the Approach section present and does it name the chosen approach, the reason it was selected, and its key tradeoff?
 
-### 5.5 Simplify the plan
+### 6. Simplify the plan
 
 After self-review, challenge the scope. Ask: is there a simpler way to achieve the same objective? Make changes silently before presenting.
 
@@ -106,29 +107,38 @@ After self-review, challenge the scope. Ask: is there a simpler way to achieve t
 - If a simpler approach would satisfy all acceptance criteria with fewer tasks, switch to it and update the Approach section accordingly.
 - Flag tasks that could be explicitly deferred post-launch; move them to a "Future work" note at the bottom rather than deleting them.
 
-Do not remove tasks that reflexion identified as missing or necessary.
+Do not remove tasks that self-review identified as missing or necessary.
 
-### 5.8 Refine prose
+### 7. Refine prose
 
-Apply the `refine-prose` skill to the full plan draft. Run it silently and carry the refined text forward — do not present the pre-refinement draft.
+Invoke the `refine-prose` skill (`/refine-prose`) on the full plan draft. Run it silently and carry the refined text forward — do not present the pre-refinement draft.
 
-### 6. Present the plan
+### 8. Present the plan
 
 State whether you are in **create mode** (a new issue will be created) or **update mode** (issue #N will be updated in place). Present the finished plan to the user and ask for confirmation before proceeding.
 
-### 7. Create or update the GitHub issue
+### 9. Create or update the GitHub issue
 
 Derive the issue title from the Objective: use a concise phrase (under 72 characters) that captures the core action and subject (e.g. "Add rate limiting to the public API").
 
-**Create mode:** Create a new GitHub issue with the derived title and plan body. To avoid shell quoting issues, write the body to a uniquely named temp file first (e.g. `mktemp`) and pass it via a file argument or read it in, then clean up the temp file.
+**Create mode:** Create a new GitHub issue with the derived title and plan body. Write the body to a temp file first to avoid shell quoting issues:
+
+```sh
+tmpfile=$(mktemp /tmp/plan-body-XXXX.md)
+# write the plan body to $tmpfile
+gh issue create --title "..." --body-file "$tmpfile"
+rm -f "$tmpfile"   # clean up whether or not the command succeeded
+```
 
 **Update mode:**
-1. Update the issue title and body with the new plan. Write the body to a temp file first to avoid shell quoting issues.
+1. Update the issue title and body with the new plan. Write the body to a temp file first using the same pattern above, passing it via `gh issue edit --body-file "$tmpfile"`.
 2. Compose a change-summary comment that lists each section as **added**, **revised**, **preserved**, or **removed**, with a "Key change" sentence per section. Post it as a comment on the issue.
 
 **Sub-issues**: If sub-issue tracking was agreed in step 1, create a child issue for each phase using the same method above. Link each child to the parent by adding a line to the parent issue body: `- Sub-issue: #<number> — <phase name>`.
 
-### 8. Report back
+> **Side effect**: creating sub-issues also modifies the parent issue body to add `Sub-issue: #<number>` reference lines.
+
+### 10. Report back
 
 Share the issue URL, state the number of tasks and phases, and call out any open questions or high-risk assumptions that should be resolved early. In update mode, confirm that the change-summary comment was posted.
 
@@ -136,26 +146,39 @@ Share the issue URL, state the number of tasks and phases, and call out any open
 
 **Invocation (inline description):**
 ```
-/plan Add rate limiting to the public API
+/manage-plans Add rate limiting to the public API
 ```
 
 **Invocation (interactive):**
 ```
-/plan
+/manage-plans
 ```
 Claude will ask for the work description. Repository is inferred from `git remote get-url origin`.
 
 **Invocation (by issue number — update mode):**
 ```
-/plan #35
+/manage-plans #35
 ```
 Fetches issue #35, generates an updated plan, edits the issue in place, and posts a change-summary comment.
 
 **Invocation (by issue URL — update mode):**
 ```
-/plan https://github.com/geemus/skills/issues/35
+/manage-plans https://github.com/geemus/skills/issues/35
 ```
 Same as above; repo is extracted from the URL.
+
+**Invocation (sub-issues):**
+```
+/manage-plans Build new onboarding flow with separate sub-issues for each phase
+```
+Claude will ask whether to track each phase as a sub-issue. If confirmed, creates a parent issue and one child issue per phase, then adds `Sub-issue: #<number>` lines to the parent body.
+
+**Invocation failure — git remote unresolvable:**
+```
+/manage-plans Add dark mode support
+```
+If `git remote get-url origin` exits non-zero or returns an unparseable URL, Claude will respond:
+> "Could not infer the GitHub repository from git remote. Please provide the repository in `owner/repo` format."
 
 **Generated issue body structure:**
 ```markdown
