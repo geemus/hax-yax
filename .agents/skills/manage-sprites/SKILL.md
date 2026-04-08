@@ -6,11 +6,12 @@ description: >
   destroy. Use when the user asks to create a sprite, run a command on a sprite,
   checkpoint or restore a sprite, open a shell on a sprite, or delete a sprite.
   Also triggered by "spin up a sprite", "exec on my sprite", "snapshot my sprite",
-  "roll back my sprite", or "tear down a sprite".
+  "roll back my sprite", "tear down a sprite", "get my sprite URL", "make my sprite
+  public", or "proxy a port on my sprite".
   TRIGGER when: user references sprite lifecycle operations, sprites.dev, or managing
   remote sandbox instances.
   DO NOT TRIGGER when: the user is operating from within a sprite and managing local
-  services or checkpoints — use sprite-env commands instead (see references/sprites-services.md).
+  services or checkpoints — use manage-sprite-env instead.
 license: Apache-2.0
 metadata:
   author: geemus
@@ -22,7 +23,6 @@ metadata:
 Manages the full lifecycle of sprites.dev instances using the `sprite` CLI.
 
 For CLI command details, read `references/sprites-cli.md`.
-For internal service and checkpoint management from within a sprite, read `references/sprites-services.md`.
 
 ## Instructions
 
@@ -58,7 +58,7 @@ For an interactive shell: `sprite console -s <name>`.
 sprite checkpoint create -s <name>
 sprite checkpoint list -s <name>
 ```
-Recommend creating a checkpoint before any risky change. Include a note about what state is being preserved.
+Recommend creating a checkpoint before any operation that modifies installed software, configuration files, or running services — e.g., `apt install`, editing config files, or service restarts.
 
 **Restore**
 ```
@@ -72,6 +72,15 @@ sprite destroy <name>
 ```
 Always confirm with the user before destroying — this is irreversible.
 
+**URL and Proxy**
+```
+sprite url                            # Show public URL for active sprite
+sprite url update --auth public       # Make URL publicly accessible
+sprite url update --auth sprite       # Restrict to org members (default)
+sprite proxy <port> [port2...]        # Forward local ports to sprite
+```
+These commands target the active sprite. Run `sprite use <name>` first if needed.
+
 ### 4. Surface results
 
 Return command output directly. If a command fails, include the error output and suggest a remediation step (re-auth, check sprite name, verify org).
@@ -84,6 +93,13 @@ sprite create dev-sandbox
 sprite exec -s dev-sandbox echo hello
 ```
 
+**Auth recovery:**
+```sh
+# sprite list fails → re-authenticate
+sprite auth setup --token <token>
+# then retry the original command
+```
+
 **Checkpoint before a risky change:**
 ```
 sprite checkpoint create -s dev-sandbox
@@ -94,6 +110,13 @@ sprite checkpoint create -s dev-sandbox
 ```
 sprite checkpoint list -s dev-sandbox
 sprite restore <checkpoint-id>
+```
+
+**Get URL and make public:**
+```sh
+sprite use dev-sandbox
+sprite url
+sprite url update --auth public
 ```
 
 **Destroy:**
