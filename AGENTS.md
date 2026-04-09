@@ -1,12 +1,10 @@
 # AGENTS.md
 
-This repository captures reusable skills for AI coding agents. Agent guidance follows the [AGENTS.md standard](https://agents.md); skill format follows the [Agent Skills standard](https://agentskills.io).
+This repository stores reusable skills for Claude Code and other AI coding agents. Agent guidance follows the [AGENTS.md standard](https://agents.md); skill format follows the [Agent Skills standard](https://agentskills.io).
 
 ## Repository Purpose
 
-- Store reusable, composable skills for use with Claude Code and other AI coding agents
-- Provide clear, consistent conventions so agents can discover and apply skills reliably
-- Follow the [agentskills.io](https://agentskills.io) open standard for skill format and discovery
+This repository stores reusable, composable skills for Claude Code and other AI coding agents. Skills follow the [agentskills.io](https://agentskills.io) open standard and ship via a native Claude Code plugin. The primary use cases are discovering available skills, creating new ones, updating existing ones, and composing skills into workflows.
 
 ## Structure
 
@@ -44,18 +42,18 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| `upsert-skill` | `/upsert-skill` | Create, update, manage, and audit skills in this repository |
-| `upsert-plan` | `/upsert-plan` | Create and update structured work plans as GitHub issues |
-| `format-review-comments` | apply automatically when writing any review comment, PR feedback, or critique of code | Format review and feedback comments using the Conventional Comments standard |
-| `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
-| `upsert-agents-md` | `/upsert-agents-md` | Create or update AGENTS.md and equivalent agent instruction files by surveying the repository |
-| `review-agents-md` | `/review-agents-md` | Audit AGENTS.md and equivalent agent instruction files for completeness, accuracy, agent-friendliness, freshness, and scope coherence |
-| `review-skill` | `/review-skill` | Evaluate a skill for effectiveness across instruction clarity, trigger discoverability, example completeness, composability, and scope coherence |
+| `audit-skills` | `/audit-skills` | Produce a full health report on the skill library: structural validation per skill and cross-skill analysis covering trigger conflicts, redundancy, workflow gaps, and composition chains |
 | `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
-| `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
+| `format-review-comments` | apply automatically when writing any review comment, PR feedback, or critique of code | Format review and feedback comments using the Conventional Comments standard |
 | `manage-sprite` | `/manage-sprite` | Provision, operate, checkpoint, and destroy sprites.dev instances via the `sprite` CLI |
 | `manage-sprite-env` | `/manage-sprite-env` | Manage services, checkpoints, and environment info from within a running sprite instance |
-| `audit-skills` | `/audit-skills` | Produce a full health report on the skill library: structural validation per skill and cross-skill analysis covering trigger conflicts, redundancy, workflow gaps, and composition chains |
+| `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
+| `review-agents-md` | `/review-agents-md` | Audit AGENTS.md and equivalent agent instruction files for completeness, accuracy, agent-friendliness, freshness, and scope coherence |
+| `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
+| `review-skill` | `/review-skill` | Evaluate a skill for effectiveness across instruction clarity, trigger discoverability, example completeness, composability, and scope coherence |
+| `upsert-agents-md` | `/upsert-agents-md` | Create or update AGENTS.md and equivalent agent instruction files by surveying the repository |
+| `upsert-plan` | `/upsert-plan` | Create and update structured work plans as GitHub issues |
+| `upsert-skill` | `/upsert-skill` | Manage the lifecycle of reusable agent skills stored under `.agents/skills/` |
 
 ## Adding or Managing Skills
 
