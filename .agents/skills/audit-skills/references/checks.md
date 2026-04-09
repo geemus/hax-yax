@@ -82,11 +82,12 @@ Run these checks after all skills have been read. They require comparing skills 
 
 | Stage | Description | Example skills |
 |-------|-------------|----------------|
-| plan | Breaking down work, defining requirements, creating issues | manage-plans |
-| implement | Writing code, creating/updating skills, making changes | manage-skills, audit-skills |
+| plan | Breaking down work, defining requirements, creating issues | upsert-plan |
+| implement | Writing code, creating/updating skills, making changes | upsert-skill, audit-skills |
 | commit | Staging and committing changes safely | create-commit |
 | review | Evaluating PRs, skills, or prose quality | review-pr, review-skill, refine-prose |
 | release | Publishing, deploying, tagging versions | _(none — gap)_ |
+
 
 **Method:**
 1. For each skill, determine which stage(s) it primarily covers based on its `description`.
@@ -115,8 +116,8 @@ Run these checks after all skills have been read. They require comparing skills 
 **Goal:** Ensure all skill names follow the action+object formula and namespace rules.
 
 **Method:**
-1. Check each skill name: it should contain at least one hyphen and follow a verb+noun or verb+adjective+noun pattern (e.g., `manage-skills`, `create-commit`, `review-pr`).
-2. If the library contains 10 or more skills, check whether related skills share a consistent namespace prefix (e.g., `manage-skills`, `manage-plans`, `manage-sprites` share `manage-`). Flag related skills that lack a shared prefix.
+1. Check each skill name: it should contain at least one hyphen and follow a verb+noun or verb+adjective+noun pattern (e.g., `upsert-skill`, `create-commit`, `review-pr`).
+2. If the library contains 10 or more skills, check whether related skills share a consistent namespace prefix (e.g., `manage-sprite`, `manage-sprite-env` share `manage-sprite`). Flag related skills that lack a shared prefix.
 3. Flag names that are single words, noun-only, or do not include an action verb.
 
 **Severity:** `nitpick`
@@ -181,8 +182,8 @@ Always render the coverage map table, even if all stages are covered:
 
 | Stage     | Skills          | Status     |
 |-----------|-----------------|------------|
-| plan      | manage-plans    | covered    |
-| implement | manage-skills   | covered    |
+| plan      | upsert-plan    | covered    |
+| implement | upsert-skill   | covered    |
 | commit    | create-commit   | covered    |
 | review    | review-pr       | covered    |
 | release   | —               | **gap**    |

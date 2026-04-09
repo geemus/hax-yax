@@ -10,7 +10,7 @@ description: >
   skills, find gaps in skills, check for trigger conflicts, or health-check the
   skill library.
   DO NOT TRIGGER when: user asks to create, update, rename, or delete a skill
-  (use manage-skills instead); or to evaluate a single skill for quality
+  (use upsert-skill instead); or to evaluate a single skill for quality
   (use review-skill instead).
 license: Apache-2.0
 metadata:
@@ -75,7 +75,7 @@ After structural validation, run the cross-skill checks listed in `references/ch
 
 4. **Composition gaps** — Scan all `SKILL.md` bodies for references to other skills (e.g., "use the `foo` skill", "apply `bar`"). For each reference, verify that the named skill exists under `.agents/skills/`. Flag missing skills. Also identify two-step workflows referenced across multiple skills (e.g., implement → commit, commit → review) and check whether any skill explicitly coordinates both steps. If no coordinating skill exists and the chain appears in more than one skill's instructions, flag it as a `suggestion`.
 
-5. **Naming consistency** — Check that every skill name follows the action+object formula (verb+noun, e.g., `manage-skills`, `create-commit`). If the library has 10 or more skills, check whether related skills share a namespace prefix. Flag deviations.
+5. **Naming consistency** — Check that every skill name follows the action+object formula (verb+noun, e.g., `upsert-skill`, `create-commit`). If the library has 10 or more skills, check whether related skills share a namespace prefix. Flag deviations.
 
 ### Report Structure
 
@@ -109,8 +109,8 @@ validate all skills
 
 | Stage     | Skills                                   | Status   |
 |-----------|------------------------------------------|----------|
-| plan      | manage-plans                             | covered  |
-| implement | manage-skills, review-skill, audit-skills| covered  |
+| plan      | upsert-plan                              | covered  |
+| implement | upsert-skill, review-skill, audit-skills | covered  |
 | commit    | create-commit                            | covered  |
 | review    | review-pr, review-skill                  | covered  |
 | release   | —                                        | **gap**  |
@@ -118,10 +118,10 @@ validate all skills
 **Sample trigger-conflict finding:**
 
 ```
-suggestion: manage-skills and audit-skills both trigger on "audit skills"
+suggestion: upsert-skill and audit-skills both trigger on "audit skills"
 
 Both skills list "audit skills" as a trigger phrase. Add DO NOT TRIGGER
-disambiguation to clarify that manage-skills handles structural audits as
+disambiguation to clarify that upsert-skill handles structural audits as
 part of lifecycle management while audit-skills produces a full library
 health report.
 ```
