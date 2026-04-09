@@ -62,6 +62,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `manage-plans` | `/manage-plans` | Create and update structured work plans as GitHub issues |
 | `format-review-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
 | `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
+| `review-agents-md` | `/review-agents-md` | Audit AGENTS.md and equivalent agent instruction files for completeness, accuracy, agent-friendliness, freshness, and scope coherence |
 | `review-skill` | `/review-skill` | Evaluate a skill for effectiveness across instruction clarity, trigger discoverability, example completeness, composability, and scope coherence |
 | `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
 | `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
