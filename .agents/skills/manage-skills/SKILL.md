@@ -6,7 +6,9 @@ description: >
   this repository — also triggered by "create a new skill", "set up a skill",
   "list my skills", "what skills do I have", or "remove a skill".
   DO NOT TRIGGER when: the user asks to review, evaluate, or critique a skill
-  for quality (use review-skill instead).
+  for quality (use review-skill instead); or asks for a full library health
+  report, trigger conflict analysis, or workflow coverage audit (use
+  audit-skills instead).
 license: Apache-2.0
 metadata:
   author: geemus
