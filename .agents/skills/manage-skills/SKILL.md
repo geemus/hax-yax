@@ -63,10 +63,10 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
    - `description` describes both what the skill does and when to invoke it
 3. For complete format rules and validation criteria, read `references/skill-format.md`
 4. For quality evaluation of individual skills (instruction clarity, trigger discoverability, composability), use the `review-skill` skill
-4. Auto-fix minor issues (typos, table formatting, missing optional metadata fields); ask the user before removing or renaming skills
-5. Apply the `refine-prose` skill to any `description` or body text that is rewritten or newly authored during the audit — run it silently before saving
-6. If the audit is read-only and no issues are found, no commit is needed
-7. If audit findings require corrections, apply fixes and commit: `fix(<skill-name>): <description of issue corrected>`
+5. Auto-fix minor issues (typos, table formatting, missing optional metadata fields); ask the user before removing or renaming skills
+6. Apply the `refine-prose` skill to any `description` or body text that is rewritten or newly authored during the audit — run it silently before saving
+7. If the audit is read-only and no issues are found, no commit is needed
+8. If audit findings require corrections, apply fixes and commit: `fix(<skill-name>): <description of issue corrected>`
 
 ## Examples
 
