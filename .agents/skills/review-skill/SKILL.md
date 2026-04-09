@@ -10,7 +10,7 @@ description: >
   TRIGGER when: user asks to review a skill, audit a skill, evaluate skill
   quality, or check if a skill is well-written.
   DO NOT TRIGGER when: user asks to create, update, rename, or delete a skill
-  (use manage-skills instead), or to review a pull request (use review-pr
+  (use upsert-skill instead), or to review a pull request (use review-pr
   instead).
 license: Apache-2.0
 metadata:
@@ -143,11 +143,11 @@ Replace with explicit instructions:
 
 **Sample output — trigger discoverability finding:**
 ```
-suggestion: the description does not include `DO NOT TRIGGER when` lines to disambiguate from `manage-skills`, so an agent may invoke the wrong skill when the user says "check my skill"
+suggestion: the description does not include `DO NOT TRIGGER when` lines to disambiguate from `upsert-skill`, so an agent may invoke the wrong skill when the user says "check my skill"
 
 Add after the existing description:
 > TRIGGER when: user asks to review, audit, or evaluate a skill.
-> DO NOT TRIGGER when: user asks to create, update, or delete a skill (use manage-skills instead).
+> DO NOT TRIGGER when: user asks to create, update, or delete a skill (use upsert-skill instead).
 ```
 
 **Sample output — inline fix for a nitpick:**

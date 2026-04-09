@@ -1,5 +1,5 @@
 ---
-name: manage-sprites
+name: manage-sprite
 description: >
   Provisions, operates, and maintains sprites.dev instances through the full
   lifecycle: authenticate, create, execute commands, manage checkpoints, and
@@ -18,7 +18,7 @@ metadata:
   version: "1.0"
 ---
 
-# Manage Sprites
+# Manage Sprite
 
 Manages the full lifecycle of sprites.dev instances using the `sprite` CLI.
 

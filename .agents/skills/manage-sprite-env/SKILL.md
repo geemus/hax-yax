@@ -8,7 +8,7 @@ description: >
   including "start a service on this sprite", "create a service",
   "checkpoint this instance", "check my sprite environment", or "view network policy".
   DO NOT TRIGGER when: the user is managing sprites from outside (creating, destroying,
-  executing commands remotely) — use manage-sprites instead.
+  executing commands remotely) — use manage-sprite instead.
 license: Apache-2.0
 metadata:
   author: geemus
@@ -25,7 +25,7 @@ For full `sprite-env` command reference, read `references/sprites-services.md`.
 
 ### 1. Confirm you are inside a sprite
 
-Run `sprite-env info` to confirm the environment. If the command is not found or fails, you are likely outside a sprite — use the `manage-sprites` skill instead.
+Run `sprite-env info` to confirm the environment. If the command is not found or fails, you are likely outside a sprite — use the `manage-sprite` skill instead.
 
 ### 2. Read available context files
 
@@ -82,7 +82,7 @@ Shows allowed egress domains. Avoid raw IP addresses unless resolved from an all
 
 ### 4. Surface results
 
-Relay the raw command output to the user without modification. If the output indicates an error (non-zero exit, error message), explain what failed and suggest a corrective action. If `sprite-env` is not found, advise the user that this command is only available inside a sprite instance and suggest using `manage-sprites` for external operations.
+Relay the raw command output to the user without modification. If the output indicates an error (non-zero exit, error message), explain what failed and suggest a corrective action. If `sprite-env` is not found, advise the user that this command is only available inside a sprite instance and suggest using `manage-sprite` for external operations.
 
 ## Examples
 

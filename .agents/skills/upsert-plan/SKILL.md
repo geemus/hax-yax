@@ -1,5 +1,5 @@
 ---
-name: manage-plans
+name: upsert-plan
 description: >
   Creates and updates detailed, structured work plans as GitHub issues. Use
   when the user wants to plan a feature, bug fix, project, or any body of
@@ -7,14 +7,14 @@ description: >
   this task", "help me plan", or "create a GitHub issue for this". In update
   mode (triggered by an issue number or URL), edits the issue in place and
   posts a change-summary comment.
-  DO NOT TRIGGER when: user asks to create, update, or delete a skill (use manage-skills instead).
+  DO NOT TRIGGER when: user asks to create, update, or delete a skill (use upsert-skill instead).
 license: Apache-2.0
 metadata:
   author: geemus
   version: "2.0"
 ---
 
-# Manage Plans
+# Upsert Plan
 
 Turns a work description into a structured, executable plan and writes it to a GitHub issue. Asks clarifying questions when needed and presents the plan for review before writing. Supports create mode (new issue) and update mode (edits an existing issue in place).
 
@@ -146,36 +146,36 @@ Share the issue URL, state the number of tasks and phases, and call out any open
 
 **Invocation (inline description):**
 ```
-/manage-plans Add rate limiting to the public API
+/upsert-plan Add rate limiting to the public API
 ```
 
 **Invocation (interactive):**
 ```
-/manage-plans
+/upsert-plan
 ```
 Claude will ask for the work description. Repository is inferred from `git remote get-url origin`.
 
 **Invocation (by issue number — update mode):**
 ```
-/manage-plans #35
+/upsert-plan #35
 ```
 Fetches issue #35, generates an updated plan, edits the issue in place, and posts a change-summary comment.
 
 **Invocation (by issue URL — update mode):**
 ```
-/manage-plans https://github.com/geemus/skills/issues/35
+/upsert-plan https://github.com/geemus/skills/issues/35
 ```
 Same as above; repo is extracted from the URL.
 
 **Invocation (sub-issues):**
 ```
-/manage-plans Build new onboarding flow with separate sub-issues for each phase
+/upsert-plan Build new onboarding flow with separate sub-issues for each phase
 ```
 Claude will ask whether to track each phase as a sub-issue. If confirmed, creates a parent issue and one child issue per phase, then adds `Sub-issue: #<number>` lines to the parent body.
 
 **Invocation failure — git remote unresolvable:**
 ```
-/manage-plans Add dark mode support
+/upsert-plan Add dark mode support
 ```
 If `git remote get-url origin` exits non-zero or returns an unparseable URL, Claude will respond:
 > "Could not infer the GitHub repository from git remote. Please provide the repository in `owner/repo` format."

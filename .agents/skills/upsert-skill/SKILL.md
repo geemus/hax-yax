@@ -1,5 +1,5 @@
 ---
-name: manage-skills
+name: upsert-skill
 description: >
   Manages the lifecycle of reusable agent skills stored under .agents/skills/.
   Use when the user wants to add, modify, rename, delete, or audit skills in
@@ -15,7 +15,7 @@ metadata:
   version: "1.6"
 ---
 
-# Manage Skills
+# Upsert Skill
 
 Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 
