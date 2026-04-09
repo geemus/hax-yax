@@ -32,21 +32,7 @@ Skills live under `.agents/skills/` so that agents running within this repositor
 
 ## Plugin Installation
 
-This repository ships a Claude Code plugin manifest at `.claude-plugin/plugin.json`. The manifest points to `.agents/skills/` and registers skills under the `skills` namespace (e.g. `/skills:manage-plans`).
-
-**Install via plugin directory:**
-
-```sh
-claude --plugin-dir /path/to/skills
-```
-
-**Install from the repository URL** (once Claude Code supports remote plugin installation):
-
-```sh
-claude plugin install https://github.com/geemus/skills
-```
-
-**Standalone use** (without plugin namespace): the `.claude/skills` symlink provides backward-compatible skill discovery for agents running within this repository.
+Skills are available under the `skills` namespace (e.g., `/skills:manage-plans`) when installed via the Claude Code plugin, or directly (e.g., `/manage-plans`) when running within this repository.
 
 ## Skills Format
 
@@ -60,13 +46,14 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 |-------|---------|---------|
 | `manage-skills` | `/manage-skills` | Create, update, manage, and audit skills in this repository |
 | `manage-plans` | `/manage-plans` | Create and update structured work plans as GitHub issues |
-| `format-review-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
+| `format-review-comments` | apply automatically when writing any review comment, PR feedback, or critique of code | Format review and feedback comments using the Conventional Comments standard |
 | `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
 | `review-agents-md` | `/review-agents-md` | Audit AGENTS.md and equivalent agent instruction files for completeness, accuracy, agent-friendliness, freshness, and scope coherence |
 | `review-skill` | `/review-skill` | Evaluate a skill for effectiveness across instruction clarity, trigger discoverability, example completeness, composability, and scope coherence |
 | `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
 | `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
 | `manage-sprites` | `/manage-sprites` | Provision, operate, checkpoint, and destroy sprites.dev instances via the `sprite` CLI |
+| `manage-sprite-env` | `/manage-sprite-env` | Manage services, checkpoints, and environment info from within a running sprite instance |
 | `audit-skills` | `/audit-skills` | Produce a full health report on the skill library: structural validation per skill and cross-skill analysis covering trigger conflicts, redundancy, workflow gaps, and composition chains |
 
 ## Adding or Managing Skills
@@ -102,3 +89,10 @@ To create, update, or delete skills with guided steps and correct conventions, u
 - Skills that touch external services must document required environment variables in their `SKILL.md`
 - Do not add skills that perform destructive operations without explicit confirmation steps
 - Only use skills from trusted sources — treat them like installed software
+
+## Environment
+
+The following CLI tools are required for full functionality:
+
+- `gh` — GitHub CLI, used for PR creation (`gh pr create`) in the Git Workflow
+- `sprite` — sprites.dev CLI, used by the `manage-sprites` skill
