@@ -66,6 +66,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
 | `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
 | `manage-sprites` | `/manage-sprites` | Provision, operate, checkpoint, and destroy sprites.dev instances via the `sprite` CLI |
+| `audit-skills` | `/audit-skills` | Produce a full health report on the skill library: structural validation per skill and cross-skill analysis covering trigger conflicts, redundancy, workflow gaps, and composition chains |
 
 ## Adding or Managing Skills
 
