@@ -163,7 +163,7 @@ Fetches issue #35, generates an updated plan, edits the issue in place, and post
 
 **Invocation (by issue URL — update mode):**
 ```
-/upsert-plan https://github.com/geemus/skills/issues/35
+/upsert-plan https://github.com/geemus/hax-yax/issues/35
 ```
 Same as above; repo is extracted from the URL.
 
