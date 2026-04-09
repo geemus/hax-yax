@@ -1,10 +1,10 @@
 {
-  "name": "skills",
+  "name": "hax-yax",
   "description": "Reusable agent skills for Claude Code — commit safety, plan generation, PR review, prose refinement, and more.",
   "version": "1.0.0",
   "author": "geemus",
   "license": "MIT",
-  "repository": "https://github.com/geemus/skills",
+  "repository": "https://github.com/geemus/hax-yax",
   "keywords": ["claude", "skills", "agent", "agentskills", "productivity"],
   "skills": "./.agents/skills/"
 }

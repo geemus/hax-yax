@@ -1,4 +1,4 @@
-# skills
+# hax-yax
 
 Reusable agent skills for Claude Code and other AI coding agents. Follows the [agentskills.io](https://agentskills.io) open standard and ships a native [Claude Code plugin manifest](https://docs.claude.ai/code/plugins) for one-command installation.
 
@@ -6,12 +6,12 @@ Reusable agent skills for Claude Code and other AI coding agents. Follows the [a
 
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| `upsert-skill` | `/skills:upsert-skill` | Create, update, manage, and audit skills in this repository |
-| `upsert-plan` | `/skills:upsert-plan` | Create and update structured work plans as GitHub issues |
+| `upsert-skill` | `/hax-yax:upsert-skill` | Create, update, manage, and audit skills in this repository |
+| `upsert-plan` | `/hax-yax:upsert-plan` | Create and update structured work plans as GitHub issues |
 | `format-review-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
-| `review-pr` | `/skills:review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
-| `create-commit` | `/skills:commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
-| `refine-prose` | `/skills:refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
+| `review-pr` | `/hax-yax:review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
+| `create-commit` | `/hax-yax:commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
+| `refine-prose` | `/hax-yax:refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
 
 ## Installation
 
@@ -20,17 +20,17 @@ Reusable agent skills for Claude Code and other AI coding agents. Follows the [a
 Install from a local clone using `--plugin-dir`:
 
 ```sh
-git clone https://github.com/geemus/skills
-claude --plugin-dir ./skills
+git clone https://github.com/geemus/hax-yax
+claude --plugin-dir ./hax-yax
 ```
 
 Or install directly from the repository URL once Claude Code supports remote plugin installation:
 
 ```sh
-claude plugin install https://github.com/geemus/skills
+claude plugin install https://github.com/geemus/hax-yax
 ```
 
-Skills are registered under the `skills` namespace (e.g. `/skills:upsert-plan`). Run `/help` inside Claude Code to see all available commands.
+Skills are registered under the `hax-yax` namespace (e.g. `/hax-yax:upsert-plan`). Run `/help` inside Claude Code to see all available commands.
 
 ### Standalone Claude Code use
 
@@ -39,7 +39,7 @@ If you already have the repository checked out and want skills available without
 ```sh
 # From within the repository, skills load automatically.
 # From another project, symlink or copy the skills directory:
-ln -s /path/to/skills/.agents/skills .claude/skills
+ln -s /path/to/hax-yax/.agents/skills .claude/skills
 ```
 
 ## Repository structure
@@ -64,7 +64,7 @@ ln -s /path/to/skills/.agents/skills .claude/skills
 
 ## Contributing
 
-Skills follow the format defined in `.agents/skills/upsert-skill/references/skill-format.md`. Use the `upsert-skill` skill (`/skills:upsert-skill`) to create or update skills with guided steps and validation.
+Skills follow the format defined in `.agents/skills/upsert-skill/references/skill-format.md`. Use the `upsert-skill` skill (`/hax-yax:upsert-skill`) to create or update skills with guided steps and validation.
 
 Commits follow [Conventional Commits](https://www.conventionalcommits.org): `<type>[scope]: <description>`.
 

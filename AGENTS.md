@@ -32,7 +32,7 @@ Skills live under `.agents/skills/` so that agents running within this repositor
 
 ## Plugin Installation
 
-Skills are available under the `skills` namespace (e.g., `/skills:upsert-plan`) when installed via the Claude Code plugin, or directly (e.g., `/upsert-plan`) when running within this repository.
+Skills are available under the `hax-yax` namespace (e.g., `/hax-yax:upsert-plan`) when installed via the Claude Code plugin, or directly (e.g., `/upsert-plan`) when running within this repository.
 
 ## Skills Format
 
