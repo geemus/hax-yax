@@ -84,11 +84,11 @@ A bulleted list of pass/fail conditions. Each criterion must be verifiable. Pair
 - Rate limit headers present on API responses: `curl -I /api/... | grep X-RateLimit`
 ```
 
-#### Open Questions
-Unknowns that need resolution before or during the work. Distinct from Assumptions: these are things the plan genuinely cannot answer yet. Omit this section if there are none.
-
 #### Future Work
 Items intentionally deferred: tasks that are nice to have but not required by the acceptance criteria, or that can wait until after launch. Use a bulleted list. Omit this section if there are none.
+
+#### Open Questions
+Unknowns that need resolution before or during the work. Distinct from Assumptions: these are things the plan genuinely cannot answer yet. Omit this section if there are none.
 
 ### 5. Self-review before presenting
 
@@ -212,4 +212,7 @@ We will use approach X because it minimizes Y; the key tradeoff is Z.
 
 ## Future Work
 - Possible extension: ...
+
+## Open Questions
+- ...
 ```
