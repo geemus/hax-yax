@@ -79,6 +79,8 @@ Work through every dimension in order. For each, read the relevant changed files
 
 **Output:** All review comments are written to the conversation only. To post them to the PR, pass the output to the appropriate GitHub tool or ask the user if they would like comments posted.
 
+When presenting multiple findings, prefix each with a letter (a., b., c., …) so individual items can be referenced by letter.
+
 Apply the `format-review-comments` skill to every comment you write. Choose the label that matches the severity and intent:
 
 | Situation | Recommended label |
