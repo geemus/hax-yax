@@ -26,7 +26,6 @@ Collect the following (ask only for what is missing):
 
 - **Work description** — what needs to be done (required; may be provided inline as skill args). If the description is too vague to decompose into concrete tasks without guessing, ask 1–2 targeted clarifying questions before continuing.
 - **Existing issue target** — if the inline args contain a bare integer (e.g. `35`), a `#N` reference (e.g. `#35`), or a full GitHub issue URL (e.g. `https://github.com/owner/repo/issues/35`), extract the issue number (and repo from the URL if present). This activates **update mode**; otherwise the skill runs in **create mode**.
-- **GitHub repository** — infer `owner/repo` by running `git remote get-url origin` and parsing the result. Parse both HTTPS (`https://github.com/owner/repo.git`) and SSH (`git@github.com:owner/repo.git`) remote formats — for SSH remotes, split on `:` then strip `.git`. If the command exits non-zero, produces empty output, or the result cannot be parsed into `owner/repo`, ask the user for the repository explicitly. Run all git commands without `-C`; the working directory is already the repo root. *(In update mode with a full URL, prefer the repo extracted from the URL.)*
 - **Sub-issues** — if the work description clearly involves multiple distinct phases or bodies of work, ask now whether the user wants each phase tracked as a separate sub-issue linked to a parent.
 
 ### 2. Survey the context
