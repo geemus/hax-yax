@@ -29,14 +29,15 @@ Accept the PR as:
 - A GitHub PR URL (e.g. `https://github.com/owner/repo/pull/42`)
 - A bare PR number (e.g. `42`) — infer the repo from `git remote get-url origin`
 - A local diff or branch name — use `git diff <base>..<head>` to obtain the diff
+- A raw diff pasted inline — use it directly; skip any steps that require a remote or PR description
 
-If no PR is specified, ask the user: "Which PR would you like me to review? Provide a URL, PR number, or branch name."
+If no PR is specified, ask the user: "Which PR would you like me to review? Provide a URL, PR number, branch name, or paste a diff directly."
 
-Fetch the PR diff and description before proceeding.
+Fetch the PR diff and description before proceeding. When working from a raw diff, a PR description may not be available — proceed without one and note the omission in the summary.
 
 ### 2. Read the PR description
 
-Understand the stated intent: what problem does the PR solve, what approach the author took, and what is explicitly out of scope. Use this as the lens for all review dimensions below.
+Understand the stated intent: what problem does the PR solve, what approach the author took, and what is explicitly out of scope. Use this as the lens for all review dimensions below. When no description is available (e.g. a raw diff), infer intent from the changed code and note the absence in the summary.
 
 ### 3. Review each dimension
 
@@ -128,6 +129,15 @@ Apply the `refine-prose` skill to the review summary and all comments before pos
 /review-pr feature/my-branch
 ```
 The agent will run `git diff main..feature/my-branch` to obtain the diff.
+
+**Invocation with a pasted diff:**
+```
+/review-pr
+--- a/src/auth.py
++++ b/src/auth.py
+@@ -12,6 +12,8 @@ def login(user, password):
+```
+The agent uses the pasted diff directly and notes in the summary that no PR description was available.
 
 **Sample output (logic finding):**
 ```
