@@ -102,10 +102,10 @@ Evaluate the draft plan against these checks. Fix any issues found silently befo
 
 After self-review, challenge the scope. Ask: is there a simpler way to achieve the same objective? Make changes silently before presenting.
 
-- Remove any task that is not required by the acceptance criteria. If it is "nice to have", add it to Open Questions as a possible extension instead.
+- Remove any task that is not required by the acceptance criteria. If it is "nice to have", move it to a **Future Work** section at the bottom — do not list it as an Open Question.
 - Collapse phases that have no meaningful dependency boundary between them.
 - If a simpler approach would satisfy all acceptance criteria with fewer tasks, switch to it and update the Approach section accordingly.
-- Flag tasks that could be explicitly deferred post-launch; move them to a "Future work" note at the bottom rather than deleting them.
+- Move tasks that could be deferred post-launch to the **Future Work** section by default — do not ask the user first.
 
 Do not remove tasks that self-review identified as missing or necessary.
 
@@ -207,4 +207,7 @@ We will use approach X because it minimizes Y; the key tradeoff is Z.
 ## Acceptance Criteria
 - All tests pass: `npm test`
 - ...
+
+## Future Work
+- Possible extension: ...
 ```
