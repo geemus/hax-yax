@@ -87,6 +87,9 @@ A bulleted list of pass/fail conditions. Each criterion must be verifiable. Pair
 #### Open Questions
 Unknowns that need resolution before or during the work. Distinct from Assumptions: these are things the plan genuinely cannot answer yet. Omit this section if there are none.
 
+#### Future Work
+Items intentionally deferred: tasks that are nice to have but not required by the acceptance criteria, or that can wait until after launch. Use a bulleted list. Omit this section if there are none.
+
 ### 5. Self-review before presenting
 
 Evaluate the draft plan against these checks. Fix any issues found silently before presenting to the user.
@@ -102,10 +105,9 @@ Evaluate the draft plan against these checks. Fix any issues found silently befo
 
 After self-review, challenge the scope. Ask: is there a simpler way to achieve the same objective? Make changes silently before presenting.
 
-- Remove any task that is not required by the acceptance criteria. If it is "nice to have", move it to a **Future Work** section at the bottom — do not list it as an Open Question.
+- Move any task that is nice to have (not required by the acceptance criteria) or that could be deferred post-launch into the **Future Work** section. Do not list these as Open Questions. Do not ask the user first.
 - Collapse phases that have no meaningful dependency boundary between them.
 - If a simpler approach would satisfy all acceptance criteria with fewer tasks, switch to it and update the Approach section accordingly.
-- Move tasks that could be deferred post-launch to the **Future Work** section by default — do not ask the user first.
 
 Do not remove tasks that self-review identified as missing or necessary.
 
