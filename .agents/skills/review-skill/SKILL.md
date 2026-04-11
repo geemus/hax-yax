@@ -34,16 +34,16 @@ Confirm the skill directory exists before proceeding. If it does not exist, stop
 
 ### 2. Read the skill in full
 
-Read `SKILL.md` first. Then read every Level 3 file present:
+Read `SKILL.md` first. Then read every supporting file present:
 - `scripts/` — all executable scripts
 - `references/` — all reference documents
 - `assets/` — all templates and examples
 
-Do not begin reviewing until all files have been read. A finding that misses information in Level 3 files is an incomplete finding.
+Do not begin reviewing until all files have been read. A finding that misses information in supporting files is an incomplete finding.
 
 ### 3. Review each dimension
 
-Work through every dimension in order. For each, apply the evaluation questions and note findings. Only example completeness is skippable — skip it when the skill is a single-step utility with self-evident output. All other four dimensions are mandatory. For each finding, note whether an inline fix is clear and unambiguous.
+Work through every dimension in order. For each, apply the evaluation questions and note findings. Only the **example completeness** dimension may be skipped — and only when the skill is a single-step utility with self-evident output. All other four dimensions are mandatory. For each finding, note whether an inline fix is clear and unambiguous.
 
 #### Instruction clarity
 
@@ -86,7 +86,7 @@ Work through every dimension in order. For each, apply the evaluation questions 
 
 When presenting multiple findings, prefix each with a letter (a., b., c., …) so individual items can be referenced by letter.
 
-Apply the `format-review-comments` skill to every comment. Choose the label that matches the severity and intent:
+Apply the `format-review-comments` skill to every comment. Do not write `praise` comments — omit positive findings entirely, as they add tokens without actionable content. Choose the label that matches the severity and intent:
 
 | Situation | Recommended label |
 |-----------|------------------|
@@ -96,8 +96,6 @@ Apply the `format-review-comments` skill to every comment. Choose the label that
 | Needs clarification | `question` |
 | Small unambiguous fix | `todo` |
 | Informational only | `note` |
-
-Do not write `praise` comments. Omit positive findings entirely — they add tokens without actionable content.
 
 ### 5. Suggest inline fixes for unambiguous findings
 
@@ -116,7 +114,7 @@ Format the summary as a `note` conventional comment.
 
 ### 7. Refine prose
 
-Apply the `refine-prose` skill to all output before presenting it. Do not announce this step to the user.
+Apply the `refine-prose` skill to all prose output — comments and the summary — before presenting it. Do not apply it to code blocks or inline fix suggestions. Do not announce this step to the user.
 
 ## Examples
 
