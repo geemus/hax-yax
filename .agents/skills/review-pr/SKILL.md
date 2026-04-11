@@ -86,10 +86,11 @@ Apply the `format-review-comments` skill to every comment you write. Choose the 
 | Must be fixed before merge | `issue [blocking]` |
 | Strong recommendation | `suggestion` |
 | Minor style or preference | `nitpick` |
-| Something done well | `praise` |
 | Needs clarification | `question` |
 | Small unambiguous fix | `todo` |
 | Informational only | `note` |
+
+Do not write `praise` comments. Omit positive findings entirely — they add tokens without actionable content.
 
 For the full label and decoration reference, read `../format-review-comments/references/conventional-comments-spec.md`.
 
@@ -134,11 +135,6 @@ Add a length guard before the dereference:
 if len(items) == 0 {
     return nil, ErrNoItems
 }
-```
-
-**Sample output (positive finding):**
-```
-praise: clean separation between the HTTP layer and business logic — the new handler delegates immediately to the service and has no domain knowledge of its own
 ```
 
 **Sample output (suggestion with inline fix):**
