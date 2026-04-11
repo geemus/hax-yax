@@ -8,10 +8,10 @@ description: >
   for unambiguous issues. Use when the user asks to review, audit, or evaluate
   a skill.
   TRIGGER when: user asks to review a skill, audit a skill, evaluate skill
-  quality, or check if a skill is well-written.
+  quality, check if a skill is well-written, or review a diff of skill files.
   DO NOT TRIGGER when: user asks to create, update, rename, or delete a skill
-  (use upsert-skill instead), or to review a pull request (use review-pr
-  instead).
+  (use upsert-skill instead), or to review a pull request that is not
+  skill-related (use review-pr instead).
 license: Apache-2.0
 metadata:
   author: geemus
@@ -29,8 +29,11 @@ Evaluates a skill for effectiveness — not just structural validity — across 
 Accept the skill as:
 - A skill name (e.g. `create-plan`) — resolve to `.agents/skills/<name>/`
 - A path (e.g. `.agents/skills/create-plan/`) — use directly
+- A diff or set of changed files — identify which skill directories are affected and treat each as a separate target
 
 Confirm the skill directory exists before proceeding. If it does not exist, stop and tell the user: "Skill directory `<path>` not found. Provide a valid skill name or path."
+
+When the input is a diff, focus findings on the changed lines. Flag regressions (changes that remove or weaken existing quality) as `issue [blocking]`, and evaluate additions against all five dimensions as normal.
 
 ### 2. Read the skill in full
 
