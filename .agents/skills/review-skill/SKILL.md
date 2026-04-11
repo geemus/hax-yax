@@ -84,6 +84,8 @@ Work through every dimension in order. For each, apply the evaluation questions 
 
 ### 4. Format all findings with format-review-comments
 
+When presenting multiple findings, prefix each with a letter (a., b., c., …) so individual items can be referenced by letter.
+
 Apply the `format-review-comments` skill to every comment. Choose the label that matches the severity and intent:
 
 | Situation | Recommended label |
