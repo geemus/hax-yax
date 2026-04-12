@@ -133,7 +133,15 @@ rm -f "$tmpfile"   # clean up whether or not the command succeeded
 
 **Update mode:**
 1. Update the issue title and body with the new plan. Write the body to a temp file first using the same pattern above, passing it via `gh issue edit --body-file "$tmpfile"`.
-2. Compose a change-summary comment that lists each section as **added**, **revised**, **preserved**, or **removed**, with a "Key change" sentence per section. Post it as a comment on the issue.
+2. Compose a change-summary comment covering only sections that changed. Format each changed section as a conventional comment in a lettered list:
+
+   ```
+   a. revised: Tasks — collapsed Phase 2 into Phase 1; no meaningful dependency boundary between them
+   b. added: Future Work — deferred dark mode support to post-launch
+   c. removed: Open Questions — all questions resolved by codebase survey
+   ```
+
+   Use `added`, `revised`, or `removed` as the label; write the subject as `<Section name> — <one-sentence description of what changed and why>`. Post it as a comment on the issue.
 
 **Sub-issues**: If sub-issue tracking was agreed in step 1, create a child issue for each phase using the same method above. Link each child to the parent by adding a line to the parent issue body: `- Sub-issue: #<number> — <phase name>`.
 
