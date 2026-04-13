@@ -14,7 +14,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Review AGENTS.md
@@ -29,9 +29,9 @@ If the user provides a file path or filename as an argument (e.g., `/review-agen
 
 Otherwise, search the repository for agent instruction files. Look for any of the following:
 
-- `AGENTS.md` (repo root)
-- `CLAUDE.md` (repo root or `.claude/CLAUDE.md`)
-- `CURSOR.md` (repo root)
+- `AGENTS.md` (worktree root)
+- `CLAUDE.md` (worktree root or `.claude/CLAUDE.md`)
+- `CURSOR.md` (worktree root)
 - `.github/copilot-instructions.md`
 - `.cursorrules`
 
@@ -111,7 +111,7 @@ Apply the `refine-prose` skill to all output before presenting it. Do not announ
 ```
 /review-agents-md
 ```
-Finds `AGENTS.md` in the repo root and proceeds automatically.
+Finds `AGENTS.md` in the worktree root and proceeds automatically.
 
 **Sample output — no agent instruction file found:**
 ```
