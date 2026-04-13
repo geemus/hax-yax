@@ -35,7 +35,7 @@ Accept the plan as:
 
 If no plan is specified, ask: "Which plan issue should I implement? Provide an issue number, `#N` reference, or full URL."
 
-Fetch the issue body using the GitHub MCP tools (`mcp__github__issue_read`). If the issue cannot be fetched, report the error and stop.
+Fetch the issue body using the GitHub tools available in the environment. If the issue cannot be fetched, report the error and stop.
 
 ### 2. Parse and present unchecked tasks
 
@@ -56,7 +56,7 @@ Do not start implementation until the user confirms.
 For each unchecked task (in dependency-resolved order):
 
 1. State which task you are beginning (e.g. "Starting: Create `.agents/skills/implement-plan/SKILL.md`").
-2. Implement the task using the tools available (Read, Write, Edit, Bash, Glob, Grep, GitHub MCP tools, etc.).
+2. Implement the task using the tools available (Read, Write, Edit, Bash, Glob, Grep, GitHub tools, etc.).
 3. Report completion: "Done: `<task description>`."
 4. If a task cannot be completed (missing dependency, ambiguity, external blocker), stop and ask the user for guidance before continuing.
 
@@ -88,7 +88,7 @@ Do not proceed to step 6 until all blocking findings are resolved.
 
 Derive the PR title from the plan issue title: keep it concise (under 70 characters) and imperative (e.g. "Add implement-plan skill to orchestrate plan execution").
 
-Create the PR using the GitHub MCP tools (`mcp__github__create_pull_request`), linking back to the plan issue in the body:
+Create the PR using the GitHub tools available in the environment, linking back to the plan issue in the body:
 
 ```markdown
 ## Summary
