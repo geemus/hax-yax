@@ -11,7 +11,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "2.0"
+  version: "2.1"
 ---
 
 # Upsert Plan
@@ -72,6 +72,8 @@ Annotate dependencies explicitly:
 ```
 
 Mark tasks that can run in parallel with a note: _(parallel with: Task X)_.
+
+**Agent guidance**: If the work touches repo structure, skills, tooling, or conventions documented in agent instruction files (AGENTS.md, CLAUDE.md), include a final task to run `upsert-agents-md` to keep those files current.
 
 **Update mode**: preserve the checked/unchecked state of any task checkboxes that appear in the existing issue. Do not uncheck tasks that were already checked.
 
