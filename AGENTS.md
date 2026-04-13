@@ -75,6 +75,15 @@ To create, update, or delete skills with guided steps and correct conventions, u
     - `chore: update AGENTS.md structure`
 - Do not force-push to `main`
 
+## Worktree Awareness
+
+When running inside a git worktree (secondary working tree), scope all file operations to the current worktree root.
+
+- **Resolve the root** with `git rev-parse --show-toplevel`; never navigate above it
+- **"Repo root"** in any skill instruction means the current worktree root, not the main working tree
+- **Detect secondary worktrees** with `git worktree list`; if `$PWD` does not match the first entry's path, you are in a secondary worktree and must stay within it
+- **Changes committed** in a secondary worktree are isolated to that worktree's branch — do not stage or commit files from outside it
+
 ## Code Style & Conventions
 
 - Markdown: ATX headings (`#`), fenced code blocks with language tags

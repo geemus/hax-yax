@@ -183,6 +183,7 @@ For full API details, read `references/pdfminer-api.md`.
 - Never commit secrets, tokens, or credentials inside a skill
 - Skills that call external services must document required environment variables in `SKILL.md`
 - Skills performing destructive operations must include an explicit confirmation step
+- **Plugin self-containment**: each `SKILL.md` must be independently usable when the skill is installed as a plugin in another repository — do not rely on this repository's `AGENTS.md` or any other repo-level guidance being available to the agent
 
 ### Anti-patterns
 

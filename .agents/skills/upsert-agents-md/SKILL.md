@@ -12,7 +12,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Upsert AGENTS.md
@@ -27,9 +27,9 @@ Creates or updates agent instruction files by surveying the actual repository an
 
 **Target file** — if the user provides a filename argument (e.g. `/upsert-agents-md CLAUDE.md`), use that path. Otherwise, search the repository for existing agent instruction files:
 
-- `AGENTS.md` (repo root)
-- `CLAUDE.md` (repo root or `.claude/CLAUDE.md`)
-- `CURSOR.md` (repo root)
+- `AGENTS.md` (worktree root)
+- `CLAUDE.md` (worktree root or `.claude/CLAUDE.md`)
+- `CURSOR.md` (worktree root)
 - `.github/copilot-instructions.md`
 - `.cursorrules`
 
@@ -37,7 +37,7 @@ Use `Glob` to locate all matches.
 
 - **Exactly one file found:** use it as the target (update mode).
 - **Multiple files found:** list each path and ask the user which to update.
-- **No files found:** default to `AGENTS.md` at the repo root (create mode).
+- **No files found:** default to `AGENTS.md` at the worktree root (create mode).
 
 In **update mode**, read the full contents of the existing file before continuing. Note any intentional customizations (non-standard sections, hand-written prose) to preserve them.
 
@@ -152,4 +152,4 @@ Reads the existing `CLAUDE.md`, surveys the repo for changes, produces an update
 ```
 /upsert-agents-md
 ```
-Finds `AGENTS.md` in the repo root, enters update mode automatically.
+Finds `AGENTS.md` in the worktree root, enters update mode automatically.

@@ -12,7 +12,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.6"
+  version: "1.7"
 ---
 
 # Upsert Skill
@@ -33,10 +33,11 @@ Manages the lifecycle of reusable skills stored under `.agents/skills/`.
 4. Document natural-language trigger phrases in the `description` — include the phrases users are likely to say (e.g. *"create a commit"*, *"review this PR"*, *"make a plan"*). Use the inline `Use when...` form for simple skills; add explicit `TRIGGER when:` / `DO NOT TRIGGER when:` lines when the skill overlaps with others and disambiguation is needed. See the Natural Language Triggers section in `references/skill-format.md` for both patterns and concrete examples.
 5. Omit `allowed-tools` unless the user explicitly requests tool restrictions
 6. Write a clear Markdown body with instructions agents can follow directly
-7. Add `scripts/`, `references/`, or `assets/` subdirectories only for content too large to inline in `SKILL.md` (large examples, schemas, scripts, reference docs). See `references/skill-format.md` for the full progressive disclosure model.
-8. Apply the `refine-prose` skill to the `description` frontmatter field and the `SKILL.md` body — run it silently before saving
-9. Review `AGENTS.md` — update if the new skill affects documented structure, conventions, or workflow
-10. Commit: `feat(<skill-name>): add <skill-name> skill — <one-line summary>`
+7. Verify plugin self-containment — re-read the instructions imagining no access to this repository's `AGENTS.md`. Any guidance the skill needs must be in the `SKILL.md` itself or in a `references/` file shipped with the skill.
+8. Add `scripts/`, `references/`, or `assets/` subdirectories only for content too large to inline in `SKILL.md` (large examples, schemas, scripts, reference docs). See `references/skill-format.md` for the full progressive disclosure model.
+9. Apply the `refine-prose` skill to the `description` frontmatter field and the `SKILL.md` body — run it silently before saving
+10. Review `AGENTS.md` — update if the new skill affects documented structure, conventions, or workflow
+11. Commit: `feat(<skill-name>): add <skill-name> skill — <one-line summary>`
 
 ### Updating a skill
 
