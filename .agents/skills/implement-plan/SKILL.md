@@ -47,9 +47,6 @@ Present the task list to the user before starting:
 - State the plan issue number and title
 - List all unchecked tasks grouped by phase (if phases exist)
 - Call out any tasks blocked by incomplete dependencies
-- Ask for confirmation: "Ready to implement these N tasks. Proceed?"
-
-Do not start implementation until the user confirms.
 
 ### 3. Implement each task in order
 
