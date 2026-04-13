@@ -9,7 +9,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.3"
+  version: "1.4"
 ---
 
 # Create Commit
@@ -86,11 +86,9 @@ Derive the message following [Conventional Commits](https://www.conventionalcomm
 
 **Body** — include when the change is non-obvious: explain *why*, not *what*. Wrap at 72 characters.
 
-### 5. Confirm and commit
+### 5. Commit
 
-Present the proposed commit message to the user and ask for approval or edits.
-
-Once approved, commit using a HEREDOC to avoid shell quoting issues:
+Display the proposed commit message to the user, then immediately commit using a HEREDOC to avoid shell quoting issues:
 
 ```bash
 git commit -m "$(cat <<'EOF'
@@ -135,9 +133,7 @@ Skipped:
     Fix: remove DB_PASSWORD value; reference $DB_PASSWORD instead,
     or add config/local.env to .gitignore
 
-Proposed commit message:
+Commit message:
   feat(api): add client module
-
-Approve this message, or provide edits:
 ```
 
