@@ -45,6 +45,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `audit-skills` | `/audit-skills` | Produce a full health report on the skill library: structural validation per skill and cross-skill analysis covering trigger conflicts, redundancy, workflow gaps, and composition chains |
 | `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
 | `format-review-comments` | apply automatically when writing any review comment, PR feedback, or critique of code | Format review and feedback comments using the Conventional Comments standard |
+| `implement-plan` | `/implement-plan` | Fetch a structured plan from a GitHub issue and orchestrate the full delivery workflow: step through unchecked tasks in dependency order, commit via create-commit, review via review-pr, and open a PR linked to the plan issue |
 | `manage-sprite` | `/manage-sprite` | Provision, operate, checkpoint, and destroy sprites.dev instances via the `sprite` CLI |
 | `manage-sprite-env` | `/manage-sprite-env` | Manage services, checkpoints, and environment info from within a running sprite instance |
 | `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
