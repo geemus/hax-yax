@@ -14,7 +14,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.3"
+  version: "1.4"
 ---
 
 # Review PR
@@ -74,6 +74,13 @@ Work through every dimension in order. For each, read the relevant changed files
 - Are public APIs, exported functions, and non-obvious logic commented?
 - Is the PR description accurate and complete?
 - Do `README`, `CHANGELOG`, or other docs need updating?
+
+#### Agent guidance
+
+- Do changes affect repo structure, skills, tooling, or conventions documented in agent instruction files (AGENTS.md, CLAUDE.md)?
+- Were agent instruction files updated to reflect those changes?
+- Are new skills, tools, or conventions introduced without corresponding updates to agent guidance?
+- If the PR modifies AGENTS.md or CLAUDE.md directly, apply the `review-agents-md` skill to evaluate those changes.
 
 ### 4. Format all feedback with format-review-comments
 
