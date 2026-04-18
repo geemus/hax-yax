@@ -130,11 +130,10 @@ Derive the issue title from the Objective: use a concise phrase (under 72 charac
 tmpfile=$(mktemp /tmp/plan-body-XXXX.md)
 # use the Write tool to write the plan body to $tmpfile
 gh issue create --title "..." --body-file "$tmpfile"
-rm "$tmpfile"
 ```
 
 **Update mode:**
-1. Update the issue title and body with the new plan. Use the same pattern: `mktemp` for the path, Write tool for the content, `gh issue edit --body-file "$tmpfile"`, then `rm "$tmpfile"`.
+1. Update the issue title and body with the new plan. Use the same pattern: `mktemp` for the path, Write tool for the content, `gh issue edit --body-file "$tmpfile"`.
 2. Compose a change-summary comment covering only sections that changed. Format each changed section as a conventional comment in a lettered list:
 
    ```

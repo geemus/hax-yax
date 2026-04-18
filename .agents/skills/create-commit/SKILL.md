@@ -93,7 +93,7 @@ Display the proposed commit message to the user, then run `mktemp` to get a uniq
 ```bash
 tmpfile=$(mktemp /tmp/commit-message-XXXX.txt)
 # use the Write tool to write the commit message to $tmpfile
-git commit -F "$tmpfile" && rm "$tmpfile"
+git commit -F "$tmpfile"
 ```
 
 ## Examples
