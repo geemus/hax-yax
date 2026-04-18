@@ -88,15 +88,11 @@ Derive the message following [Conventional Commits](https://www.conventionalcomm
 
 ### 5. Commit
 
-Display the proposed commit message to the user, then immediately commit using a HEREDOC to avoid shell quoting issues:
+Display the proposed commit message to the user, then use the Write tool to write the message to `/tmp/commit-message.txt` and commit with:
 
 ```bash
-git commit -m "$(cat <<'EOF'
-<type>[scope]: <subject>
-
-<body if any>
-EOF
-)"
+git commit -F /tmp/commit-message.txt
+rm /tmp/commit-message.txt
 ```
 
 ## Examples
