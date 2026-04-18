@@ -124,16 +124,14 @@ State whether you are in **create mode** (a new issue will be created) or **upda
 
 Derive the issue title from the Objective: use a concise phrase (under 72 characters) that captures the core action and subject (e.g. "Add rate limiting to the public API").
 
-**Create mode:** Create a new GitHub issue with the derived title and plan body. Run `mktemp` to get a unique path, use the Write tool to write the body to that path, then pass it via `--body-file`:
+**Create mode:** Create a new GitHub issue with the derived title and plan body. Use the Write tool to write the body to `.tmp/upsert-plan.md`, then pass it via `--body-file`:
 
 ```sh
-tmpfile=$(mktemp /tmp/plan-body-XXXX.md)
-# use the Write tool to write the plan body to $tmpfile
-gh issue create --title "..." --body-file "$tmpfile"
+gh issue create --title "..." --body-file .tmp/upsert-plan.md
 ```
 
 **Update mode:**
-1. Update the issue title and body with the new plan. Use the same pattern: `mktemp` for the path, Write tool for the content, `gh issue edit --body-file "$tmpfile"`.
+1. Update the issue title and body with the new plan. Use the Write tool to write the body to `.tmp/upsert-plan.md`, then pass it via `gh issue edit --body-file .tmp/upsert-plan.md`.
 2. Compose a change-summary comment covering only sections that changed. Format each changed section as a conventional comment in a lettered list:
 
    ```

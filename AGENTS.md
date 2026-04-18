@@ -91,7 +91,7 @@ When running inside a git worktree (secondary working tree), scope all file oper
 - One skill per directory; do not bundle unrelated tasks
 - Prefer explicit over implicit; agents should not need to infer intent
 - Scripts should be self-contained or clearly document their dependencies
-- **Long content to CLI commands**: run `mktemp` in Bash to get a unique temp path, then use the Write tool to write the content to that path, and pass via `--body-file` or `-F`. Do not use shell here-docs or HEREDOC patterns for content — use the Write tool instead.
+- **Long content to CLI commands**: use the Write tool to write content to a skill-scoped path under `.tmp/` (e.g., `.tmp/upsert-plan.md`, `.tmp/create-commit.txt`), then pass via `--body-file` or `-F`. Do not use shell here-docs or HEREDOC patterns — use the Write tool instead. `.tmp/` is gitignored.
 
 ## Security
 

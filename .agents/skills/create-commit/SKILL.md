@@ -88,12 +88,10 @@ Derive the message following [Conventional Commits](https://www.conventionalcomm
 
 ### 5. Commit
 
-Display the proposed commit message to the user, then run `mktemp` to get a unique path, use the Write tool to write the message to that path, and commit with:
+Display the proposed commit message to the user, then use the Write tool to write the message to `.tmp/create-commit.txt` and commit with:
 
 ```bash
-tmpfile=$(mktemp /tmp/commit-message-XXXX.txt)
-# use the Write tool to write the commit message to $tmpfile
-git commit -F "$tmpfile"
+git commit -F .tmp/create-commit.txt
 ```
 
 ## Examples
