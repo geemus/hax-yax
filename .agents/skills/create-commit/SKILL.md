@@ -91,8 +91,7 @@ Derive the message following [Conventional Commits](https://www.conventionalcomm
 Display the proposed commit message to the user, then use the Write tool to write the message to `/tmp/commit-message.txt` and commit with:
 
 ```bash
-git commit -F /tmp/commit-message.txt
-rm /tmp/commit-message.txt
+git commit -F /tmp/commit-message.txt && rm /tmp/commit-message.txt
 ```
 
 ## Examples
