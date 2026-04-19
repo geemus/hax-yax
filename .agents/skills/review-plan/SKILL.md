@@ -81,7 +81,9 @@ Work through every dimension in order. Note findings for each. Only skip a dimen
 - Is the Background section grounded in what exists today, not just what will be built?
 - Are agent-instruction files (AGENTS.md, CLAUDE.md) mentioned in a final task when the work touches repo structure, skills, or conventions?
 
-### 3. Format all findings with format-review-comments
+### 3. Format all findings with format-review-comments (interactive mode only)
+
+If invoked silently (called from `upsert-plan`), skip this step and proceed directly to step 4.
 
 When presenting multiple findings, prefix each with a letter (a., b., c., …) so individual items can be referenced by letter.
 
