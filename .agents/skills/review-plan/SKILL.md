@@ -102,9 +102,9 @@ Apply the `format-review-comments` skill to every comment. Do not write `praise`
 
 When invoked as a silent step within `upsert-plan`:
 - Do not output findings to the user
-- For each `issue [blocking]` or `suggestion` finding, apply the fix directly to the in-context plan draft
-- For `nitpick` and `todo` findings, apply them if the fix is unambiguous; skip otherwise
-- For `question` findings, skip — do not interrupt the upsert-plan flow
+- **Blocking findings** (`issue [blocking]`): apply the fix directly to the in-context plan draft
+- **Non-blocking findings** (`suggestion`, `nitpick`, `todo`, `note`): apply if the fix is unambiguous; skip otherwise
+- **Questions** (`question`): skip — do not interrupt the upsert-plan flow
 - After applying all fixes, return the revised plan draft and continue the upsert-plan workflow
 
 ### 5. Write a review summary (interactive mode only)
