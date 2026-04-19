@@ -107,7 +107,15 @@ After per-comment feedback, write a brief summary (3–7 sentences) covering:
 
 Format the summary as a `note` conventional comment.
 
-### 5. Refine prose
+### 5. Process findings
+
+After presenting findings and the summary:
+
+- **Actionable findings** (`issue [blocking]`, `suggestion`, `nitpick`, `todo`): apply each fix directly to the plan (edit the issue body or in-context draft as appropriate).
+- **Notes** (`note`): surface to the user as informational; no action required.
+- **Questions** (`question`): ask the user for clarification before proceeding.
+
+### 6. Refine prose
 
 Apply the `refine-prose` skill to all prose output — comments and the summary — before presenting. Do not apply it to code blocks, commands, or inline fix suggestions. Do not announce this step.
 

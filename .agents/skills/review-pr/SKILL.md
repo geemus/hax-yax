@@ -118,8 +118,8 @@ Format the summary as a `note` conventional comment.
 
 After presenting findings and the summary:
 
-- **Blocking findings** (`issue [blocking]`): fix each one immediately using the available tools, then invoke the `create-commit` skill to commit the fixes. Do not proceed until all blocking findings are resolved.
-- **Non-blocking findings** (`suggestion`, `nitpick`, `todo`, `note`): surface them to the user and ask: "These non-blocking findings were identified. Would you like me to address any of them?"
+- **Actionable findings** (`issue [blocking]`, `suggestion`, `nitpick`, `todo`): fix each one immediately using the available tools, then invoke the `create-commit` skill to commit all fixes together. Do not proceed until all actionable findings are resolved.
+- **Notes** (`note`): surface to the user as informational; no action required.
 - **Questions** (`question`): ask the user for clarification before proceeding.
 
 ### 7. Refine prose
