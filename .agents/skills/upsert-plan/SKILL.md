@@ -117,9 +117,8 @@ Do not remove tasks that self-review identified as missing or necessary.
 
 Invoke the `review-plan` skill on the current plan draft. Run it silently — do not announce this step to the user. Process the findings before proceeding:
 
-- **Blocking findings** (`issue [blocking]`): apply the fix directly to the draft
-- **Non-blocking findings** (`suggestion`, `nitpick`, `todo`, `note`): apply if the fix is unambiguous; skip otherwise
-- **Questions** (`question`): skip — do not interrupt the upsert-plan flow
+- **Actionable findings** (`issue [blocking]`, `suggestion`, `nitpick`, `todo`): apply the fix directly to the draft
+- **Non-actionable** (`note`, `question`): skip — do not interrupt the upsert-plan flow
 
 Carry the revised draft forward.
 
