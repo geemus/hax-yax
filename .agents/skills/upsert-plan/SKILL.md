@@ -11,7 +11,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "2.1"
+  version: "2.2"
 ---
 
 # Upsert Plan
@@ -35,6 +35,7 @@ Before planning, ground the plan in reality. For a clearly simple task (a single
 - **Existing issue content** *(update mode only)*: Fetch the current title and body of the target issue to use as planning context and to compute a change summary later.
 - **Codebase scan**: Use `Glob` to map the directory structure around the relevant area. Use `Grep` to search for key terms from the work description. Check for context files (all optional): `CLAUDE.md`, `README.md`, `AGENTS.md`. Read any that exist for conventions and constraints; if absent, proceed without them.
 - **Open issues / PRs** *(skip for simple tasks)*: Search for open issues and pull requests in the repo matching `<keyword>`, where the keyword is a specific noun or action from the work description that would appear in issue titles. If no issues or PRs exist yet, note the absence and continue.
+- **Best practices search** *(skip for simple tasks)*: Form a concise search query by extracting the primary technology or action noun from the work description and appending "best practices" (e.g., "add rate limiting to the API" → "API rate limiting best practices"; "postgres connection pooling" → "postgres connection pooling best practices"). Run one to two targeted `WebSearch` queries. Summarize any relevant findings in the Background section. If a finding changes the preferred approach, update the Approach section accordingly. Surface any new unchecked assumptions in the Assumptions section.
 - **Constraints**: Note tech stack, dependencies, CI requirements, and anything that restricts the approach.
 - Record what already exists and what must be built from scratch — this feeds the Background section.
 
