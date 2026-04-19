@@ -81,9 +81,7 @@ Work through every dimension in order. Note findings for each. Only skip a dimen
 - Is the Background section grounded in what exists today, not just what will be built?
 - Are agent-instruction files (AGENTS.md, CLAUDE.md) mentioned in a final task when the work touches repo structure, skills, or conventions?
 
-### 3. Format all findings with format-review-comments (interactive mode only)
-
-If invoked silently (called from `upsert-plan`), skip this step and proceed directly to step 4.
+### 3. Format all findings with format-review-comments
 
 When presenting multiple findings, prefix each with a letter (a., b., c., …) so individual items can be referenced by letter.
 
@@ -98,16 +96,7 @@ Apply the `format-review-comments` skill to every comment. Do not write `praise`
 | Small unambiguous fix | `todo` |
 | Informational only | `note` |
 
-### 4. Apply findings silently (when called from upsert-plan)
-
-When invoked as a silent step within `upsert-plan`:
-- Do not output findings to the user
-- **Blocking findings** (`issue [blocking]`): apply the fix directly to the in-context plan draft
-- **Non-blocking findings** (`suggestion`, `nitpick`, `todo`, `note`): apply if the fix is unambiguous; skip otherwise
-- **Questions** (`question`): skip — do not interrupt the upsert-plan flow
-- After applying all fixes, return the revised plan draft and continue the upsert-plan workflow
-
-### 5. Write a review summary (interactive mode only)
+### 4. Write a review summary
 
 After per-comment feedback, write a brief summary (3–7 sentences) covering:
 
@@ -118,7 +107,7 @@ After per-comment feedback, write a brief summary (3–7 sentences) covering:
 
 Format the summary as a `note` conventional comment.
 
-### 6. Refine prose (interactive mode only)
+### 5. Refine prose
 
 Apply the `refine-prose` skill to all prose output — comments and the summary — before presenting. Do not apply it to code blocks, commands, or inline fix suggestions. Do not announce this step.
 
