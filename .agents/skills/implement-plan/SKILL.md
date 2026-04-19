@@ -88,7 +88,7 @@ Create the PR using the GitHub tools available in the environment, linking back 
 <bullet points summarizing what was implemented>
 
 ## Plan
-Implements #<plan-issue-number>
+Closes #<plan-issue-number>
 
 ## Test plan
 <bulleted checklist of how to verify the changes>
