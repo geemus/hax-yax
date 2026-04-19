@@ -11,7 +11,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "2.2"
+  version: "2.3"
 ---
 
 # Upsert Plan
@@ -113,15 +113,19 @@ After self-review, challenge the scope. Ask: is there a simpler way to achieve t
 
 Do not remove tasks that self-review identified as missing or necessary.
 
-### 7. Refine prose
+### 7. Review plan
+
+Invoke the `review-plan` skill on the current plan draft. `review-plan` will automatically fix all actionable findings. Do not proceed to step 8 until `review-plan` completes.
+
+### 8. Refine prose
 
 Invoke the `refine-prose` skill (`/refine-prose`) on the full plan draft. Run it silently and carry the refined text forward — do not present the pre-refinement draft.
 
-### 8. Present the plan
+### 9. Present the plan
 
 State whether you are in **create mode** (a new issue will be created) or **update mode** (issue #N will be updated in place). Present the finished plan to the user and ask for confirmation before proceeding.
 
-### 9. Create or update the GitHub issue
+### 10. Create or update the GitHub issue
 
 Derive the issue title from the Objective: use a concise phrase (under 72 characters) that captures the core action and subject (e.g. "Add rate limiting to the public API").
 
@@ -147,7 +151,7 @@ gh issue create --title "..." --body-file .tmp/upsert-plan-body.md
 
 > **Side effect**: creating sub-issues also modifies the parent issue body to add `Sub-issue: #<number>` reference lines.
 
-### 10. Report back
+### 11. Report back
 
 Share the issue URL, state the number of tasks and phases, and call out any open questions or high-risk assumptions that should be resolved early. In update mode, confirm that the change-summary comment was posted.
 

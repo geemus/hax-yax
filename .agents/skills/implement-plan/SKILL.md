@@ -75,11 +75,7 @@ Invoke the `review-pr` skill on the current branch against the base branch (defa
 /review-pr <current-branch>
 ```
 
-Process the review findings:
-- **Blocking findings** (`issue [blocking]`): fix each one immediately, then re-run `create-commit` to commit the fixes before proceeding.
-- **Non-blocking findings** (`suggestion`, `nitpick`, `question`, `todo`, `note`): surface them to the user and ask: "These non-blocking findings were identified. Would you like me to address any of them before opening the PR?"
-
-Do not proceed to step 6 until all blocking findings are resolved.
+`review-pr` will automatically fix all actionable findings and commit them. Do not proceed to step 6 until `review-pr` completes.
 
 ### 6. Open a PR linked to the plan issue
 
