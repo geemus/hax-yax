@@ -50,6 +50,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `manage-sprite-env` | `/manage-sprite-env` | Manage services, checkpoints, and environment info from within a running sprite instance |
 | `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
 | `review-agents-md` | `/review-agents-md` | Audit AGENTS.md and equivalent agent instruction files for completeness, accuracy, agent-friendliness, freshness, and scope coherence |
+| `review-plan` | `/review-plan` | Evaluate a structured work plan across six quality dimensions: objective clarity, task actionability, dependency correctness, acceptance criteria completeness, scope appropriateness, and structural completeness |
 | `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
 | `review-skill` | `/review-skill` | Evaluate a skill for effectiveness across instruction clarity, trigger discoverability, example completeness, composability, and scope coherence |
 | `upsert-agents-md` | `/upsert-agents-md` | Create or update AGENTS.md and equivalent agent instruction files by surveying the repository |
