@@ -129,14 +129,10 @@ State whether you are in **create mode** (a new issue will be created) or **upda
 
 Derive the issue title from the Objective: use a concise phrase (under 72 characters) that captures the core action and subject (e.g. "Add rate limiting to the public API").
 
-**Create mode:** Create a new GitHub issue with the derived title and plan body. Use the Write tool to write the body to `.tmp/upsert-plan-body.md`, then pass it via `--body-file`:
-
-```sh
-gh issue create --title "..." --body-file .tmp/upsert-plan-body.md
-```
+**Create mode:** Create a new GitHub issue with the derived title and plan body.
 
 **Update mode:**
-1. Update the issue title and body with the new plan. Use the Write tool to write the body to `.tmp/upsert-plan-body.md`, then pass it via `gh issue edit --body-file .tmp/upsert-plan-body.md`.
+1. Update the issue title and body with the new plan.
 2. Compose a change-summary comment covering only sections that changed. Format each changed section as a conventional comment in a lettered list:
 
    ```
@@ -147,7 +143,7 @@ gh issue create --title "..." --body-file .tmp/upsert-plan-body.md
 
    Use `added`, `revised`, or `removed` as the label; write the subject as `<Section name> — <one-sentence description of what changed and why>`. Post it as a comment on the issue.
 
-**Sub-issues**: If sub-issue tracking was agreed in step 1, create a child issue for each phase using the same method above, writing each body to `.tmp/upsert-plan-subissue.md` immediately before the `gh issue create` call that consumes it. Link each child to the parent by adding a line to the parent issue body: `- Sub-issue: #<number> — <phase name>`.
+**Sub-issues**: If sub-issue tracking was agreed in step 1, create a child issue for each phase. Link each child to the parent by adding a line to the parent issue body: `- Sub-issue: #<number> — <phase name>`.
 
 > **Side effect**: creating sub-issues also modifies the parent issue body to add `Sub-issue: #<number>` reference lines.
 
