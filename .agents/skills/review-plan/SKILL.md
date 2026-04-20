@@ -13,7 +13,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Review Plan
@@ -117,7 +117,7 @@ After presenting findings and the summary:
 
 ### 6. Refine prose
 
-Apply the `refine-prose` skill to all prose output — comments and the summary — before presenting. Do not apply it to code blocks, commands, or inline fix suggestions. Do not announce this step.
+Apply the `refine-prose` skill to all prose output — comments and the summary — before presenting. Do not apply it to code blocks, commands, or inline fix suggestions. Do not announce this step. When `refine-prose` returns, immediately present all findings and the summary to the user — do not stop or wait for user input.
 
 ## Examples
 

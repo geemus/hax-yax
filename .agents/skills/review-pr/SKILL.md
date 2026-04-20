@@ -14,7 +14,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.5"
+  version: "1.6"
 ---
 
 # Review PR
@@ -124,7 +124,7 @@ After presenting findings and the summary:
 
 ### 7. Refine prose
 
-Apply the `refine-prose` skill to the review summary and all comments before posting. Run it silently — do not announce the refinement step.
+Apply the `refine-prose` skill to the review summary and all comments before posting. Run it silently — do not announce the refinement step. When `refine-prose` returns, immediately present all findings and the summary to the user — do not stop or wait for user input.
 
 ## Examples
 
