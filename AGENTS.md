@@ -46,8 +46,6 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `create-commit` | `/commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
 | `format-review-comments` | apply automatically when writing any review comment, PR feedback, or critique of code | Format review and feedback comments using the Conventional Comments standard |
 | `implement-plan` | `/implement-plan` | Fetch a structured plan from a GitHub issue and orchestrate the full delivery workflow: step through unchecked tasks in dependency order, commit via create-commit, review via review-pr, and open a PR linked to the plan issue |
-| `manage-sprite` | `/manage-sprite` | Provision, operate, checkpoint, and destroy sprites.dev instances via the `sprite` CLI |
-| `manage-sprite-env` | `/manage-sprite-env` | Manage services, checkpoints, and environment info from within a running sprite instance |
 | `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
 | `review-agents-md` | `/review-agents-md` | Audit AGENTS.md and equivalent agent instruction files for completeness, accuracy, agent-friendliness, freshness, and scope coherence |
 | `review-plan` | `/review-plan` | Evaluate a structured work plan across six quality dimensions: objective clarity, task actionability, dependency correctness, acceptance criteria completeness, scope appropriateness, and structural completeness |
@@ -106,4 +104,3 @@ When running inside a git worktree (secondary working tree), scope all file oper
 The following CLI tools are required for full functionality:
 
 - `gh` — GitHub CLI, used for PR creation (`gh pr create`) in the Git Workflow
-- `sprite` — sprites.dev CLI, used by the `manage-sprite` skill
