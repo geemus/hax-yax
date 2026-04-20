@@ -15,7 +15,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Audit Skills
@@ -88,7 +88,7 @@ Present findings in this order, as specified in `references/checks.md` under **R
 
 Format every reported finding with the `format-review-comments` skill. Use severity labels: `issue [blocking]` for structural violations that will break agent behavior, `suggestion` for quality improvements, `nitpick` for style issues.
 
-Apply the `refine-prose` skill to the full report before presenting it. Do not announce this step.
+Apply the `refine-prose` skill to the full report before presenting it. Do not announce this step. When `refine-prose` returns, immediately present the full report to the user — do not stop or wait for user input.
 
 ## Examples
 

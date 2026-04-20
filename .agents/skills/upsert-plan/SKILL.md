@@ -11,7 +11,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "2.3"
+  version: "2.4"
 ---
 
 # Upsert Plan
@@ -115,11 +115,11 @@ Do not remove tasks that self-review identified as missing or necessary.
 
 ### 7. Review plan
 
-Invoke the `review-plan` skill on the current plan draft. `review-plan` will automatically fix all actionable findings. Do not proceed to step 8 until `review-plan` completes.
+Invoke the `review-plan` skill on the current plan draft. `review-plan` will automatically fix all actionable findings. When `review-plan` returns, immediately continue to step 8 — do not stop or wait for user input.
 
 ### 8. Refine prose
 
-Invoke the `refine-prose` skill (`/refine-prose`) on the full plan draft. Run it silently and carry the refined text forward — do not present the pre-refinement draft.
+Invoke the `refine-prose` skill (`/refine-prose`) on the full plan draft. Run it silently and carry the refined text forward — do not present the pre-refinement draft. When `refine-prose` returns, immediately continue to step 9 — do not stop or wait for user input.
 
 ### 9. Present the plan
 

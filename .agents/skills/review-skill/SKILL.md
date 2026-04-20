@@ -15,7 +15,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Review Skill
@@ -114,7 +114,7 @@ Format the summary as a `note` conventional comment.
 
 ### 7. Refine prose
 
-Apply the `refine-prose` skill to all prose output — comments and the summary — before presenting it. Do not apply it to code blocks or inline fix suggestions. Do not announce this step to the user.
+Apply the `refine-prose` skill to all prose output — comments and the summary — before presenting it. Do not apply it to code blocks or inline fix suggestions. Do not announce this step to the user. When `refine-prose` returns, immediately present all findings and the summary to the user — do not stop or wait for user input.
 
 ## Examples
 
