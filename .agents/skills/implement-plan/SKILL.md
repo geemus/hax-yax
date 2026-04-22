@@ -59,27 +59,29 @@ For each unchecked task (in dependency-resolved order):
 
 **Do not** check off task checkboxes on the plan issue — leave them unchecked so the skill can be retried or re-run without losing progress markers.
 
-After all tasks are implemented, summarize what was done before proceeding.
+After all tasks are implemented, write a brief summary of what was done, then immediately proceed to step 4 — do not stop or wait for user input.
 
 ### 4. Commit via create-commit
 
-Invoke the `create-commit` skill (`/commit`) to stage and commit all changes made during step 3.
+Immediately after all tasks are complete, invoke the `create-commit` skill (`/commit`) — do not pause, summarize and stop, or ask for confirmation. Proceed directly.
 
-Wait for the commit to succeed before continuing. If `create-commit` reports nothing to commit, note this and proceed to step 5.
+Wait for the commit to succeed, then proceed immediately to step 5. If `create-commit` reports nothing to commit, note this and proceed immediately to step 5 — do not stop.
 
 ### 5. Review via review-pr
 
-Invoke the `review-pr` skill on the current branch against the base branch (default: `main`):
+Immediately after the commit in step 4 completes, invoke the `review-pr` skill on the current branch against the base branch (default: `main`) — do not pause or ask for confirmation:
 
 ```
 /review-pr <current-branch>
 ```
 
-`review-pr` will automatically fix all actionable findings and commit them. Do not proceed to step 6 until `review-pr` completes.
+`review-pr` will automatically fix all actionable findings and commit them. When `review-pr` completes, proceed immediately to step 6 — do not stop or wait for user input.
 
 ### 6. Open a PR linked to the plan issue
 
-Derive the PR title from the plan issue title: keep it concise (under 70 characters) and imperative (e.g. "Add implement-plan skill to orchestrate plan execution").
+Immediately after `review-pr` completes, derive the PR title from the plan issue title and open the PR — do not pause or ask for confirmation.
+
+Keep the title concise (under 70 characters) and imperative (e.g. "Add implement-plan skill to orchestrate plan execution").
 
 Create the PR using the GitHub tools available in the environment, linking back to the plan issue in the body:
 
