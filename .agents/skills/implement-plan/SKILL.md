@@ -15,7 +15,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Implement Plan
@@ -57,6 +57,8 @@ For each unchecked task (in dependency-resolved order):
 3. Report completion: "Done: `<task description>`."
 4. If a task cannot be completed (missing dependency, ambiguity, external blocker), stop and ask the user for guidance before continuing.
 
+**Defer all lint, test, and typecheck runs** until the dedicated final-validation step (step 6). In this step, do not run lint, tests, or typecheck after individual tasks — intermediate states are not the validation target, and per-task runs accumulate redundant work across the loop. All such commands are deferred to step 6, where they execute exactly once against the final post-review state. The only exception is running a command to confirm a task's concrete output (e.g. a generator script the task explicitly requires); even then, do not invoke repo-wide lint or test suites.
+
 **Do not** check off task checkboxes on the plan issue — leave them unchecked so the skill can be retried or re-run without losing progress markers.
 
 After all tasks are implemented, write a brief summary of what was done, then immediately proceed to step 4 — do not stop or wait for user input.
@@ -75,11 +77,39 @@ Immediately after the commit in step 4 completes, invoke the `review-pr` skill o
 /review-pr <current-branch>
 ```
 
-`review-pr` will automatically fix all actionable findings and commit them. When `review-pr` completes, proceed immediately to step 6 — do not stop or wait for user input.
+`review-pr` will automatically fix all actionable findings and commit them. **Do not run lint, tests, or typecheck during `review-pr` fix iteration** — lint and tests are deferred to step 6, where they run exactly once on the final post-review state. Validating against each intermediate fix-and-recommit cycle is redundant, since only the final state ships. When `review-pr` completes, proceed immediately to step 6 — do not stop or wait for user input.
 
-### 6. Open a PR linked to the plan issue
+### 6. Run lint and tests on final state
 
-Immediately after `review-pr` completes, derive the PR title from the plan issue title and open the PR — do not pause or ask for confirmation.
+Immediately after `review-pr` completes, run the repository's lint, typecheck, and test commands exactly once against the final post-review state — do not pause or ask for confirmation. This is the single validation gate; per-task and per-review runs were deferred here specifically to avoid redundant validation of intermediate states.
+
+**Command discovery** (in priority order — use the first source that defines each command):
+1. `AGENTS.md` / `CLAUDE.md` — look for an explicit "Testing", "Linting", or "Validation" section naming the commands to run
+2. `package.json` `scripts` — prefer `lint`, `typecheck`, `test` (in that order); fall back to `check` or `ci` if they exist
+3. `Makefile` — prefer `make lint`, `make typecheck`, `make test`
+4. Language defaults — `ruff check . && pytest` (Python), `cargo clippy && cargo test` (Rust), `go vet ./... && go test ./...` (Go), etc.
+
+If none of these are present and no convention is documented, skip this step and note it in the PR body.
+
+**Execution order:** lint → typecheck → tests. Stop at the first failure; a failing lint run typically masks real type or test errors.
+
+**Fix-and-recommit loop** (capped at **2 fix attempts** after the initial failure):
+1. If a command fails, inspect the output and fix the root cause — do not suppress warnings or disable rules to make them pass.
+2. Invoke `create-commit` to commit the fix.
+3. Re-run the failed command (and any later commands in the order above).
+4. Repeat up to 2 fix attempts before escalating.
+
+**Escalation:** if failures persist after 2 fix attempts, or if a failure is clearly outside the scope of this plan (e.g. a pre-existing broken test unrelated to the changed files), stop and report to the user:
+- which command failed
+- the relevant error excerpt
+- what was tried
+- whether the agent believes the failure is in-scope or pre-existing
+
+When all commands pass (or the step is skipped per the rules above), proceed immediately to step 7 — do not stop or wait for user input.
+
+### 7. Open a PR linked to the plan issue
+
+Immediately after step 6 completes, derive the PR title from the plan issue title and open the PR — do not pause or ask for confirmation.
 
 Keep the title concise (under 70 characters) and imperative (e.g. "Add implement-plan skill to orchestrate plan execution").
 
@@ -151,5 +181,39 @@ Fixing automatically…
 [edits file]
 Committing fix via create-commit…
 [commits]
-Proceeding to open PR.
+Proceeding to step 6 (lint and tests on final state).
+```
+
+**Sample lint/test failure recovery:**
+```
+Step 6 — running lint and tests on final post-review state.
+
+Discovered commands from package.json scripts: `npm run lint`, `npm test`.
+
+Attempt 1:
+  $ npm run lint
+  ✗ src/plan.ts:42  no-unused-vars: 'tmp' is defined but never used
+
+Fix attempt 1/2: remove unused `tmp` binding in src/plan.ts:42.
+Committing fix via create-commit…
+[commits]
+
+Attempt 2:
+  $ npm run lint
+  ✓ passed
+  $ npm test
+  ✓ 47 passed
+
+All validation commands pass. Proceeding to step 7 (open PR).
+```
+
+**Sample full flow (happy path):**
+```
+Step 3 — implementing 4 tasks, deferring all lint/test runs to step 6.
+[task 1 done] [task 2 done] [task 3 done] [task 4 done]
+
+Step 4 — /commit
+Step 5 — /review-pr claude/implement-plan-126 (no blocking findings)
+Step 6 — lint + typecheck + tests on final state (all pass)
+Step 7 — opening PR
 ```
