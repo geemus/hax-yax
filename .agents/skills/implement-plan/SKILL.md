@@ -93,11 +93,11 @@ If none of these are present and no convention is documented, skip this step and
 
 **Execution order:** lint → typecheck → tests. Stop at the first failure; a failing lint run typically masks real type or test errors.
 
-**Fix-and-recommit loop** (capped at **2 retries**):
+**Fix-and-recommit loop** (capped at **2 fix attempts** after the initial failure):
 1. If a command fails, inspect the output and fix the root cause — do not suppress warnings or disable rules to make them pass.
 2. Invoke `create-commit` to commit the fix.
 3. Re-run the failed command (and any later commands in the order above).
-4. Repeat up to 2 times total.
+4. Repeat up to 2 fix attempts before escalating.
 
 **Escalation:** if failures persist after 2 fix attempts, or if a failure is clearly outside the scope of this plan (e.g. a pre-existing broken test unrelated to the changed files), stop and report to the user:
 - which command failed
