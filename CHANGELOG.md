@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/); versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] — 2026-04-23
+
+### Changed
+
+- `implement-plan` v1.1: defer all lint, typecheck, and test runs until after `review-pr` completes, and consolidate them into a single dedicated final-validation step (new step 6) with a bounded fix-and-recommit loop (2-retry cap, then escalation). Eliminates redundant validation of intermediate per-task and per-review-fix states. PR-opening renumbered to step 7.
+
 ## [Unreleased] — 2026-04-09
 
 ### Changed
