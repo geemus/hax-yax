@@ -6,12 +6,18 @@ Reusable agent skills for Claude Code and other AI coding agents. Follows the [a
 
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| `upsert-skill` | `/hax-yax:upsert-skill` | Create, update, manage, and audit skills in this repository |
-| `upsert-plan` | `/hax-yax:upsert-plan` | Create and update structured work plans as GitHub issues |
-| `format-review-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
-| `review-pr` | `/hax-yax:review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
+| `audit-skills` | `/hax-yax:audit-skills` | Produce a full health report on the skill library: structural validation per skill and cross-skill analysis covering trigger conflicts, redundancy, workflow gaps, and composition chains |
 | `create-commit` | `/hax-yax:commit` | Stage changes safely, generate a conventional-commit message, and block secrets from being committed |
+| `format-review-comments` | applied proactively during code review | Format review and feedback comments using the Conventional Comments standard |
+| `implement-plan` | `/hax-yax:implement-plan` | Fetch a structured plan from a GitHub issue and orchestrate the full delivery workflow: step through unchecked tasks in dependency order, commit, review, validate, and open a PR |
 | `refine-prose` | `/hax-yax:refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
+| `review-agents-md` | `/hax-yax:review-agents-md` | Audit AGENTS.md and equivalent agent instruction files for completeness, accuracy, agent-friendliness, freshness, and scope coherence |
+| `review-plan` | `/hax-yax:review-plan` | Evaluate a structured work plan across six quality dimensions: objective clarity, task actionability, dependency correctness, acceptance criteria completeness, scope appropriateness, and structural completeness |
+| `review-pr` | `/hax-yax:review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
+| `review-skill` | `/hax-yax:review-skill` | Evaluate a skill for effectiveness across instruction clarity, trigger discoverability, example completeness, composability, and scope coherence |
+| `upsert-agents-md` | `/hax-yax:upsert-agents-md` | Create or update AGENTS.md and equivalent agent instruction files by surveying the repository |
+| `upsert-plan` | `/hax-yax:upsert-plan` | Create and update structured work plans as GitHub issues |
+| `upsert-skill` | `/hax-yax:upsert-skill` | Manage the lifecycle of reusable agent skills stored under `.agents/skills/` |
 
 ## Installation
 
