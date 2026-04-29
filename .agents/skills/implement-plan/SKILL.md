@@ -5,9 +5,9 @@ description: >
   delivery workflow: parses unchecked tasks in dependency order, steps through
   them one at a time, commits via create-commit, reviews via review-pr, and
   opens a PR linked back to the plan issue.
-  Use when the user says "implement this plan", "execute plan #N", "work
-  through issue #N", "implement the plan in #N", or "carry out the tasks in
-  #N".
+  Use when the user says "implement #N", "implement this plan", "execute plan
+  #N", "work through issue #N", "implement the plan in #N", or "carry out the
+  tasks in #N".
   TRIGGER when: user wants to execute or implement a plan stored as a GitHub
   issue.
   DO NOT TRIGGER when: user wants to create or update a plan (use upsert-plan
