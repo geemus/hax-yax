@@ -73,12 +73,12 @@ Is the file focused on agent guidance, or does it duplicate README/CHANGELOG con
 
 #### Leanness
 
-Does the file avoid duplicating information already present in code-level documentation (`@moduledoc`, docstrings, header comments, doc comments)? For each section that describes a specific module, type, callback, struct, byte-level layout, or symbol table, locate the corresponding code and compare wording. Apply the heuristic: *if a future agent could find this information by reading the relevant module, it should not also appear in full here — replace with a pointer*.
+Does the file avoid duplicating information already present in source-level documentation (docstrings, doc comments, header comments, or language-native annotations such as JSDoc, Rustdoc, Godoc, `@moduledoc`)? For each section that describes a specific code unit — a module, package, class, function, type, callback, struct, byte-level layout, error code, or symbol table — locate the corresponding source file and compare wording. Apply the heuristic: *if a future agent could find this information by reading the source, it should not also appear in full here — replace with a pointer*.
 
 Distinguish severities by intent:
 
 - **`suggestion`** — *pointer preferred*: section could collapse to a one-line pointer to the authoritative source, but the full prose is defensible
-- **`issue`** — *verbatim duplicate*: section repeats module docs verbatim or near-verbatim, creating two places to maintain
+- **`issue`** — *verbatim duplicate*: section repeats source documentation verbatim or near-verbatim, creating two places to maintain
 - **`issue [blocking]`** — *bloat impairs usability* (rare): accumulated duplication has grown the file to the point that an agent struggles to locate actionable guidance
 
 ### 4. Format all findings with format-review-comments
@@ -172,18 +172,18 @@ Remove the `create-plan` row from the table.
 
 **Sample output — leanness finding (verbatim duplicate):**
 ```
-issue: the "Cache module" section restates the `@moduledoc` for `MyApp.Cache` (lib/my_app/cache.ex) almost verbatim, creating two places to maintain the same description
+issue: the "Cache module" section restates the doc comment for `Cache` (src/cache.ts) almost verbatim, creating two places to maintain the same description
 
 Replace the section with a one-line pointer:
-> See the `@moduledoc` for `MyApp.Cache` at `lib/my_app/cache.ex`.
+> See the doc comment for `Cache` at `src/cache.ts`.
 ```
 
 **Sample output — leanness finding (pointer preferred):**
 ```
-suggestion: the "Frame format" section reproduces the byte-level layout already documented in the `Wire.Frame` docstring (lib/wire/frame.ex) — full prose is defensible for quick reference, but a pointer would reduce drift
+suggestion: the "Frame format" section reproduces the byte-level layout already documented in the docstring for `wire.Frame` (wire/frame.py) — full prose is defensible for quick reference, but a pointer would reduce drift
 
 Consider replacing with:
-> Frame layout is defined in the docstring of `Wire.Frame` at `lib/wire/frame.ex`.
+> Frame layout is defined in the docstring for `wire.Frame` at `wire/frame.py`.
 ```
 
 **Sample output — summary:**
