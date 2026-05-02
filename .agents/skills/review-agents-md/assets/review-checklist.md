@@ -119,7 +119,11 @@ Does the file avoid duplicating information already present in code-level docume
 
 For each candidate section, ask: *Could this section be replaced with a one-line pointer to the authoritative source without losing agent-usable information?* If yes, the section is a leanness finding.
 
-A "pointer" looks like: `See \`@moduledoc\` for \`MyApp.Foo\` at \`lib/my_app/foo.ex\`.`
+A "pointer" looks like:
+
+```
+See `@moduledoc` for `MyApp.Foo` at `lib/my_app/foo.ex`.
+```
 
 ### Severity guidance
 
