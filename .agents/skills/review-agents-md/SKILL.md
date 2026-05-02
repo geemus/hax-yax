@@ -19,7 +19,7 @@ metadata:
 
 # Review AGENTS.md
 
-Audits agent instruction files for completeness, accuracy, and agent-friendliness across five dimensions, with cross-referencing checks to verify that paths, scripts, and branch names mentioned in the file actually exist in the repository.
+Audits agent instruction files for completeness, accuracy, and agent-friendliness across six dimensions, with cross-referencing checks to verify that paths, scripts, and branch names mentioned in the file actually exist in the repository.
 
 ## Instructions
 
@@ -49,7 +49,7 @@ Read the full contents of the chosen file before reviewing. Do not begin reviewi
 
 Read `assets/review-checklist.md` before starting. Work through every dimension in order, applying each checklist item and noting findings as you go. Record whether an inline fix is clear and unambiguous for each finding.
 
-The five dimensions are:
+The six dimensions are:
 
 #### Completeness
 
@@ -70,6 +70,16 @@ Does the documented state match the actual repository? Flag stale references (do
 #### Scope coherence
 
 Is the file focused on agent guidance, or does it duplicate README/CHANGELOG content or serve a mixed audience? Flag content that actively misleads an agent as `issue [blocking]`; content that belongs elsewhere as `suggestion`.
+
+#### Leanness
+
+Does the file avoid duplicating information already present in source-level documentation (docstrings, doc comments, header comments, or language-native annotations such as JSDoc, Rustdoc, Godoc, `@moduledoc`)? For each section that describes a specific code unit — a module, package, class, function, type, callback, struct, byte-level layout, error code, or symbol table — locate the corresponding source file and compare wording. Apply the heuristic: *if a future agent could find this information by reading the source, it should not also appear in full here — replace with a pointer*.
+
+Distinguish severities by intent:
+
+- **`suggestion`** — *pointer preferred*: section could collapse to a one-line pointer to the authoritative source, but the full prose is defensible
+- **`issue`** — *verbatim duplicate*: section repeats source documentation verbatim or near-verbatim, creating two places to maintain
+- **`issue [blocking]`** — *bloat impairs usability* (rare): accumulated duplication has grown the file to the point that an agent struggles to locate actionable guidance
 
 ### 4. Format all findings with format-review-comments
 
@@ -158,6 +168,22 @@ Replace with an explicit rule:
 issue: the Skills table lists `create-plan` but `.agents/skills/create-plan/` does not exist in the repository — this entry is stale
 
 Remove the `create-plan` row from the table.
+```
+
+**Sample output — leanness finding (verbatim duplicate):**
+```
+issue: the "Cache module" section restates the doc comment for `Cache` (src/cache.ts) almost verbatim, creating two places to maintain the same description
+
+Replace the section with a one-line pointer:
+> See the doc comment for `Cache` at `src/cache.ts`.
+```
+
+**Sample output — leanness finding (pointer preferred):**
+```
+suggestion: the "Frame format" section reproduces the byte-level layout already documented in the docstring for `wire.Frame` (wire/frame.py) — full prose is defensible for quick reference, but a pointer would reduce drift
+
+Consider replacing with:
+> Frame layout is defined in the docstring for `wire.Frame` at `wire/frame.py`.
 ```
 
 **Sample output — summary:**
