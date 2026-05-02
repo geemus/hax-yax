@@ -85,13 +85,13 @@ Produce a Markdown document with these sections. Include only sections for which
 
 | Content type | Home |
 |---|---|
-| How a module works, callback contracts, struct fields, type signatures | `@moduledoc` / docstrings / inline code comments |
+| How a module works, callback contracts, struct fields, type signatures | In-source documentation (docstrings, doc comments, header blocks) |
 | User-facing setup, installation, and workflow | `README.md` |
 | Agent decision rules — what to prefer, what to avoid, invariants to uphold | `AGENTS.md` (this file) |
 
 For every paragraph or table you are about to write, ask: *could a future agent find this by reading the relevant code or `README.md`?* If yes, emit a one-line pointer (e.g. *"See `Retcon.Message` for the atom/string key contract."*) instead of repeating the prose. If no, emit the full explanation — it has no other home.
 
-**Do not duplicate `@moduledoc` / docstring content in the agent instruction file.** Implementation details belong in the module; agent decision rules belong here. Duplicated prose creates two places to keep in sync on every refactor and crowds out the decision rules that justify this file's existence.
+**Do not duplicate in-source documentation in the agent instruction file.** Implementation details belong next to the code (in docstrings, doc comments, or whatever each language uses); agent decision rules belong here. Duplicated prose creates two places to keep in sync on every refactor and crowds out the decision rules that justify this file's existence.
 
 #### Repository Purpose *(required)*
 One short paragraph stating what the repository does and who it is for. Write for an agent, not a human reader.
@@ -118,7 +118,7 @@ List required CLI tools and environment variables. For each, note what it is use
 
 Before self-reviewing, walk the draft section-by-section and prune duplicated prose. For each paragraph, table, or list:
 
-1. **Locate the canonical home.** For module behavior, callback contracts, struct fields, type signatures, or function semantics, open the relevant source file and check its `@moduledoc`, docstring, or top-of-file header comment. For setup, installation, or workflow narrative, check `README.md`.
+1. **Locate the canonical home.** For module behavior, callback contracts, struct fields, type signatures, or function semantics, open the relevant source file and check its in-source documentation — whichever convention the language uses (docstrings, doc comments, top-of-file headers, or equivalent). For setup, installation, or workflow narrative, check `README.md`.
 2. **If the canonical home already covers it:** replace the section's prose with a one-line pointer naming the file or module — e.g. *"See `Retcon.Message` for the atom/string key contract."* or *"See `README.md` § Installation for setup."* Do not also restate the content.
 3. **If the canonical home is missing or thin:** the agent instruction file is not the right place to fix that. Note the gap to the user when presenting the draft (step 6) so they can update the code docs or README, but keep this file lean.
 4. **Keep what only belongs here:** agent decision rules, preferences, invariants, branch and commit conventions, and explicit do/do-not guidance — these have no other canonical home.
@@ -134,7 +134,7 @@ Before presenting, check the draft against the `review-agents-md` checklist dime
 - **Agent-friendliness** — instructions are explicit and imperative, not vague?
 - **Freshness** — no stale references; skills table matches actual skill directories?
 - **Scope coherence** — focused on agent guidance, no README/CHANGELOG duplication?
-- **Leanness** — no section mirrors `@moduledoc` / docstring content verbatim; duplicated prose has been replaced with pointers?
+- **Leanness** — no section mirrors in-source documentation verbatim; duplicated prose has been replaced with pointers?
 
 Fix any issues found before presenting.
 

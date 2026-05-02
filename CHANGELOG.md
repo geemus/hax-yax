@@ -6,7 +6,7 @@ All notable changes to this project are documented here. Format follows [Keep a 
 
 ### Changed
 
-- `upsert-agents-md` v1.2: add a leanness principle to the generation process. Drafting now uses a three-category heuristic (module docs vs `README.md` vs `AGENTS.md`) to decide where each piece of content belongs, and a new dedicated leanness pass (step 4) walks the draft section-by-section to replace duplicated `@moduledoc` / docstring prose with one-line pointers. Self-review gains a leanness check; downstream steps renumbered 5–9.
+- `upsert-agents-md` v1.2: add a leanness principle to the generation process. Drafting now uses a three-category heuristic (in-source documentation vs `README.md` vs `AGENTS.md`) to decide where each piece of content belongs, and a new dedicated leanness pass (step 4) walks the draft section-by-section to replace prose duplicated from in-source docs with one-line pointers. Self-review gains a leanness check; downstream steps renumbered 5–9.
 
 ## [Unreleased] — 2026-04-23
 
