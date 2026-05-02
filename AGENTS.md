@@ -47,7 +47,7 @@ For full format rules, naming constraints, progressive disclosure levels, and a 
 | `format-review-comments` | apply automatically when writing any review comment, PR feedback, or critique of code | Format review and feedback comments using the Conventional Comments standard |
 | `implement-plan` | `/implement-plan` | Fetch a structured plan from a GitHub issue and orchestrate the full delivery workflow: step through unchecked tasks in dependency order, commit via create-commit, review via review-pr, validate once with lint and tests on the final state, and open a PR linked to the plan issue |
 | `refine-prose` | `/refine-prose` | Polish drafted prose for clarity, conciseness, and consistent voice before presenting or posting |
-| `review-agents-md` | `/review-agents-md` | Audit AGENTS.md and equivalent agent instruction files for completeness, accuracy, agent-friendliness, freshness, and scope coherence |
+| `review-agents-md` | `/review-agents-md` | Audit AGENTS.md and equivalent agent instruction files for completeness, accuracy, agent-friendliness, freshness, scope coherence, and leanness |
 | `review-plan` | `/review-plan` | Evaluate a structured work plan across six quality dimensions: objective clarity, task actionability, dependency correctness, acceptance criteria completeness, scope appropriateness, and structural completeness |
 | `review-pr` | `/review-pr` | Conduct a systematic PR review across logic, security, performance, test coverage, and documentation |
 | `review-skill` | `/review-skill` | Evaluate a skill for effectiveness across instruction clarity, trigger discoverability, example completeness, composability, and scope coherence |

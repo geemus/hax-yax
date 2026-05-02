@@ -99,3 +99,36 @@ Is the file focused on agent guidance?
 - Content that actively misleads an agent → `issue [blocking]`
 - Content that belongs in another file → `suggestion`
 - Redundant or padded content → `nitpick`
+
+---
+
+## Dimension 6: Leanness
+
+Does the file avoid duplicating information already present in code-level documentation?
+
+> *Heuristic: if a future agent could find this information by reading the relevant module, it should not also appear in full here. Replace with a pointer.*
+
+### Detect duplication with code docs
+
+- [ ] **Identify candidate sections** — locate sections that describe specific modules, types, callbacks, structs, byte-level layouts, error codes, symbol tables, or API surfaces
+- [ ] **Locate the authoritative source** — for each candidate, find the corresponding code (use `Glob`/`Grep` to locate the module, then `Read` the file's `@moduledoc`, docstring, header comment, or doc comments)
+- [ ] **Compare wording** — check whether the AGENTS.md prose repeats the code documentation verbatim, near-verbatim, or only paraphrases the same facts
+- [ ] **Check for implementation details** — flag content that belongs in the code itself (callback contracts, struct field tables, byte-level schemas, exhaustive symbol enumerations) rather than the agent instructions
+
+### Pointer test
+
+For each candidate section, ask: *Could this section be replaced with a one-line pointer to the authoritative source without losing agent-usable information?* If yes, the section is a leanness finding.
+
+A "pointer" looks like: `See \`@moduledoc\` for \`MyApp.Foo\` at \`lib/my_app/foo.ex\`.`
+
+### Severity guidance
+
+- **`suggestion`** — *pointer preferred*: section could be a one-line pointer to code docs, but the full prose is defensible (e.g. provides agent-specific framing, summarizes for quick reference)
+- **`issue`** — *verbatim duplicate*: section repeats module docs verbatim or near-verbatim, creating two places to maintain the same information
+- **`issue [blocking]`** — *bloat impairs usability* (rare): the file has grown so large from accumulated duplication that an agent struggles to locate actionable guidance
+
+### What is not a leanness finding
+
+- Brief summaries that orient an agent before pointing to code (these aid navigation)
+- Cross-cutting conventions that span multiple modules (these have no single authoritative module to point to)
+- Workflow guidance that happens to reference module names (the focus is on the workflow, not on duplicating the module's own docs)
