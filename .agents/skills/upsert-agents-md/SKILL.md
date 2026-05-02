@@ -12,7 +12,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: geemus
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Upsert AGENTS.md
@@ -81,6 +81,18 @@ Gather the information needed to write accurate guidance. Work through each area
 
 Produce a Markdown document with these sections. Include only sections for which you found actual content — do not add placeholder sections. In **update mode**, preserve any existing section that is not stale; replace or augment sections where the survey found newer information.
 
+**Where information belongs.** Before writing each section, decide whether the content belongs in the agent instruction file at all. Use this heuristic:
+
+| Content type | Home |
+|---|---|
+| How a module works, callback contracts, struct fields, type signatures | `@moduledoc` / docstrings / inline code comments |
+| User-facing setup, installation, and workflow | `README.md` |
+| Agent decision rules — what to prefer, what to avoid, invariants to uphold | `AGENTS.md` (this file) |
+
+For every paragraph or table you are about to write, ask: *could a future agent find this by reading the relevant code or `README.md`?* If yes, emit a one-line pointer (e.g. *"See `Retcon.Message` for the atom/string key contract."*) instead of repeating the prose. If no, emit the full explanation — it has no other home.
+
+**Do not duplicate `@moduledoc` / docstring content in the agent instruction file.** Implementation details belong in the module; agent decision rules belong here. Duplicated prose creates two places to keep in sync on every refactor and crowds out the decision rules that justify this file's existence.
+
 #### Repository Purpose *(required)*
 One short paragraph stating what the repository does and who it is for. Write for an agent, not a human reader.
 
@@ -102,7 +114,18 @@ Document: secrets management rules, any off-limits destructive operations, and c
 #### Environment *(include if tools or env vars are required)*
 List required CLI tools and environment variables. For each, note what it is used for and where to obtain it.
 
-### 4. Self-review
+### 4. Leanness pass
+
+Before self-reviewing, walk the draft section-by-section and prune duplicated prose. For each paragraph, table, or list:
+
+1. **Locate the canonical home.** For module behavior, callback contracts, struct fields, type signatures, or function semantics, open the relevant source file and check its `@moduledoc`, docstring, or top-of-file header comment. For setup, installation, or workflow narrative, check `README.md`.
+2. **If the canonical home already covers it:** replace the section's prose with a one-line pointer naming the file or module — e.g. *"See `Retcon.Message` for the atom/string key contract."* or *"See `README.md` § Installation for setup."* Do not also restate the content.
+3. **If the canonical home is missing or thin:** the agent instruction file is not the right place to fix that. Note the gap to the user when presenting the draft (step 6) so they can update the code docs or README, but keep this file lean.
+4. **Keep what only belongs here:** agent decision rules, preferences, invariants, branch and commit conventions, and explicit do/do-not guidance — these have no other canonical home.
+
+After this pass, every retained paragraph should answer *"what should an agent prefer, avoid, or uphold?"* rather than *"how does this module work?"*
+
+### 5. Self-review
 
 Before presenting, check the draft against the `review-agents-md` checklist dimensions silently:
 
@@ -111,24 +134,25 @@ Before presenting, check the draft against the `review-agents-md` checklist dime
 - **Agent-friendliness** — instructions are explicit and imperative, not vague?
 - **Freshness** — no stale references; skills table matches actual skill directories?
 - **Scope coherence** — focused on agent guidance, no README/CHANGELOG duplication?
+- **Leanness** — no section mirrors `@moduledoc` / docstring content verbatim; duplicated prose has been replaced with pointers?
 
 Fix any issues found before presenting.
 
-### 5. Present the draft
+### 6. Present the draft
 
 State whether this is **create mode** (new file) or **update mode** (file path will be updated). Show the full draft and ask for confirmation before writing.
 
 In **update mode**, also briefly describe what changed relative to the existing file: sections added, revised, or preserved.
 
-### 6. Write the file
+### 7. Write the file
 
 After confirmation, write the file to the target path. In **update mode**, overwrite the existing file entirely with the approved content.
 
-### 7. Validate with review-agents-md
+### 8. Validate with review-agents-md
 
 Run the `review-agents-md` skill on the file just written. If it surfaces any `issue [blocking]` findings, address them immediately and re-write the file. Surface `suggestion` findings to the user as follow-up opportunities; do not block.
 
-### 8. Commit
+### 9. Commit
 
 Commit with an appropriate message:
 - **Create mode:** `docs: add AGENTS.md`
