@@ -152,7 +152,7 @@ Remove the reference or add the missing script:
 
 **Sample output — accuracy finding (ambiguous tool):**
 ```
-question: the file references the `sprite` CLI in the Tooling section — this tool was not found locally. Is `sprite` expected to be installed separately, or is this reference stale?
+question: the file references the `mytool` CLI in the Tooling section — this tool was not found locally. Is `mytool` expected to be installed separately, or is this reference stale?
 ```
 
 **Sample output — agent-friendliness finding:**

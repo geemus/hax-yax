@@ -21,7 +21,6 @@ All notable changes to this project are documented here. Format follows [Keep a 
 - Renamed repository from `geemus/skills` to `geemus/hax-yax`; updated plugin manifest name, repository URL, all `/skills:` namespace references to `/hax-yax:`, and example URLs across `README.md`, `AGENTS.md`, and `.agents/skills/upsert-plan/SKILL.md`
 - Renamed `manage-plans` → `upsert-plan`: "upsert" more precisely describes the create-or-update operation; singular noun matches single-item-per-invocation behavior
 - Renamed `manage-skills` → `upsert-skill`: same rationale — dominant operation is create-or-update a single skill
-- Renamed `manage-sprites` → `manage-sprite`: singular noun correction; "manage" retained because destroy and exec are equal-weight operations alongside create/update
 - Updated all cross-references in SKILL.md files, reference documents, AGENTS.md, and README.md to use the new names
 
 ## [1.0.0] — 2026-04-06

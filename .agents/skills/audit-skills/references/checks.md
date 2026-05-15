@@ -117,7 +117,7 @@ Run these checks after all skills have been read. They require comparing skills 
 
 **Method:**
 1. Check each skill name: it should contain at least one hyphen and follow a verb+noun or verb+adjective+noun pattern (e.g., `upsert-skill`, `create-commit`, `review-pr`).
-2. If the library contains 10 or more skills, check whether related skills share a consistent namespace prefix (e.g., `manage-sprite`, `manage-sprite-env` share `manage-sprite`). Flag related skills that lack a shared prefix.
+2. If the library contains 10 or more skills, check whether related skills share a consistent namespace prefix (e.g., `review-pr`, `review-plan`, `review-skill` share `review-`). Flag related skills that lack a shared prefix.
 3. Flag names that are single words, noun-only, or do not include an action verb.
 
 **Severity:** `nitpick`
